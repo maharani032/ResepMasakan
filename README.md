@@ -2,7 +2,7 @@
 ## Buka terminal lalu jalankan
 * npm install
   ```sh
-  npm install npm@latest -g
+  npm install
   ```
 * run command
   ```sh
