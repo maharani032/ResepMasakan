@@ -1,4 +1,10 @@
 # ResepMasakan
-buka terminal lalu jalankan
-1. npm install
-2. node app.js
+## Buka terminal lalu jalankan
+* npm install
+  ```sh
+  npm install npm@latest -g
+  ```
+* run command
+  ```sh
+  node app.js
+  ```
