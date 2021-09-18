@@ -1,0 +1,36 @@
+<%- include ('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <%- include ('../component/guest/navbar.ejs') %>
+            <div class="container container-register">
+                <form action='/register' method='POST' autocomplete="off">
+                    <div class="row row-space">
+                        <div class="form-group col-md-6 form-align-center">
+                            <label for="fname">First Name</label>
+                            <input type='text' class="form-control" name="fname" autocomplete="off" placeholder="first name">
+                        </div>
+                        <div class="form-group col-md-6 form-align-center">
+                            <label for="lname">Last Name</label>
+                            <input type='text' class="form-control" name="lname" autocomplete="off" placeholder="last name">
+                        </div>
+                    </div>
+                    <div class="form-group email">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" autocomplete="off" placeholder="*****@****.com">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Password">Password</label>
+                            <input type="password" class="form-control" name='password' autocomplete="off" placeholder="password">
+            
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-register">Register</button>
+                </form>
+            
+            </div>
+            
+        
+        
+<%- include('../includes/end.ejs') %>
