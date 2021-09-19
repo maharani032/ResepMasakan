@@ -1,3 +1,13 @@
+exports.getGuestHome = ( req, res, next ) =>
+{
+    res.render(
+        'component/guest/home',
+        {
+            pageTitle: 'CookBook | Beranda',
+            path: '/'
+        }
+    )
+};
 exports.getRegister = ( req, res, next ) =>
 {
     res.render(
