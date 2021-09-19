@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+.header {
+    height: 100%;
+}
+/* Navigasi Bar Atas */
+.topnav {
+    background-color: #f55203;
+    overflow: hidden;
+}
+
+.topnav .logo {
+    float: left;
+    position: relative;
+    width: 6%;
+    height: 6%;
+    padding: 10px 5px 10px 2px;
+}
+
+.topnav a{
+    float: left;
+    position: relative;
+    text-align: center;
+    color: #ffc95f;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.topnav .brand {
+    font-size: 50px;
+}
+
+.topnav div {
+    float: right;
+    font-size: 20px;
+    padding: 20px 20px;
+    margin-right: 20px;
+}
+
+.topnav div a:hover {
+    color: black;
+}
+
+/* Informasi Singkat */
+.box-info {
+    background-color: rgb(255,129,32,0.6);
+    position: relative;
+    padding: 100px;
+    margin: 0px 150px 0px 150px;
+}
+
+.info-header {
+    margin: 100px;
+    color: black;
+    text-align: center;
+}
+
+/* .info-header button {
+
+} */
+
+/* Foto Kover*/
+body {
+    background-image: url(/public/image/pexels-maarten-van-den-heuvel-2284166.jpg);
+    background-size: cover;
+    overflow-x: hidden;
+}
