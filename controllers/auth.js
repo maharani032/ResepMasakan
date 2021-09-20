@@ -5,11 +5,13 @@ const User = require( '../models/user' );
 
 exports.getHome = ( req, res, next ) =>
 {
+    let guest = 2;
     res.render(
         'home',
         {
             pageTitle: 'CookBook | Beranda',
-            path: '/'
+            path: '/',
+            guest: guest
         }
     )
 };

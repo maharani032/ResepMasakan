@@ -2,10 +2,12 @@
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-    <% if (condition) { %>
-     
+    <% if (guest=== 1) { %>
+        <%- include ('component/guest/navbar.ejs') %>
+    
+   <% } else { %>
+    <%- include ('component/user/navbar.ejs') %>
     <% } %>
-    <%- include ('component/guest/navbar.ejs') %>
     <div class="body">
         <div class="box-info">
             <div class="info-header">
