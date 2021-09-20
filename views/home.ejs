@@ -1,9 +1,11 @@
-<%- include ('../../includes/head.ejs') %>
+<%- include ('includes/head.ejs') %> 
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-
-    <%- include ('navbar.ejs') %>
+    <% if (condition) { %>
+     
+    <% } %>
+    <%- include ('component/guest/navbar.ejs') %>
     <div class="body">
         <div class="box-info">
             <div class="info-header">
@@ -20,4 +22,4 @@
         </div>
     </div>
     
-<%- include('../../includes/head.ejs') %>
+<%- include('includes/head.ejs') %>
