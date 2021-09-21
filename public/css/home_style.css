@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    background-image: url(/public/image/pexels-maarten-van-den-heuvel-2284166.jpg);
+    background-size: cover;
+    overflow-x: hidden;
+}
+/* Navigasi Bar Atas */
+nav {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #00a29e;
+    overflow-x: hidden;
+}
+
+.logo {
+    width: 10%;
+    height: 10%;
+    padding: auto;
+    align-self: center;
+}
+
+nav a{
+    float: left;
+    position: relative;
+    text-align: center;
+    color: #fff8e6;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.brand {
+    font-size: 50px;
+}
+
+.links {
+    font-size: 20px;
+    padding: 20px 20px;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.logo-brand{
+    display: flex;
+    justify-items: flex-start;
+}
+
+nav a:hover {
+    color: black;
+}
+
+/* Informasi Singkat */
+.box-info {
+    order: 2;
+    background-color: rgba(255,180,66,0.6);
+    position: relative;
+    padding: 100px;
+    margin: 0px 150px 0px 150px;
+}
+
+.info-header {
+    margin: 100px;
+    color: black;
+    text-align: center;
+}
+
+.info-header button {
+    background-color: #00a29e;
+    color: #fff8e6;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 15px;
+} 
+
+.info-header button:hover{
+    color: black;
+}
+ /* Konten */ 
+section {
+    order: 3;
+    display: flex;
+    background-color: #ffb442;
+}
+
+.resep {
+    order: 3;
+    flex: 50%;
+    overflow: hidden;
+}
+
+.resep-box {
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.resep-box a {
+    display: flex;
+    align-items: center;
+    padding: 150px 150px;
+    background-color: #fff8e6;
+    margin: 30px 10px 50px 20px;
+}
+
+.resep h2{
+    text-align: center;
+    background-color: #e15d5d;
+    padding: 10px 0;
+}
+
+.acara-box {
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.acara-box a{
+    display: flex;
+    align-items: center;
+    padding: 150px 150px;
+    background-color: #fff8e6;
+    margin: 30px 10px 50px 20px;
+}
+
+.acara {
+    order: 3;
+    flex: 50%;
+    flex-flow: row wrap;
+}
+
+.acara h2{
+    text-align: center;
+    background-color: #e15d5d;
+    padding: 10px 0;
+}
+
+/* Footer */
+footer {
+    order: 4;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color:  #00a29e;
+}
+
+.link-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+}
+
+.info-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+}
