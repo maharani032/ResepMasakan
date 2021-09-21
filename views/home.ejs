@@ -4,21 +4,27 @@
     <body>
     
         <%- include ('component/navbar.ejs') %>
+<% if (isAuthenticated) { %>
 
-    <div class="body">
-        <div class="box-info">
-            <div class="info-header">
-                <h1>Temukan Resep Andalanmu di CookBook!</h1>
-                <p>CookBook merupakan komunitas pecinta masakan kami yang dimana setiap anggota dapat berbagi resep yang menarik
-                    dan lezat</p>
-                <p>Tidak hanya berbagi resep, kami juga melayani pengiriman bahan makanan dengan praktis dan cepat untuk setiap
-                    resep yang ingin kamu buat</p>
-                <p>Tunggu apa lagi? Bergabunglah dengan kami!</p>
-                <button type="button">
-                    <a href="/register">Bergabung</a>
-                </button>
+    <% } else { %>
+        <div class="body">
+            <div class="box-info">
+                <div class="info-header">
+                    <h1>Temukan Resep Andalanmu di CookBook!</h1>
+                    <p>CookBook merupakan komunitas pecinta masakan kami yang dimana setiap anggota dapat berbagi resep yang
+                        menarik
+                        dan lezat</p>
+                    <p>Tidak hanya berbagi resep, kami juga melayani pengiriman bahan makanan dengan praktis dan cepat untuk
+                        setiap
+                        resep yang ingin kamu buat</p>
+                    <p>Tunggu apa lagi? Bergabunglah dengan kami!</p>
+                    <button type="button">
+                        <a href="/register">Bergabung</a>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    <% }%>
+    
     
 <%- include('includes/head.ejs') %>

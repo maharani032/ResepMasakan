@@ -7,7 +7,7 @@
         <a href="/">Acara</a>
         <a href="/aboutUs">Tentang Kami</a>
         <% if (isAuthenticated) { %>
-            <a href="/">Sign Out</a>
+            <a href="/logout">Sign Out</a>
         <% } else if (!isAuthenticated) { %>
          <a href="/login">Login</a>
             <% } %>

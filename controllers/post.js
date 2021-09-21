@@ -6,7 +6,6 @@ exports.getHome = ( req, res, next ) =>
         {
             pageTitle: 'CookBook | Beranda',
             path: '/',
-
         }
     )
 };
