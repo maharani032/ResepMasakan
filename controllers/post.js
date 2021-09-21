@@ -1,3 +1,5 @@
+const user = require( "../models/user" );
+
 
 exports.getHome = ( req, res, next ) =>
 {
@@ -6,6 +8,7 @@ exports.getHome = ( req, res, next ) =>
         {
             pageTitle: 'CookBook | Beranda',
             path: '/',
+            user: req.user
         }
     )
 };

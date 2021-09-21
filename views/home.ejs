@@ -5,7 +5,7 @@
     
         <%- include ('component/navbar.ejs') %>
 <% if (isAuthenticated) { %>
-
+    hi <%= user.name.fname %> <%= user.name.lname %> 
     <% } else { %>
         <div class="body">
             <div class="box-info">
