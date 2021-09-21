@@ -1,0 +1,15 @@
+<nav class="topnav">
+    <img class="logo" src="/image/cookingbrand.png" />
+    <a href="/" class="brand">CookBook</a>
+    <div>
+        
+        <a href="/">Resep</a>
+        <a href="/">Acara</a>
+        <a href="/aboutUs">Tentang Kami</a>
+        <% if (isAuthenticated) { %>
+            <a href="/logout">Sign Out</a>
+        <% } else if (!isAuthenticated) { %>
+         <a href="/login">Login</a>
+            <% } %>
+    </div>
+</nav>
