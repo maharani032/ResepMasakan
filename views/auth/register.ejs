@@ -2,77 +2,59 @@
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <%- include ('../component/guest/navbar.ejs') %>
-            <div class="container container-register">
-                <% if (errorMessage) { %>
-                    <div class="user-message user-message--error">
-                        <%= errorMessage %>
+        <%- include ('../component/navbar.ejs') %>
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <div class="fadeIn first">
+                        <img src="image/cookingbrand.png" id="icon" alt="User Icon" />
                     </div>
-                <% } %>
-                <form action='/register' method='POST' autocomplete="off">
-                    <div class="row row-space">
-                        <div class="form-group col-md-6 form-align-center">
-                            <label for="fname">First Name</label>
-                            <input 
-                            type='text' 
-                            class="form-control" 
-                            name="fname" 
-                            autocomplete="off" 
-                            placeholder="first name"
-                            value='<%= inputPage.fname %> '
-                            >
-                        </div>
-                        <div class="form-group col-md-6 form-align-center">
-                            <label for="lname">Last Name</label>
-                            <input 
-                            type='text' 
-                            class="form-control" 
-                            name="lname" 
-                            autocomplete="off" 
-                            placeholder="last name"
-                            value='<%= inputPage.fname %>'
-                            >
-                        </div>
+                    <!-- <div class="container container-register"> -->
+                        <% if (errorMessage) { %>
+                            <div class="user-message user-message--error">
+                                <%= errorMessage %>
+                            </div>
+                            <% } %>
+                                <form action='/register' method='POST' autocomplete="off">
+                                    <div class="row row-space name">
+                                        <div class="form-group col-md-6 form-align-center">
+                                            <input 
+                                            placeholder="first name"
+                                            type='text' 
+                                            name="fname" 
+                                            autocomplete="off" 
+                                            value='<%= inputPage.fname %>'
+                                            >
+                                        </div>
+                                        <div class="form-group col-md-6 form-align-center">
+                                            <input 
+                                            type='text' 
+                                            name="lname" 
+                                            autocomplete="off"
+                                            placeholder="last name"
+                                            value='<%= inputPage.fname %>'>
+                                        </div>
+                                    </div>
+                                    <div class="form-group email">
+                                        <input type="text" 
+                                        class="<%= validErrors.find(e=>e.param==='email')?'invalid': '' %>" 
+                                        name="email" 
+                                        id='email' autocomplete="off" 
+                                        value='<%= inputPage.email %>' 
+                                        placeholder="*****@****.com">
+                                    </div>
+                
+                                            <input type="password" name='password' autocomplete="off"
+                                                placeholder="password" value='<%= inputPage.password %>'>
+                                        
+                                            <input type="password" name='ConfirmPassword' autocomplete="off"
+                                                placeholder="Confirm Password" value='<%= inputPage.confirmPassword %>'>
+                                        
+                                    
+                                    <button type="submit" class="btn btn-primary btn-register">Register</button>
+                                </form>
+                    
                     </div>
-                    <div class="form-group email">
-                        <label for="email">Email</label>
-                        <input 
-                        type="email" 
-                        class="
-                        form-control <%= validErrors.find(e=>e.param==='email')?'invalid': '' %>
-                        "
-                        name="email" 
-                        autocomplete="off" 
-                        value='<%= inputPage.email %> '
-                        placeholder="*****@****.com">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="Password">Password</label>
-                            <input 
-                            type="password" 
-                            class="form-control" 
-                            name='password' 
-                            autocomplete="off" 
-                            placeholder="password"
-                            value='<%= inputPage.password %>'
-                            >
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ConfirmPassword">Confirm Password</label>
-                            <input 
-                            type="password" 
-                            class="form-control" 
-                            name='ConfirmPassword' 
-                            autocomplete="off" 
-                            placeholder="password"
-                            value='<%= inputPage.confirmPassword %>'
-                            >
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-register">Register</button>
-                </form>
-            
+                </div>
             </div>
             
         

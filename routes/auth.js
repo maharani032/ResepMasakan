@@ -4,9 +4,10 @@ const authController = require( '../controllers/auth' );
 const user = require( '../models/user' );
 const router = express.Router();
 
-router.get( '/', authController.getHome );
+
 router.get( '/register', authController.getRegister );
 router.get( '/login', authController.getLogIn );
+router.get( '/logout', authController.getLogOut );
 // router post
 router.post( '/register', [
     check( 'email' )
@@ -27,7 +28,7 @@ router.post( '/register', [
         .normalizeEmail(),
     body(
         'password',
-        'Please enter a password with only numbers and text and at least 5 characters.'
+        'password minimal 5 karakter'
     )
         .isLength( { min: 5 } )
         .isAlphanumeric(),
@@ -41,4 +42,13 @@ router.post( '/register', [
         } )
 
 ], authController.postRegister )
+router.post( '/login', [
+    body( 'email' )
+        .isEmail()
+        .withMessage( 'email tidak valid' )
+        .normalizeEmail(),
+    body( 'password', 'password tidak valid.' )
+        .isLength( { min: 5 } )
+        .isAlphanumeric()
+], authController.postLogIn )
 module.exports = router;

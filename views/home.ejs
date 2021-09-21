@@ -2,12 +2,9 @@
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-    <% if (guest=== 1) { %>
-        <%- include ('component/guest/navbar.ejs') %>
     
-   <% } else { %>
-    <%- include ('component/user/navbar.ejs') %>
-    <% } %>
+        <%- include ('component/navbar.ejs') %>
+
     <div class="body">
         <div class="box-info">
             <div class="info-header">
@@ -18,7 +15,7 @@
                     resep yang ingin kamu buat</p>
                 <p>Tunggu apa lagi? Bergabunglah dengan kami!</p>
                 <button type="button">
-                    <a href="">Bergabung</a>
+                    <a href="/register">Bergabung</a>
                 </button>
             </div>
         </div>

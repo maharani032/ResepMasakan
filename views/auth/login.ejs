@@ -1,7 +1,44 @@
 <%- include ('../includes/head.ejs') %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <%- include ('../component/guest/navbar.ejs') %>
+        <%- include ('../component/navbar.ejs') %>
+        
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <img src="image/cookingbrand.png" id="icon" alt="User Icon" />
+            </div>
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error">
+                        <%= errorMessage %>
+                    </div>
+                    <% } %>
+            <form method='POST' action ='/login' autocomplete="off">
+        
+                <input type="text" 
+                id="email" 
+                class="<%= validErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" 
+                name="email" placeholder="email" 
+                value="<%= inputPage.email %>"
+                autocomplete="off">
+                <input type="password" 
+                id="password" 
+                class="<%= validErrors.find(e => e.param === 'password') ? 'invalid' : '' %>" 
+                name="password" placeholder="password"
+                value="<%= inputPage.password %>">
+                <button type="submit" class="btn btn-primary btn-register" >Log In
+                </button>
+            </form>
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account?<a href="/register" class='underlineHover'>Sign Up</a>
+                </div>
+        </div>
+    </div>
 
 <%- include('../includes/end.ejs') %>

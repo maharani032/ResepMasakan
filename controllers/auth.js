@@ -3,18 +3,7 @@ const bcrypt = require( 'bcryptjs' );
 const { validationResult } = require( 'express-validator' );
 const User = require( '../models/user' );
 
-exports.getHome = ( req, res, next ) =>
-{
-    let guest = 2;
-    res.render(
-        'home',
-        {
-            pageTitle: 'CookBook | Beranda',
-            path: '/',
-            guest: guest
-        }
-    )
-};
+
 exports.getRegister = ( req, res, next ) =>
 {
     let message = '';
@@ -43,13 +32,32 @@ exports.getRegister = ( req, res, next ) =>
 };
 exports.getLogIn = ( req, res, next ) =>
 {
+    let message = '';
+    if ( message.length > 0 ) {
+        message = message[ 0 ];
+    } else {
+        message = null;
+    }
     res.render(
         'auth/login',
         {
+            errorMessage: message,
             pageTitle: 'Log In',
-            path: '/login'
+            path: '/login',
+            inputPage: {
+                email: '',
+                password: ''
+            }, validErrors: []
         } );
 };
+exports.getLogOut = function ( req, res, next )
+{
+    req.session.destroy( err =>
+    {
+
+        console.log( err );
+    } )
+}
 //post
 exports.postRegister = ( req, res, next ) =>
 {
@@ -92,11 +100,78 @@ exports.postRegister = ( req, res, next ) =>
         } )
         .then( result =>
         {
-            res.redirect( '/' )
+            res.redirect( '/login' )
         } ).catch( err =>
         {
             const error = new Error( err );
             error.httpStatusCode = 500;
         } );
 
+}
+exports.postLogIn = ( req, res, next ) =>
+{
+    const email = req.body.email;
+    const password = req.body.password;
+    console.log( email );
+    console.log( password );
+    const errors = validationResult( req );
+    if ( !errors.isEmpty() ) {
+        return res.render( 'auth/login', {
+            path: '/login',
+            pageTitle: 'Log In',
+            errorMessage: errors.array()[ 0 ].msg,
+            inputPage: {
+                email: email,
+                password: password
+            },
+            validErrors: errors.array(),
+
+        } );
+    }
+    User.findOne( { email: email } ).then( user =>
+    {
+        if ( !user ) {
+            return res.render( 'auth/login', {
+                path: '/login',
+                pageTitle: 'Log In',
+                errorMessage: 'salah email atau password',
+                inputPage: {
+                    email: email,
+                    password: password
+                },
+                validErrors: []
+            } );
+        }
+        bcrypt.compare( password, user.password )
+            .then( domatch =>
+            {
+                if ( domatch ) {
+                    req.session.isLoggedIn = true;
+                    req.session.user = user;
+                    return req.session.save( err =>
+                    {
+                        console.log( err );
+                        res.redirect( '/' )
+                    } )
+                } return res.render( 'auth/login', {
+                    path: '/login',
+                    pageTitle: 'Log In',
+                    errorMessage: 'salah email atau password',
+                    inputPage: {
+                        email: email,
+                        password: password
+                    },
+                    validErrors: []
+                } );
+
+            } ).catch( err =>
+            {
+                console.log( err );
+                res.redirect( '/login' )
+            } )
+    } ).catch( err =>
+    {
+        const error = new error( err );
+        return next( error )
+    } )
 }
