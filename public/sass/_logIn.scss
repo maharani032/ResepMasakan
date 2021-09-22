@@ -12,13 +12,9 @@ h2 {
   text-transform: uppercase;
   display:inline-block;
   margin: 40px 8px 10px 8px; 
-//   color: #F55203;
   color: #cccccc;
 }
 
-
-
-/* STRUCTURE */
 
 .wrapper {
   display: flex;
@@ -28,6 +24,7 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
+  padding-top: 10%;
 }
 
 #formContent {

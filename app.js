@@ -3,12 +3,12 @@ require( "dotenv" ).config();
 const express = require( 'express' );
 const session = require( 'express-session' );
 const MongoDBStore = require( 'connect-mongodb-session' )( session );
-
 const errorPage = require( './controllers/error' );
 const mongoose = require( 'mongoose' )
 const flash = require( 'connect-flash' );
 const authRoutes = require( './routes/auth' );
 const postRoutes = require( './routes/post' );
+const adminRoutes = require( './routes/admin' );
 const User = require( './models/user' );
 const app = express();
 
@@ -51,6 +51,7 @@ app.use( express.urlencoded( { extended: false } ) );
 app.use( express.static( "public" ) );
 app.use( postRoutes );
 app.use( authRoutes );
+app.use( adminRoutes );
 app.use( flash() );
 app.use( errorPage.get404 );
 mongoose

@@ -113,8 +113,6 @@ exports.postLogIn = ( req, res, next ) =>
 {
     const email = req.body.email;
     const password = req.body.password;
-    console.log( email );
-    console.log( password );
     const errors = validationResult( req );
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/login', {

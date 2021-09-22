@@ -1,3 +1,6 @@
+<head>
+
+
 <nav class="topnav">
     <img class="logo" src="/image/cookingbrand.png" />
     <a href="/" class="brand">CookBook</a>
@@ -6,10 +9,22 @@
         <a href="/">Resep</a>
         <a href="/">Acara</a>
         <a href="/aboutUs">Tentang Kami</a>
+        
         <% if (isAuthenticated) { %>
-            <a href="/logout">Sign Out</a>
+            <div class="dropdown">
+                <button class="dropbtn">Profile</button>
+                <div class="dropdown-content">
+                    <% if (user.admin==true) { %>
+                        <a href="/add-event">event</a>
+                        <% } %>
+                    <a href="/logout">Sign Out</a>
+                </div>
+            </div>
+           
+            
         <% } else if (!isAuthenticated) { %>
          <a href="/login">Login</a>
             <% } %>
     </div>
 </nav>
+</head>

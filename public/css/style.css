@@ -1,14 +1,17 @@
 .topnav {
   background-color: #f55203;
-  overflow: hidden;
+  float: right;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
 }
 
 .topnav .logo {
   float: left;
-  position: relative;
   width: 6%;
   height: 6%;
-  padding: 10px 5px 10px 2px;
+  padding: 20px 5px 10px 2px;
 }
 
 .topnav a {
@@ -33,6 +36,46 @@
 
 .topnav div a:hover {
   color: black;
+}
+
+.topnav .dropbtn {
+  background-color: transparent;
+  border: none;
+  position: relative;
+  text-align: center;
+  color: #ffc95f;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+.topnav .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.topnav .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.topnav .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.topnav .dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.topnav .dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .container-404 {
@@ -79,12 +122,10 @@
 .body {
   background-image: url(/image/pexels-maarten-van-den-heuvel-2284166.jpg);
   background-size: cover;
-  overflow-x: hidden;
 }
 
 .body .box-info {
   background-color: rgba(255, 129, 32, 0.6);
-  position: relative;
   padding: 100px;
   margin: 0px 150px 0px 150px;
 }
@@ -112,7 +153,6 @@ h2 {
   color: #cccccc;
 }
 
-/* STRUCTURE */
 .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -130,6 +170,7 @@ h2 {
   width: 100%;
   min-height: 100%;
   padding: 20px;
+  padding-top: 10%;
 }
 
 #formContent {

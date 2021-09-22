@@ -3,6 +3,7 @@ const user = require( "../models/user" );
 
 exports.getHome = ( req, res, next ) =>
 {
+
     res.render(
         'home',
         {

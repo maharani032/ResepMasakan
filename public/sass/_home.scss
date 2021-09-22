@@ -1,11 +1,9 @@
 .body{
     background-image: url(/image/pexels-maarten-van-den-heuvel-2284166.jpg);
     background-size: cover;
-    overflow-x: hidden;
 
     .box-info {
         background-color: rgba(255,129,32,0.6);
-        position: relative;
         padding: 100px;
         margin: 0px 150px 0px 150px;
         & .info-header{

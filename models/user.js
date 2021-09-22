@@ -19,6 +19,14 @@ const userSchema = new Schema( {
     password: {
         type: String,
         required: true
+    },
+    admin: {
+        type: Boolean,
+        default: false
+    },
+    event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event'
     }
 } )
 module.exports = mongoose.model( 'User', userSchema );
