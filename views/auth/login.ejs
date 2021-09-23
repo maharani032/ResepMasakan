@@ -19,7 +19,7 @@
         
                 <input type="text" 
                 id="email" 
-                class="<%= validErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" 
+                class="form-register-login <%= validErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" 
                 name="email" placeholder="email" 
                 value="<%= inputPage.email %>"
                 autocomplete="off">

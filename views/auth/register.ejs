@@ -21,7 +21,8 @@
                                             placeholder="first name"
                                             type='text' 
                                             name="fname" 
-                                            autocomplete="off" 
+                                            autocomplete="off"
+                                            class='form-register-login' 
                                             value='<%= inputPage.fname %>'
                                             >
                                         </div>
@@ -31,12 +32,13 @@
                                             name="lname" 
                                             autocomplete="off"
                                             placeholder="last name"
+                                            class='form-register-login'
                                             value='<%= inputPage.fname %>'>
                                         </div>
                                     </div>
                                     <div class="form-group email">
                                         <input type="text" 
-                                        class="<%= validErrors.find(e=>e.param==='email')?'invalid': '' %>" 
+                                        class="form-register-login <%= validErrors.find(e=>e.param==='email')?'invalid': '' %>" 
                                         name="email" 
                                         id='email' autocomplete="off" 
                                         value='<%= inputPage.email %>' 

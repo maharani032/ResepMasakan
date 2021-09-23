@@ -3,8 +3,40 @@
     </head>
     <body>
 
-        <%- include ('../component/navbar.ejs') %>
-            <% if (isAuthenticated) { %>
+        <%- include ('../component/navbar.ejs') %> 
+        <div class="container container-event">
+            <div class="row">
+                <div class="col">
+                    <h1>Add Event</h1>
+                    <form action="/add-event" method="POST" enctype='multipart/form-data'>
+                        <div class="form-group">
+                            <label>Nama acara</label>
+                            <input name='nameEvent' type="text" class='form-control'>
+                        </div>
+                        <div class="form-group">
+                            <label>Link meet</label>
+                            <input name='linkMeet' type="text" class='form-control' >
+                        </div>
+                        <div class="form-group">
+                            <label>deskripsi</label>
+                            <textarea name="deskripsi" class='form-control'rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal acara</label>
+                            <input name='OnDate' type="date" class='form-control'>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Image</label>
+                            <input type="file" class='form-control' name='ImageEvent'>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-postEvent">Post Event
+                        </button>
+                    </form>
+                </div>
                 
-            <% } %> 
+               
+            </div>
+        </div>
+       
+           
         <%- include('../includes/head.ejs') %>

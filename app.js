@@ -11,7 +11,7 @@ const postRoutes = require( './routes/post' );
 const adminRoutes = require( './routes/admin' );
 const User = require( './models/user' );
 const app = express();
-
+const multer = require( 'multer' );
 //session
 const store = new MongoDBStore( {
     uri: process.env.DB,
@@ -45,9 +45,39 @@ app.use( ( req, res, next ) =>
     } )
 } )
 //-- session done
+const imageEventStorage = multer.diskStorage( {
+    destination: ( req, file, cb ) =>
+    {
+        cb( null, 'image/imageEventUpload' )
+    },
+    filename: ( req, file, cb ) =>
+    {
+
+        cb( null, Date.now() + '-' + file.originalname );
+    }
+} );
+const ImageFilter = ( req, file, cb ) =>
+{
+    if (
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg'
+    ) {
+        cb( null, true );
+    }
+    else {
+        cb( null, false );
+
+    }
+}
 app.set( 'view engine', 'ejs' );
 app.set( 'views', 'views' );
 app.use( express.urlencoded( { extended: false } ) );
+app.use( multer( {
+    dest: 'image/imageEventUpload',
+    storage: imageEventStorage,
+    fileFilter: ImageFilter
+} ).single( 'ImageEvent' ) )
 app.use( express.static( "public" ) );
 app.use( postRoutes );
 app.use( authRoutes );

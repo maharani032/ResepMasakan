@@ -24,9 +24,9 @@ const userSchema = new Schema( {
         type: Boolean,
         default: false
     },
-    event: {
+    event: [ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
-    }
+    } ]
 } )
 module.exports = mongoose.model( 'User', userSchema );

@@ -219,7 +219,7 @@ h2 {
   background-color: #39ace7;
 }
 
-.form-register-login {
+input[type=text] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -236,24 +236,24 @@ h2 {
   border-radius: 5px 5px 5px 5px;
 }
 
-.form-register-login:focus {
+input[type=text]:focus {
   background-color: #fff;
   border-bottom: 2px solid #F55203;
 }
 
-.form-register-login::-webkit-input-placeholder {
+input[type=text]::-webkit-input-placeholder {
   color: #797171;
 }
 
-.form-register-login:-ms-input-placeholder {
+input[type=text]:-ms-input-placeholder {
   color: #797171;
 }
 
-.form-register-login::-ms-input-placeholder {
+input[type=text]::-ms-input-placeholder {
   color: #797171;
 }
 
-.form-register-login::placeholder {
+input[type=text]::placeholder {
   color: #797171;
 }
 
@@ -363,14 +363,8 @@ input[type=password]::placeholder {
 }
 
 .container {
+  background-color: aqua;
   position: absolute;
-  top: 0;
-  left: 5%;
-  margin-top: 9%;
-}
-
-.btn-postEvent {
-  margin-top: 5%;
-  position: absolute;
+  margin: 5rem 5rem;
 }
 /*# sourceMappingURL=style.css.map */

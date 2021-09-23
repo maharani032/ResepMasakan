@@ -10,13 +10,17 @@ const eventSchema = new Schema( {
         type: Date,
         default: Date.now
     },
-    link: String,
-    Image: String,
+    linkMeet: String,
+    ImageEvent: { type: String, required: true },
     nameEvent: String,
     Deskripsi: String,
     Ondate: {
         type: Date,
         required: true
-    }
+    },
+    like: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    } ]
 } );
-module.exports = mongoose.model( events, eventSchema );
+module.exports = mongoose.model( 'Event', eventSchema );
