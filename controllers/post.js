@@ -1,15 +1,20 @@
-const user = require( "../models/user" );
-
-
+const path = require( 'path' );
+const Event = require( "../models/event" );
 exports.getHome = ( req, res, next ) =>
 {
 
-    res.render(
-        'home',
-        {
-            pageTitle: 'CookBook | Beranda',
-            path: '/',
-            user: req.user
-        }
-    )
+    Event.find( {}, ( err, events ) =>
+    {
+        res.render(
+            'home',
+            {
+                pageTitle: 'CookBook | Beranda',
+                path: '/',
+                user: user,
+                events: events
+            }
+        )
+    } )
+    const user = req.user
+
 };

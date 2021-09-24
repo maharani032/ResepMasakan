@@ -1,3 +1,4 @@
+const path = require( 'path' );
 const express = require( 'express' );
 const adminController = require( '../controllers/admin' );
 const isAdmin = require( '../middleware/is-admin' )

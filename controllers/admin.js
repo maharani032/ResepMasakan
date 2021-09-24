@@ -1,3 +1,4 @@
+const path = require( 'path' );
 const user = require( '../models/user' );
 const Event = require( '../models/event' )
 const { validationResult } = require( 'express-validator' );

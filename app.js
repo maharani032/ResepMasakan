@@ -48,12 +48,12 @@ app.use( ( req, res, next ) =>
 const imageEventStorage = multer.diskStorage( {
     destination: ( req, file, cb ) =>
     {
-        cb( null, 'images/imageEventUpload' )
+        cb( null, 'images' );
     },
     filename: ( req, file, cb ) =>
     {
 
-        cb( null, Date.now() + '-' + file.originalname );
+        cb( null, 'imageEvent' + ' - ' + file.originalname );
     }
 } );
 const ImageFilter = ( req, file, cb ) =>
@@ -74,12 +74,12 @@ app.set( 'view engine', 'ejs' );
 app.set( 'views', 'views' );
 app.use( express.urlencoded( { extended: false } ) );
 app.use( multer( {
-    dest: 'images/imageEventUpload',
+    // dest: 'images',
     storage: imageEventStorage,
     fileFilter: ImageFilter
 } ).single( 'ImageEvent' ) )
 app.use( express.static( "public" ) );
-app.use( 'images', express.static( path.join( __dirname, 'images/imageEventUpload' ) ) );
+app.use( '/images', express.static( path.join( __dirname, 'images' ) ) );
 app.use( postRoutes );
 app.use( authRoutes );
 app.use( adminRoutes );

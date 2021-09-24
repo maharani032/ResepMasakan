@@ -1,23 +1,22 @@
 .topnav{
-    background-color: #f55203;
+    background-color: #00a29e;
     float: right;
     position: absolute;
     top: 0;
     z-index: 1;
     width:100%;
-    
-    // transform: ;
     & .logo{
       float: left;
       width: 6%;
       height: 6%;
       padding: 20px 5px 10px 2px;
+      align-self: center;
     }
     & a{
     float: left;
     position: relative;
     text-align: center;
-    color: #ffc95f;
+    color: #fff8e6;
     text-decoration: none;
     padding: 10px 10px;
     }
@@ -38,10 +37,12 @@
       border: none;
       position: relative;
       text-align: center;
-      color: #ffc95f;
+      color: white;
       bottom: 10px;
       cursor: pointer;
-     
+     &:hover{
+      color:black
+     }
     }
     .dropdown {
   position: relative;

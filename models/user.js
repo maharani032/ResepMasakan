@@ -25,8 +25,10 @@ const userSchema = new Schema( {
         default: false
     },
     event: [ {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Event'
+        eventId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'event',
+        },
     } ]
 } )
 

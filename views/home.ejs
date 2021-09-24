@@ -1,12 +1,10 @@
 <%- include ('includes/head.ejs') %> 
+<link rel="stylesheet" href="/css/home_style.css">
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
     
         <%- include ('component/navbar.ejs') %>
-<% if (isAuthenticated) { %>
-    hi <%= user.name.fname %> <%= user.name.lname %> 
-    <% } else { %>
         <div class="body">
             <div class="box-info">
                 <div class="info-header">
@@ -24,7 +22,62 @@
                 </div>
             </div>
         </div>
-    <% }%>
+            <div class="resep">
+                <h2>Resep</h2>
+                <div class="resep-box">
+                    <div class="rbox1">
+                        <a href=""></a>
+                        <a href=""></a>
+                    </div>
+                    <div class="rbox2">
+                        <a href=""></a>
+                        <a href=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="acara">
+                <h2>Acara</h2>
+                <% if (events.length>0) { %>
+                 <div class="event-box">
+                    <% events.forEach(event => {%>
+                        <article class="boxEvent">
+                            <div class="box-header">
+                                <h1 class="nameEvent">
+                                    <%= event.nameEvent %> 
+                                </h1>
+                            </div>
+                                <div class="box-image">
+                                    <img size='50px'src="/<%=event.ImageEvent%>" alt="<%= event.nameEvent %>">
+
+                                </div>
+                                
+                            
+            
+                        </article>
+                    <%}); %>
+                        
+                    <% } %>
+                 </div>
+                
+                
+            </div>
+            </section>
+            <footer>
+                <div class="link-website">
+                    <h2>Navigasi Website</h2>
+                    <a>Resep</a>
+                    <a>Acara</a>
+                    <a>Tentang Kami</a>
+                </div>
+                <div class="info-website">
+                    <h2>Kontak Kami</h2>
+                    <p>Apabila terdapat kritik dan saran atau pertanyaan lebih lanjut, hubungi kami melalui:</p>
+                    <p><i class="fab fa-whatsapp"></i> : 08xx-xxxx-xxxx</p>
+                    <a><i class="fab fa-twitter"></i> : @namasupermarket</a>
+                    <a><i class="fab fa-instagram"></i> : @namasupermarket</a>
+                    <a></a>
+                </div>
+            </footer>
     
     
 <%- include('includes/head.ejs') %>
