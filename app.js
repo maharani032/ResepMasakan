@@ -48,7 +48,7 @@ app.use( ( req, res, next ) =>
 const imageEventStorage = multer.diskStorage( {
     destination: ( req, file, cb ) =>
     {
-        cb( null, 'image/imageEventUpload' )
+        cb( null, 'images/imageEventUpload' )
     },
     filename: ( req, file, cb ) =>
     {
@@ -74,11 +74,12 @@ app.set( 'view engine', 'ejs' );
 app.set( 'views', 'views' );
 app.use( express.urlencoded( { extended: false } ) );
 app.use( multer( {
-    dest: 'image/imageEventUpload',
+    dest: 'images/imageEventUpload',
     storage: imageEventStorage,
     fileFilter: ImageFilter
 } ).single( 'ImageEvent' ) )
 app.use( express.static( "public" ) );
+app.use( 'images', express.static( path.join( __dirname, 'images/imageEventUpload' ) ) );
 app.use( postRoutes );
 app.use( authRoutes );
 app.use( adminRoutes );
@@ -90,7 +91,7 @@ mongoose
             useNewUrlParser: true,
             useUnifiedTopology: true
         } )
-    .then( result =>
+    .then( result => 
     {
         app.listen( 3000 );
         console.log( 'connection to database on port 3000' );

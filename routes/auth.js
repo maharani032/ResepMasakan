@@ -1,7 +1,7 @@
 const express = require( 'express' );
 const { check, body } = require( 'express-validator' )
 const authController = require( '../controllers/auth' );
-const user = require( '../models/user' );
+const User = require( '../models/user' );
 const router = express.Router();
 
 
@@ -15,7 +15,7 @@ router.post( '/register', [
         .withMessage( 'Please enter a valid email' )
         .custom( ( value, { req } ) =>
         {
-            return user.findOne( { email: value } )
+            return User.findOne( { email: value } )
                 .then( userDoc =>
                 {
                     if ( userDoc ) {

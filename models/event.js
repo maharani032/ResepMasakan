@@ -10,7 +10,7 @@ const eventSchema = new Schema( {
         type: Date,
         default: Date.now
     },
-    linkMeet: String,
+    tempat: String,
     ImageEvent: { type: String, required: true },
     nameEvent: String,
     Deskripsi: String,

@@ -96,6 +96,7 @@ exports.postRegister = ( req, res, next ) =>
                 },
                 email: email,
                 password: hashPassword,
+                event: []
             } );
             return user.save();
         } )

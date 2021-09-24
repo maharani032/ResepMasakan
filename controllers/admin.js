@@ -21,7 +21,7 @@ exports.postPostEvent = ( req, res, next ) =>
     const Ondate = req.body.OnDate
     const LinkMeet = req.body.LinkMeet
     const deskripsi = req.body.deskripsi
-    const User = req.user
+    let id = req.user._id
 
     const errors = validationResult( req )
 
@@ -42,15 +42,26 @@ exports.postPostEvent = ( req, res, next ) =>
     }
     const ImageEvent = pictureEvent.path
     const event = new Event( {
-        userId: req.user._id,
+        userId: id,
         nameEvent: nameEvent,
         ImageEvent: ImageEvent,
         Ondate: Ondate,
         LinkMeet: LinkMeet,
         deskripsi: deskripsi
     } );
-    event.save().then( result =>
+
+    event.save().then( event =>
     {
+        user.findOneAndUpdate( { _id: req.user.id }, { $push: { event: event } },
+            ( err, sucess ) =>
+            {
+                if ( err ) {
+                    console.log( err );
+                }
+                else {
+                    console.log( 'sucess' );
+                }
+            } )
         console.log( 'create event' );
         res.redirect(
             '/'
@@ -60,3 +71,4 @@ exports.postPostEvent = ( req, res, next ) =>
         console.log( err )
     } )
 }
+

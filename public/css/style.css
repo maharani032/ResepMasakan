@@ -366,7 +366,7 @@ input[type=password]::placeholder {
   position: absolute;
   top: 0;
   left: 5%;
-  margin-top: 9%;
+  margin-top: 10%;
 }
 
 .btn-postEvent {

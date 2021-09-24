@@ -29,4 +29,5 @@ const userSchema = new Schema( {
         ref: 'Event'
     } ]
 } )
+
 module.exports = mongoose.model( 'User', userSchema );
