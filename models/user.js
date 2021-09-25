@@ -2,6 +2,7 @@ const mongoose = require( 'mongoose' );
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema( {
+    googleId: String,
     name: {
         fname: {
             type: String,
@@ -18,12 +19,13 @@ const userSchema = new Schema( {
     },
     password: {
         type: String,
-        required: true
+
     },
     admin: {
         type: Boolean,
         default: false
     },
+    picture: { type: String },
     event: [ {
         eventId: {
             type: mongoose.Schema.Types.ObjectId,

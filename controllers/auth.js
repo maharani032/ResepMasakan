@@ -50,15 +50,7 @@ exports.getLogIn = ( req, res, next ) =>
             }, validErrors: []
         } );
 };
-exports.getLogOut = function ( req, res, next )
-{
-    req.session.destroy( err =>
-    {
 
-        console.log( err );
-        res.redirect( '/' );
-    } )
-}
 //post
 exports.postRegister = ( req, res, next ) =>
 {
