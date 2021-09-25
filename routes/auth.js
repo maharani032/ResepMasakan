@@ -1,13 +1,36 @@
 const express = require( 'express' );
 const { check, body } = require( 'express-validator' )
 const authController = require( '../controllers/auth' );
-const User = require( '../models/user' );
+const user = require( '../models/user' );
 const router = express.Router();
-
-
+const passport = require( 'passport' );
+// const GoogleS
+router.get( '/auth/google', passport.authenticate( 'google',
+    {
+        scope: [ 'profile', 'email' ],
+        prompt: 'select_account',
+    } ) )
+router.get( '/auth/google/webmasakan', passport.authenticate( 'google', { failureRedirect: '/login' } ), ( req, res ) =>
+{
+    req.session.isLoggedIn = true;
+    req.session.user = user;
+    return req.session.save( err =>
+    {
+        console.log( err );
+        res.redirect( '/' )
+    } )
+} )
 router.get( '/register', authController.getRegister );
 router.get( '/login', authController.getLogIn );
-router.get( '/logout', authController.getLogOut );
+router.get( '/logout', ( req, res, next ) =>
+{
+
+    req.session.destroy( function ( e )
+    {
+        req.logout();
+        res.redirect( '/' );
+    } );
+} );
 // router post
 router.post( '/register', [
     check( 'email' )

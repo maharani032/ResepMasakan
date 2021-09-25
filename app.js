@@ -9,6 +9,9 @@ const flash = require( 'connect-flash' );
 const authRoutes = require( './routes/auth' );
 const postRoutes = require( './routes/post' );
 const adminRoutes = require( './routes/admin' );
+const passport = require( 'passport' )
+require( './controllers/passport-auth-google' )( passport )
+
 const User = require( './models/user' );
 const app = express();
 const multer = require( 'multer' );
@@ -45,6 +48,8 @@ app.use( ( req, res, next ) =>
     } )
 } )
 //-- session done
+app.use( passport.initialize() )
+app.use( passport.session() )
 const imageEventStorage = multer.diskStorage( {
     destination: ( req, file, cb ) =>
     {
@@ -83,8 +88,8 @@ app.use( '/images', express.static( path.join( __dirname, 'images' ) ) );
 app.use( postRoutes );
 app.use( authRoutes );
 app.use( adminRoutes );
-app.use( flash() );
-app.use( errorPage.get404 );
+
+// app.use( errorPage.get404 );
 mongoose
     .connect( process.env.DB,
         {
