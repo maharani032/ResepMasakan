@@ -25,7 +25,7 @@ const userSchema = new Schema( {
         type: Boolean,
         default: false
     },
-    picture: { type: String },
+    picture: String,
     event: [ {
         eventId: {
             type: mongoose.Schema.Types.ObjectId,

@@ -89,7 +89,7 @@ app.use( postRoutes );
 app.use( authRoutes );
 app.use( adminRoutes );
 
-// app.use( errorPage.get404 );
+app.use( errorPage.get404 );
 mongoose
     .connect( process.env.DB,
         {

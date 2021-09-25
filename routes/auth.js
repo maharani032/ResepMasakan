@@ -38,7 +38,7 @@ router.post( '/register', [
         .withMessage( 'Please enter a valid email' )
         .custom( ( value, { req } ) =>
         {
-            return User.findOne( { email: value } )
+            return user.findOne( { email: value } )
                 .then( userDoc =>
                 {
                     if ( userDoc ) {
