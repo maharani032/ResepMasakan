@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    background-image: url(/public/image/pexels-maarten-van-den-heuvel-2284166.jpg);
+    background-size: cover;
+    overflow-x: hidden;
+}
+/* Navigasi Bar Atas */
+nav {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #00a29e;
+    overflow-x: hidden;
+}
+
+.logo {
+    width: 10%;
+    height: 10%;
+    padding: auto;
+    align-self: center;
+}
+
+nav a{
+    float: left;
+    position: relative;
+    text-align: center;
+    color: #fff8e6;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.brand {
+    font-size: 50px;
+}
+
+.links {
+    font-size: 20px;
+    padding: 20px 20px;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.logo-brand{
+    display: flex;
+    justify-items: flex-start;
+}
+
+nav a:hover {
+    color: black;
+}
+
+/* Sortir Bahan */
+.sortir-bahan {
+    order: 1;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.sortir-bahan button {
+    margin: 10px;
+    padding: 10px 45px;
+    font-size: 17px;
+    background-color: #E05D5D;
+    border: none;
+    border-radius: 15px;
+}
+
+.sortir-posting{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+}
+
+.resep {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+    padding: 75px 10px;
+    background-color: #FFB344;
+    border: none;
+    border-radius: 10px;
+}
+
+.sortir-posting a {
+    text-decoration: none;
+    color: black;
+}
+
+.image-resep img{
+    width: 200px;
+    height: 200px;
+    align-self: center;
+}
+
+/* Footer */
+footer {
+    order: 4;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: #00a29e;
+  }
+  
+  .link-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+  }
+  
+  .info-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+  }
