@@ -53,7 +53,7 @@ exports.postPostEvent = ( req, res, next ) =>
 
     event.save().then( event =>
     {
-        user.findOneAndUpdate( { _id: req.user.id }, { $push: { event: event } },
+        user.findOneAndUpdate( { _id: req.user.id }, { $push: { 'event': { eventId: event._id } } },
             ( err, sucess ) =>
             {
                 if ( err ) {

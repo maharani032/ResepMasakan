@@ -531,4 +531,9 @@ input[type=password]::placeholder {
   margin-top: 5%;
   position: absolute;
 }
+
+.body-profile {
+  position: absolute;
+  margin-top: 10%;
+}
 /*# sourceMappingURL=style.css.map */

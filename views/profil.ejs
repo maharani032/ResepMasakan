@@ -1,0 +1,54 @@
+<%- include ('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <!-- <!%- include ('component/navbar.ejs') %> -->
+            <div class="body-profile">
+                <div class="profile">
+                    <p>
+                        <%= user.name.fname %>
+                    </p>
+                    <p>
+                        <%= user.name.lname %>
+                    </p>
+                    <p>
+                        <%= user.email %> 
+                    </p>
+                    <p>
+                        role:
+                        <% if (user.admin==true) { %>
+                        admin
+                        
+                        <% } else { %>
+                            user
+                        <% } %>
+                    </p>
+                </div>
+                <div class="acara">
+                    
+                    <% if (events.length>0) { %>
+                        <% events.forEach(event=>{ %> 
+                            <div class="acara-box">
+                                <div class="nama">
+                                    <h3>
+                                    nama Acara:<%= event.nameEvent %>
+                                </h3>
+                                </div>
+                                
+
+                                    <p>tanggal dibuat:
+                                        <%= event.createByDate %> 
+                                    </p>
+                                    <p>acara diadakan:
+                                        <%= event.Ondate %> 
+                                    </p>
+                            </div>
+                            
+                            <%}) %>
+                    <% } %> 
+                </div>
+                
+                </div>
+            <%- include('includes/head.ejs') %>
+
+            

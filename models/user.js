@@ -26,12 +26,13 @@ const userSchema = new Schema( {
         default: false
     },
     picture: String,
-    event: [ {
-        eventId: {
+    event: {
+        eventId: [ {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'event',
-        },
-    } ]
+        } ]
+    }
+
 } )
 
 module.exports = mongoose.model( 'User', userSchema );
