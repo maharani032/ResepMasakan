@@ -1,11 +1,11 @@
 <%- include ('includes/head.ejs') %> 
-<link rel="stylesheet" href="/css/home_style.css">
+<!-- <link rel="stylesheet" href="/css/home_style.css"> -->
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
     
         <%- include ('component/navbar.ejs') %>
-        <div class="body">
+        <div class="body-home">
             <div class="box-info">
                 <div class="info-header">
                     <h1>Temukan Resep Andalanmu di CookBook!</h1>
@@ -22,6 +22,9 @@
                 </div>
             </div>
         </div>
+        <section>
+
+       
             <div class="resep">
                 <h2>Resep</h2>
                 <div class="resep-box">
@@ -37,31 +40,45 @@
             </div>
             <div class="acara">
                 <h2>Acara</h2>
-                <% if (events.length>0) { %>
-                 <div class="event-box">
-                    <% events.forEach(event => {%>
-                        <article class="boxEvent">
+                <div class="acara-box">
+                    <% if (events.length>0) { %>
+                        <% events.forEach(event => { %> 
+                            <a href=''>
+                            <img width='150px' height='150px' src="/<%=event.ImageEvent%>" alt="">
+                            </a>
+                    
+                        <% }) %> 
+                        <% } %>
+                    <!-- <div class="box1">
+                        
+                        <a href=""></a>
+                        <a href=""></a>
+                    </div>
+                    <div class="box2">
+                        <a href=""></a>
+                        <a href=""></a>
+                    </div> -->
+                </div>
+                <!-- <!% if (events.length>0) { %>
+                 <div class="acara-box">
+                    <!% events.forEach(event => {%>
+                        <div class="boxEvent">
                             <div class="box-header">
                                 <h1 class="nameEvent">
-                                    <%= event.nameEvent %> 
+                                    <!%= event.nameEvent %> 
                                 </h1>
                             </div>
                                 <div class="box-image">
-                                    <img size='50px'src="/<%=event.ImageEvent%>" alt="<%= event.nameEvent %>">
+                                    <img size='50px'src="/<!%=event.ImageEvent%>" alt="<!%= event.nameEvent %>">
 
                                 </div>
-                                
-                            
-            
                         </article>
-                    <%}); %>
+                    <!%}); %>
                         
-                    <% } %>
+                    <!% } %> -->
                  </div>
-                
-                
-            </div>
-            </section>
+            
+        </section>
             <footer>
                 <div class="link-website">
                     <h2>Navigasi Website</h2>

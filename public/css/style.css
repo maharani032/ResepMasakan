@@ -93,13 +93,12 @@
   margin-top: 10rem;
 }
 
-.body {
+.body-home {
   background-image: url(/image/pexels-maarten-van-den-heuvel-2284166.jpg);
   background-size: cover;
-  /* Footer */
 }
 
-.body .box-info {
+.body-home .box-info {
   -webkit-box-ordinal-group: 3;
       -ms-flex-order: 2;
           order: 2;
@@ -109,13 +108,13 @@
   margin: 0px 150px 0px 150px;
 }
 
-.body .box-info .info-header {
+.body-home .box-info .info-header {
   margin: 100px;
   color: black;
   text-align: center;
 }
 
-.body .box-info .info-header button {
+.body-home .box-info .info-header button {
   background-color: #00a29e;
   color: #fff8e6;
   text-decoration: none;
@@ -127,11 +126,11 @@
   border-radius: 15px;
 }
 
-.body .box-info .info-header button button:hover {
+.body-home .box-info .info-header button button:hover {
   color: black;
 }
 
-.body section {
+section {
   -webkit-box-ordinal-group: 4;
       -ms-flex-order: 3;
           order: 3;
@@ -141,7 +140,7 @@
   background-color: #ffb442;
 }
 
-.body section .resep {
+.resep {
   -webkit-box-ordinal-group: 4;
       -ms-flex-order: 3;
           order: 3;
@@ -151,7 +150,7 @@
   overflow: hidden;
 }
 
-.body section .resep .resep-box {
+.resep-box {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
@@ -164,7 +163,7 @@
           justify-content: space-evenly;
 }
 
-.body section .resep .resep-box a {
+.resep-box a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -176,13 +175,13 @@
   margin: 30px 10px 50px 20px;
 }
 
-.body section .resep .resep-box h2 {
+.resep h2 {
   text-align: center;
   background-color: #e15d5d;
   padding: 10px 0;
 }
 
-.body .acara-box {
+.acara-box {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
@@ -195,10 +194,38 @@
           justify-content: space-evenly;
 }
 
-.body footer {
-  -webkit-box-ordinal-group: 5;
-      -ms-flex-order: 4;
-          order: 4;
+.acara-box a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff8e6;
+  margin: 30px 10px 50px 20px;
+}
+
+.acara {
+  -webkit-box-ordinal-group: 4;
+      -ms-flex-order: 3;
+          order: 3;
+  -webkit-box-flex: 50%;
+      -ms-flex: 50%;
+          flex: 50%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.acara h2 {
+  text-align: center;
+  background-color: #e15d5d;
+  padding: 10px 0;
+}
+
+/* Footer */
+footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -212,7 +239,7 @@
   background-color: #00a29e;
 }
 
-.body .link-website {
+footer .link-website {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -223,7 +250,7 @@
   margin: 50px;
 }
 
-.body .info-website {
+footer .link-website .info-website {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -232,44 +259,6 @@
       -ms-flex-flow: column wrap;
           flex-flow: column wrap;
   margin: 50px;
-}
-
-.body .event-box {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-}
-
-.body .event-box .boxEvent {
-  width: 20rem;
-  max-width: 95%;
-  margin: 1rem;
-  -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-}
-
-.body .event-box .boxEvent .box-header {
-  padding: 1rem;
-}
-
-.body .event-box .boxEvent .box-header h1 {
-  margin: 0;
-}
-
-.body .event-box .boxEvent .box-image {
-  background-color: black;
-  text-align: center;
-}
-
-.body .event-box .boxEvent .box-image img {
-  width: 150px;
 }
 
 .btn-register {
@@ -312,7 +301,7 @@ a {
   font-weight: 400;
 }
 
-h2 {
+.body-login h2 {
   text-align: center;
   font-size: 16px;
   font-weight: 600;
