@@ -58,7 +58,7 @@ const imageEventStorage = multer.diskStorage( {
     filename: ( req, file, cb ) =>
     {
 
-        cb( null, 'imageEvent' + ' - ' + file.originalname );
+        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + file.originalname );
     }
 } );
 const ImageFilter = ( req, file, cb ) =>

@@ -1,5 +1,4 @@
 const GoogleStrategy = require( 'passport-google-oauth20' ).Strategy
-// require( "dotenv" ).config()
 const User = require( '../models/user' )
 module.exports = ( passport ) =>
 {
@@ -11,7 +10,6 @@ module.exports = ( passport ) =>
     },
         async ( accessToken, refreshToken, profile, done ) =>
         {
-            console.log( profile )
             const newUser = {
                 googleId: profile.id,
                 name: {
