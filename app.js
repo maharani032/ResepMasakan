@@ -5,7 +5,6 @@ const session = require( 'express-session' );
 const MongoDBStore = require( 'connect-mongodb-session' )( session );
 const errorPage = require( './controllers/error' );
 const mongoose = require( 'mongoose' )
-const flash = require( 'connect-flash' );
 const authRoutes = require( './routes/auth' );
 const postRoutes = require( './routes/post' );
 const adminRoutes = require( './routes/admin' );
