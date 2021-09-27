@@ -1,0 +1,56 @@
+<%- include ('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <!-- <!%- include ('component/navbar.ejs') %> -->
+            <div class="body-profile">
+                <div class="profile">
+                    <p>
+                        <%= user.name.fname %>
+                    </p>
+                    <p>
+                        <%= user.name.lname %>
+                    </p>
+                    <p>
+                        <%= user.email %> 
+                    </p>
+                    <p>
+                        role:
+                        <% if (user.admin==true) { %>
+                        admin
+                        
+                        <% } else { %>
+                            user
+                        <% } %>
+                    </p>
+                </div>
+                <div class="acara">
+                    
+                    <% if (events.length>0) { %>
+                        <% events.forEach(event=>{ %> 
+                            <div class="box">
+                            
+                                    <p>
+                                    nama Acara:<%= event.nameEvent %>
+                                    </p>
+                        
+                            
+                                    <p>tanggal dibuat : <%= event.createByDate %> </p>
+                                    <p>acara diadakan: <%= event.Ondate %> </p>
+                                    <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
+                                    <input type="hidden" value="<%= event._id %>" name="eventId">
+
+                                    <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    <!-- <a href="/delete-event/<%=event._id %>">delete event </a> -->
+                                    <!-- <button type='button' class='btn' onclick="deleteEvent(this)">Delete</button> -->
+                            </div>
+                            
+                            <%}) %>
+                    <% } %> 
+                </div>
+                
+                </div>
+            <%- include('includes/head.ejs') %>
+
+            

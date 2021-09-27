@@ -87,8 +87,8 @@ app.use( '/images', express.static( path.join( __dirname, 'images' ) ) );
 app.use( postRoutes );
 app.use( authRoutes );
 app.use( adminRoutes );
-
-app.use( errorPage.get404 );
+app.get( '/500', errorPage.get500 )
+// app.use( errorPage.get404 );
 mongoose
     .connect( process.env.DB,
         {

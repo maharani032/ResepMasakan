@@ -1,5 +1,5 @@
 const mongoose = require( 'mongoose' );
-
+// const Event=require('even')
 const Schema = mongoose.Schema;
 const userSchema = new Schema( {
     googleId: String,
@@ -26,12 +26,13 @@ const userSchema = new Schema( {
         default: false
     },
     picture: String,
-    event: [ {
-        eventId: {
+    event: {
+        eventId: [ {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'event',
-        },
-    } ]
+        } ]
+    }
+
 } )
 
 module.exports = mongoose.model( 'User', userSchema );
