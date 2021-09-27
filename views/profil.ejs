@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <!-- <!%- include ('component/navbar.ejs') %> -->
+        <%- include ('component/navbar.ejs') %>
             <div class="body-profile">
                 <div class="profile">
                     <p>
@@ -34,16 +34,15 @@
                                     nama Acara:<%= event.nameEvent %>
                                     </p>
                         
-                            
-                                    <p>tanggal dibuat : <%= event.createByDate %> </p>
-                                    <p>acara diadakan: <%= event.Ondate %> </p>
+                                    <p>tempat : <%= event.tempat %> </p>
+                                    <p>deskripsi: <%= event.Deskripsi %> </p>
+                                    <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %> </p>
+                                    <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %> </p>
                                     <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
                                     <input type="hidden" value="<%= event._id %>" name="eventId">
 
                                     <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
                                         <button type="submit" class="btn btn-danger">Delete</button>
-                                    <!-- <a href="/delete-event/<%=event._id %>">delete event </a> -->
-                                    <!-- <button type='button' class='btn' onclick="deleteEvent(this)">Delete</button> -->
                             </div>
                             
                             <%}) %>

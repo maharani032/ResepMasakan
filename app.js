@@ -78,7 +78,6 @@ app.set( 'view engine', 'ejs' );
 app.set( 'views', 'views' );
 app.use( express.urlencoded( { extended: false } ) );
 app.use( multer( {
-    // dest: 'images',
     storage: imageEventStorage,
     fileFilter: ImageFilter
 } ).single( 'ImageEvent' ) )
