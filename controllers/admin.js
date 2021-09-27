@@ -3,16 +3,15 @@ const User = require( '../models/user' );
 const Event = require( '../models/event' )
 const fileHelper = require( '../util/file' )
 const { validationResult } = require( 'express-validator' );
-const models = require( '../models/models' );
 exports.getPostEvent = ( req, res, next ) =>
 {
-    // let user = req.user
     res.render(
         'event/postEvent',
         {
             pageTitle: 'add event',
-            path: '/add-event',
-            user: User
+            path: '/admin/add-event',
+            user: req.user,
+            editMode: false,
         }
     )
 }
@@ -22,10 +21,9 @@ exports.postPostEvent = ( req, res, next ) =>
     const nameEvent = req.body.nameEvent
     const pictureEvent = req.file
     const Ondate = req.body.OnDate
-    const LinkMeet = req.body.LinkMeet
     const deskripsi = req.body.deskripsi
+    const tempat = req.body.tempat
     let id = req.user._id
-    // let user = req.user
     const errors = validationResult( req )
 
     if ( !errors.isEmpty() ) {
@@ -33,12 +31,11 @@ exports.postPostEvent = ( req, res, next ) =>
         return res.render( 'event/postEvent', {
             pageTitle: 'add event',
             path: '/add-event',
-            user: User,
+            user: req.user,
             event: {
                 nameEvent: nameEvent,
-
+                tempat: tempat,
                 Ondate: Ondate,
-                LinkMeet: LinkMeet,
                 deskripsi: deskripsi
             }
         } )
@@ -48,9 +45,10 @@ exports.postPostEvent = ( req, res, next ) =>
         userId: id,
         nameEvent: nameEvent,
         ImageEvent: ImageEvent,
+        tempat: tempat,
         Ondate: Ondate,
-        LinkMeet: LinkMeet,
-        deskripsi: deskripsi
+        Deskripsi: deskripsi,
+        like: []
     } );
 
     event.save().then( event =>
@@ -95,7 +93,7 @@ exports.getEditEvent = ( req, res, next ) =>
                 path: 'edit-event',
                 event: event,
                 user: user,
-                errorMessage: null,
+                editMode: true,
             } )
         } )
 }
@@ -132,4 +130,36 @@ exports.deleteEvent = ( req, res, next ) =>
             console.log( err )
         } )
 
+}
+exports.postEditEvent = ( req, res, next ) =>
+{
+    console.log( req.body.eventId )
+    const UpdatenameEvent = req.body.nameEvent
+    const pictureEvent = req.file
+    const UpdateOndate = req.body.OnDate
+    const Updatedeskripsi = req.body.deskripsi
+    const Updatetempat = req.body.tempat
+    const eventId = req.body.eventId
+    let id = req.user._id
+    Event.findById( eventId ).then( event =>
+    {
+        event.nameEvent = UpdatenameEvent
+        event.OnDate = UpdateOndate
+        event.tempat = Updatetempat
+        event.Deskripsi = Updatedeskripsi
+        if ( pictureEvent ) {
+            fileHelper.deleteFile( event.ImageEvent )
+            event.ImageEvent = pictureEvent.path
+        }
+        return event.save().then( result =>
+        {
+            console.log( 'update event' )
+            res.redirect( '/profil' )
+        } ).catch( err =>
+        {
+
+            res.redirect( '/505' )
+        } )
+        // event.
+    } )
 }

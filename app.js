@@ -78,7 +78,6 @@ app.set( 'view engine', 'ejs' );
 app.set( 'views', 'views' );
 app.use( express.urlencoded( { extended: false } ) );
 app.use( multer( {
-    // dest: 'images',
     storage: imageEventStorage,
     fileFilter: ImageFilter
 } ).single( 'ImageEvent' ) )
@@ -88,7 +87,7 @@ app.use( postRoutes );
 app.use( authRoutes );
 app.use( adminRoutes );
 app.get( '/500', errorPage.get500 )
-app.use( errorPage.get404 );
+// app.use( errorPage.get404 );
 mongoose
     .connect( process.env.DB,
         {

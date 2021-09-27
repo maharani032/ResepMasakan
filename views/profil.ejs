@@ -34,9 +34,10 @@
                                     nama Acara:<%= event.nameEvent %>
                                     </p>
                         
-                            
-                                    <p>tanggal dibuat : <%= event.createByDate %> </p>
-                                    <p>acara diadakan: <%= event.Ondate %> </p>
+                                    <p>tempat : <%= event.tempat %> </p>
+                                    <p>deskripsi: <%= event.Deskripsi %> </p>
+                                    <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %> </p>
+                                    <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %> </p>
                                     <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
                                     <input type="hidden" value="<%= event._id %>" name="eventId">
 
