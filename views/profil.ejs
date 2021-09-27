@@ -28,20 +28,22 @@
                     
                     <% if (events.length>0) { %>
                         <% events.forEach(event=>{ %> 
-                            <div class="acara-box">
-                                <div class="nama">
-                                    <h3>
+                            <div class="box">
+                            
+                                    <p>
                                     nama Acara:<%= event.nameEvent %>
-                                </h3>
-                                </div>
-                                
+                                    </p>
+                        
+                            
+                                    <p>tanggal dibuat : <%= event.createByDate %> </p>
+                                    <p>acara diadakan: <%= event.Ondate %> </p>
+                                    <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
+                                    <input type="hidden" value="<%= event._id %>" name="eventId">
 
-                                    <p>tanggal dibuat:
-                                        <%= event.createByDate %> 
-                                    </p>
-                                    <p>acara diadakan:
-                                        <%= event.Ondate %> 
-                                    </p>
+                                    <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    <!-- <a href="/delete-event/<%=event._id %>">delete event </a> -->
+                                    <!-- <button type='button' class='btn' onclick="deleteEvent(this)">Delete</button> -->
                             </div>
                             
                             <%}) %>

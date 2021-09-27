@@ -1,19 +1,23 @@
 const path = require( 'path' );
-const user = require( '../models/user' )
-const Event = require( '../models/event' )
+const models = require( '../models/models' )
+
 exports.getProfile = ( req, res, next ) =>
 {
     let id = req.user._id
     let user = req.user
-    Event.find( { userId: id }, ( err, event ) =>
+    models.Event.find( { userId: id }, ( err, event ) =>
     {
-        res.render( 'profil', {
-            path: '/profil',
-            pageTitle: 'Profil',
-            user: user,
-            events: event
+        if ( !err ) {
+            res.render( 'profil', {
+                path: '/profil',
+                pageTitle: 'Profil',
+                user: user,
+                events: event
 
-        } )
+            } )
+        } else {
+
+        }
     } )
 
 
