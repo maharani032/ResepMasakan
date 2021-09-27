@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <!-- <!%- include ('component/navbar.ejs') %> -->
+        <%- include ('component/navbar.ejs') %>
             <div class="body-profile">
                 <div class="profile">
                     <p>
@@ -42,8 +42,6 @@
 
                                     <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
                                         <button type="submit" class="btn btn-danger">Delete</button>
-                                    <!-- <a href="/delete-event/<%=event._id %>">delete event </a> -->
-                                    <!-- <button type='button' class='btn' onclick="deleteEvent(this)">Delete</button> -->
                             </div>
                             
                             <%}) %>
