@@ -37,7 +37,12 @@
                                     </p>
                         
                                     <p>tempat : <%= event.tempat %> </p>
-                                    <p>deskripsi: <%= event.Deskripsi %> </p>
+                                    
+                                    <div class="deskripsi">
+                                        <p>deskripsi: </p>
+                                        <%- event.html.replace(/\n/g,'<br/>')%>
+                                    </div>
+                                    
                                     <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %> </p>
                                     <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %> </p>
                                     <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>

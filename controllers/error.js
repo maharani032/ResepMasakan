@@ -16,7 +16,7 @@ exports.get500 = ( req, res, next ) =>
         'err/500',
         {
             pageTitle: 'Perbaikan',
-            path: '/505',
+            path: '/500',
             user: req.user
         } )
 }

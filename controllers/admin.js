@@ -1,6 +1,7 @@
 const path = require( 'path' )
 const User = require( '../models/user' )
 const Event = require( '../models/event' )
+
 const fileHelper = require( '../util/file' )
 const { validationResult } = require( 'express-validator' )
 exports.getPostEvent = ( req, res, next ) =>
@@ -46,6 +47,7 @@ exports.postPostEvent = ( req, res, next ) =>
         tempat: tempat,
         Ondate: Ondate,
         Deskripsi: deskripsi,
+        html: "",
         like: []
     } )
 
@@ -136,6 +138,7 @@ exports.postEditEvent = ( req, res, next ) =>
         event.nameEvent = UpdatenameEvent
         event.OnDate = UpdateOndate
         event.tempat = Updatetempat
+        event.html = ''
         event.Deskripsi = Updatedeskripsi
         if ( pictureEvent ) {
             fileHelper.deleteFile( event.ImageEvent )

@@ -10,11 +10,13 @@ const authRoutes = require( './routes/auth' )
 const postRoutes = require( './routes/post' )
 const adminRoutes = require( './routes/admin' )
 const passport = require( 'passport' )
+
 require( './controllers/passport-auth-google' )( passport )
 
 const User = require( './models/user' )
 const app = express()
 const multer = require( 'multer' )
+app.use( express.urlencoded( { extended: true } ) )
 //session
 const store = new MongoDBStore( {
     uri: process.env.DB,
@@ -77,7 +79,7 @@ const ImageFilter = ( req, file, cb ) =>
 }
 app.set( 'view engine', 'ejs' )
 app.set( 'views', 'views' )
-app.use( express.urlencoded( { extended: false } ) )
+
 app.use( multer( {
     storage: imageEventStorage,
     fileFilter: ImageFilter
