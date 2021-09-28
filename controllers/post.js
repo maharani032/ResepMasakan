@@ -1,8 +1,8 @@
-const path = require( 'path' );
-const model = require( '../models/models' )
+const path = require( 'path' )
+const Event = require( '../models/event' )
 exports.getHome = ( req, res, next ) =>
 {
-    model.Event.find( {}, ( err, events ) =>
+    Event.find( {}, ( err, events ) =>
     {
         res.render(
             'home',
@@ -16,4 +16,4 @@ exports.getHome = ( req, res, next ) =>
     } )
     const user = req.user
 
-};
+}

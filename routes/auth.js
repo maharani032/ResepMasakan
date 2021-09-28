@@ -1,9 +1,9 @@
-const express = require( 'express' );
+const express = require( 'express' )
 const { check, body } = require( 'express-validator' )
-const authController = require( '../controllers/auth' );
-const user = require( '../models/user' );
-const router = express.Router();
-const passport = require( 'passport' );
+const authController = require( '../controllers/auth' )
+const user = require( '../models/user' )
+const router = express.Router()
+const passport = require( 'passport' )
 router.get( '/auth/google', passport.authenticate( 'google',
     {
         scope: [ 'profile', 'email' ],
@@ -11,25 +11,25 @@ router.get( '/auth/google', passport.authenticate( 'google',
     } ) )
 router.get( '/auth/google/webmasakan', passport.authenticate( 'google', { failureRedirect: '/login' } ), ( req, res ) =>
 {
-    req.session.isLoggedIn = true;
-    req.session.user = user;
+    req.session.isLoggedIn = true
+    req.session.user = user
     return req.session.save( err =>
     {
-        console.log( err );
+        console.log( err )
         res.redirect( '/' )
     } )
 } )
-router.get( '/register', authController.getRegister );
-router.get( '/login', authController.getLogIn );
+router.get( '/register', authController.getRegister )
+router.get( '/login', authController.getLogIn )
 router.get( '/logout', ( req, res, next ) =>
 {
 
     req.session.destroy( function ( e )
     {
-        req.logout();
-        res.redirect( '/' );
-    } );
-} );
+        req.logout()
+        res.redirect( '/' )
+    } )
+} )
 // router post
 router.post( '/register', [
     check( 'email' )
@@ -43,9 +43,9 @@ router.post( '/register', [
                     if ( userDoc ) {
                         return Promise.reject(
                             'Email sudah terpakai, Mohon diganti'
-                        );
+                        )
                     }
-                } );
+                } )
         } )
         .normalizeEmail(),
     body(
@@ -58,9 +58,9 @@ router.post( '/register', [
         .custom( ( value, { req } ) =>
         {
             if ( value !== req.body.password ) {
-                throw new Error( 'confirmasi password berbeda' );
+                throw new Error( 'confirmasi password berbeda' )
             }
-            return true;
+            return true
         } )
 
 ], authController.postRegister )
@@ -73,4 +73,4 @@ router.post( '/login', [
         .isLength( { min: 5 } )
         .isAlphanumeric()
 ], authController.postLogIn )
-module.exports = router;
+module.exports = router

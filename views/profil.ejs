@@ -18,6 +18,7 @@
                         role:
                         <% if (user.admin==true) { %>
                         admin
+                        <p><%= user.event.eventId.length %></p>
                         
                         <% } else { %>
                             user
@@ -28,6 +29,7 @@
                     
                     <% if (events.length>0) { %>
                         <% events.forEach(event=>{ %> 
+                            <%  %> 
                             <div class="box">
                             
                                     <p>

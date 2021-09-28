@@ -1,16 +1,15 @@
-const bcrypt = require( 'bcryptjs' );
-
-const { validationResult } = require( 'express-validator' );
-const User = require( '../models/user' );
+const bcrypt = require( 'bcryptjs' )
+const { validationResult } = require( 'express-validator' )
+const User = require( '../models/user' )
 
 
 exports.getRegister = ( req, res, next ) =>
 {
-    let message = '';
+    let message = ''
     if ( message.length > 0 ) {
-        message = message[ 0 ];
+        message = message[ 0 ]
     } else {
-        message = null;
+        message = null
     }
     res.render(
         'auth/register',
@@ -28,15 +27,15 @@ exports.getRegister = ( req, res, next ) =>
                 confirmPassword: ''
             },
             validErrors: []
-        } );
-};
+        } )
+}
 exports.getLogIn = ( req, res, next ) =>
 {
-    let message = '';
+    let message = ''
     if ( message.length > 0 ) {
-        message = message[ 0 ];
+        message = message[ 0 ]
     } else {
-        message = null;
+        message = null
     }
     res.render(
         'auth/login',
@@ -48,18 +47,18 @@ exports.getLogIn = ( req, res, next ) =>
                 email: '',
                 password: ''
             }, validErrors: []
-        } );
-};
+        } )
+}
 
 //post
 exports.postRegister = ( req, res, next ) =>
 {
-    const fname = req.body.fname;
-    const email = req.body.email;
-    const lname = req.body.lname;
-    const password = req.body.password;
+    const fname = req.body.fname
+    const email = req.body.email
+    const lname = req.body.lname
+    const password = req.body.password
 
-    const errors = validationResult( req );
+    const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/register', {
             path: '/register',
@@ -75,7 +74,7 @@ exports.postRegister = ( req, res, next ) =>
                 confirmPassword: req.body.ConfirmPassword
             },
             validErrors: errors.array()
-        } );
+        } )
     }
     bcrypt
         .hash( password, 12 )
@@ -89,24 +88,24 @@ exports.postRegister = ( req, res, next ) =>
                 email: email,
                 password: hashPassword,
                 event: []
-            } );
-            return user.save();
+            } )
+            return user.save()
         } )
         .then( result =>
         {
             res.redirect( '/login' )
         } ).catch( err =>
         {
-            const error = new Error( err );
-            error.httpStatusCode = 500;
-        } );
+            const error = new Error( err )
+            error.httpStatusCode = 500
+        } )
 
 }
 exports.postLogIn = ( req, res, next ) =>
 {
-    const email = req.body.email;
-    const password = req.body.password;
-    const errors = validationResult( req );
+    const email = req.body.email
+    const password = req.body.password
+    const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/login', {
             path: '/login',
@@ -118,7 +117,7 @@ exports.postLogIn = ( req, res, next ) =>
             },
             validErrors: errors.array(),
 
-        } );
+        } )
     }
     User.findOne( { email: email } ).then( user =>
     {
@@ -132,17 +131,17 @@ exports.postLogIn = ( req, res, next ) =>
                     password: password
                 },
                 validErrors: []
-            } );
+            } )
         }
         bcrypt.compare( password, user.password )
             .then( domatch =>
             {
                 if ( domatch ) {
-                    req.session.isLoggedIn = true;
-                    req.session.user = user;
+                    req.session.isLoggedIn = true
+                    req.session.user = user
                     return req.session.save( err =>
                     {
-                        console.log( err );
+                        console.log( err )
                         res.redirect( '/' )
                     } )
                 } return res.render( 'auth/login', {
@@ -154,16 +153,16 @@ exports.postLogIn = ( req, res, next ) =>
                         password: password
                     },
                     validErrors: []
-                } );
+                } )
 
             } ).catch( err =>
             {
-                console.log( err );
+                console.log( err )
                 res.redirect( '/login' )
             } )
     } ).catch( err =>
     {
-        const error = new error( err );
+        const error = new error( err )
         return next( error )
     } )
 }

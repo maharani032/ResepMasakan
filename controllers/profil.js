@@ -1,13 +1,13 @@
-const path = require( 'path' );
-const models = require( '../models/models' )
-
+const path = require( 'path' )
+const Event = require( '../models/event' )
 exports.getProfile = ( req, res, next ) =>
 {
     let id = req.user._id
     let user = req.user
-    models.Event.find( { userId: id }, ( err, event ) =>
+    Event.find( { userId: id } ).sort( { createByDate: -1 } ).exec( function ( err, event )
     {
         if ( !err ) {
+            console.log( event )
             res.render( 'profil', {
                 path: '/profil',
                 pageTitle: 'Profil',
@@ -16,6 +16,8 @@ exports.getProfile = ( req, res, next ) =>
 
             } )
         } else {
+            console.log( err )
+            res.redirect( '/505' )
 
         }
     } )

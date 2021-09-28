@@ -1,19 +1,20 @@
-const path = require( 'path' );
-require( "dotenv" ).config();
-const express = require( 'express' );
-const session = require( 'express-session' );
-const MongoDBStore = require( 'connect-mongodb-session' )( session );
-const errorPage = require( './controllers/error' );
+const path = require( 'path' )
+require( "dotenv" ).config()
+const { v4: uuidv4 } = require( 'uuid' );
+const express = require( 'express' )
+const session = require( 'express-session' )
+const MongoDBStore = require( 'connect-mongodb-session' )( session )
+const errorPage = require( './controllers/error' )
 const mongoose = require( 'mongoose' )
-const authRoutes = require( './routes/auth' );
-const postRoutes = require( './routes/post' );
-const adminRoutes = require( './routes/admin' );
+const authRoutes = require( './routes/auth' )
+const postRoutes = require( './routes/post' )
+const adminRoutes = require( './routes/admin' )
 const passport = require( 'passport' )
 require( './controllers/passport-auth-google' )( passport )
 
-const User = require( './models/user' );
-const app = express();
-const multer = require( 'multer' );
+const User = require( './models/user' )
+const app = express()
+const multer = require( 'multer' )
 //session
 const store = new MongoDBStore( {
     uri: process.env.DB,
@@ -27,23 +28,23 @@ app.use( session( {
 } ) )
 app.use( ( req, res, next ) =>
 {
-    res.locals.isAuthenticated = req.session.isLoggedIn;
-    next();
+    res.locals.isAuthenticated = req.session.isLoggedIn
+    next()
 } )
 app.use( ( req, res, next ) =>
 {
     if ( !req.session.user ) {
-        return next();
+        return next()
     } User.findById( req.session.user._id ).then( user =>
     {
         if ( !user ) {
-            return next();
+            return next()
         }
-        req.user = user;
-        next();
+        req.user = user
+        next()
     } ).catch( err =>
     {
-        next( new error( err ) );
+        next( new error( err ) )
     } )
 } )
 //-- session done
@@ -52,14 +53,14 @@ app.use( passport.session() )
 const imageEventStorage = multer.diskStorage( {
     destination: ( req, file, cb ) =>
     {
-        cb( null, 'images' );
+        cb( null, 'images' )
     },
     filename: ( req, file, cb ) =>
     {
 
-        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + file.originalname );
+        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + file.originalname + uuidv4() )
     }
-} );
+} )
 const ImageFilter = ( req, file, cb ) =>
 {
     if (
@@ -67,27 +68,27 @@ const ImageFilter = ( req, file, cb ) =>
         file.mimetype === 'image/jpg' ||
         file.mimetype === 'image/jpeg'
     ) {
-        cb( null, true );
+        cb( null, true )
     }
     else {
-        cb( null, false );
+        cb( null, false )
 
     }
 }
-app.set( 'view engine', 'ejs' );
-app.set( 'views', 'views' );
-app.use( express.urlencoded( { extended: false } ) );
+app.set( 'view engine', 'ejs' )
+app.set( 'views', 'views' )
+app.use( express.urlencoded( { extended: false } ) )
 app.use( multer( {
     storage: imageEventStorage,
     fileFilter: ImageFilter
 } ).single( 'ImageEvent' ) )
-app.use( express.static( "public" ) );
-app.use( '/images', express.static( path.join( __dirname, 'images' ) ) );
-app.use( postRoutes );
-app.use( authRoutes );
-app.use( adminRoutes );
+app.use( express.static( "public" ) )
+app.use( '/images', express.static( path.join( __dirname, 'images' ) ) )
+app.use( postRoutes )
+app.use( authRoutes )
+app.use( adminRoutes )
 app.get( '/500', errorPage.get500 )
-// app.use( errorPage.get404 );
+app.use( errorPage.get404 )
 mongoose
     .connect( process.env.DB,
         {
@@ -96,9 +97,9 @@ mongoose
         } )
     .then( result => 
     {
-        app.listen( 3000 );
-        console.log( 'connection to database on port 3000' );
+        app.listen( 3000 )
+        console.log( 'connection to database on port http://localhost:3000' )
     } ).catch( err =>
     {
-        console.log( err );
+        console.log( err )
     } )

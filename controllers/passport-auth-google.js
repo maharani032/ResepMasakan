@@ -24,7 +24,7 @@ module.exports = ( passport ) =>
 
                 if ( user ) {
                     done( null, user )
-                    console.log( 'user ada' );
+                    console.log( 'user ada' )
                 } else {
                     user = await User.create( newUser )
                     console.log( 'create user' )
