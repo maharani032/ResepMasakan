@@ -1,5 +1,8 @@
 const mongoose = require( 'mongoose' );
-
+const marked = require( 'marked' )
+const createDomPurify = require( 'dompurify' )
+const { JSDOM } = require( 'jsdom' )
+const dompurify = createDomPurify( new JSDOM().window )
 const Schema = mongoose.Schema;
 const resepSchema = new Schema( {
     userId: {
@@ -7,7 +10,7 @@ const resepSchema = new Schema( {
         ref: 'User',
         required: true
     },
-    judul: {
+    namaResep: {
         type: String,
         required: true
     },
@@ -17,6 +20,10 @@ const resepSchema = new Schema( {
         required: true
     },
     deskripsi: {
+        type: String,
+        required: true
+    },
+    ImageResep: {
         type: String,
         required: true
     },

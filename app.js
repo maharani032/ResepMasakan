@@ -1,6 +1,5 @@
 const path = require( 'path' )
 require( "dotenv" ).config()
-const { v4: uuidv4 } = require( 'uuid' );
 const express = require( 'express' )
 const session = require( 'express-session' )
 const MongoDBStore = require( 'connect-mongodb-session' )( session )
@@ -52,38 +51,15 @@ app.use( ( req, res, next ) =>
 //-- session done
 app.use( passport.initialize() )
 app.use( passport.session() )
-const imageEventStorage = multer.diskStorage( {
-    destination: ( req, file, cb ) =>
-    {
-        cb( null, 'images' )
-    },
-    filename: ( req, file, cb ) =>
-    {
 
-        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + uuidv4() + file.originalname )
-    }
-} )
-const ImageFilter = ( req, file, cb ) =>
-{
-    if (
-        file.mimetype === 'image/png' ||
-        file.mimetype === 'image/jpg' ||
-        file.mimetype === 'image/jpeg'
-    ) {
-        cb( null, true )
-    }
-    else {
-        cb( null, false )
-
-    }
-}
 app.set( 'view engine', 'ejs' )
 app.set( 'views', 'views' )
 
-app.use( multer( {
-    storage: imageEventStorage,
-    fileFilter: ImageFilter
-} ).single( 'ImageEvent' ) )
+// const uploadImageEvent = multer( {
+//     storage: imageEventStorage,
+//     fileFilter: ImageFilter
+// } ).single( 'ImageEvent' )
+
 app.use( '/images', express.static( path.join( __dirname, 'images' ) ) )
 app.use( express.static( "public" ) )
 app.use( postRoutes )

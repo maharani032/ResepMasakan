@@ -1,7 +1,6 @@
 const path = require( 'path' )
 const User = require( '../models/user' )
 const Event = require( '../models/event' )
-
 const fileHelper = require( '../util/file' )
 const { validationResult } = require( 'express-validator' )
 exports.getPostEvent = ( req, res, next ) =>
@@ -21,6 +20,7 @@ exports.postPostEvent = ( req, res, next ) =>
 {
     const nameEvent = req.body.nameEvent
     const pictureEvent = req.file
+    console.log( pictureEvent )
     const Ondate = req.body.OnDate
     const deskripsi = req.body.deskripsi
     const tempat = req.body.tempat
@@ -39,7 +39,7 @@ exports.postPostEvent = ( req, res, next ) =>
             }
         } )
     }
-    const ImageEvent = pictureEvent.path.replace( '\\', '/' )
+    const ImageEvent = pictureEvent.path
     const event = new Event( {
         userId: req.user._id,
         nameEvent: nameEvent,

@@ -30,6 +30,12 @@ const userSchema = new Schema( {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'event',
         } ]
+    },
+    resep: {
+        resepId: [ {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'resep'
+        } ]
     }
 
 } )

@@ -28,13 +28,23 @@
             <div class="resep">
                 <h2>Resep</h2>
                 <div class="resep-box">
-                    <div class="rbox1">
+                    <% if (reseps.length>0) { %>
+                        <% for (resep of Object.keys(reseps)){ %>
+                            <% if (resep>4) { %>
+                                <% break %> 
+                            <% } %>
+                            <a href=''>
+                                <img class='ImageEvent' src="/<%=reseps[resep].ImageResep%>" alt="">
+                            </a>
+                            <% } %>  
+                    <% } %>
+                    <!-- <div class="rbox1">
                         <a href=""></a>
                         <a href=""></a>
                     </div>
                     <div class="rbox2">
                         <a href=""></a>
-                        <a href=""></a>
+                        <a href=""></a> -->
                     </div>
                 </div>
             </div>

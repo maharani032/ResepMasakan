@@ -5,6 +5,7 @@
   top: 0;
   z-index: 1;
   width: 100%;
+  max-height: 100px;
 }
 
 .topnav .logo {
@@ -60,8 +61,15 @@
   display: inline-block;
 }
 
+.topnav .list {
+  position: relative;
+  height: 10px;
+  bottom: 20px;
+}
+
 .topnav .dropdown-content {
   display: none;
+  border-radius: 15px 50px 30px;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
@@ -78,7 +86,7 @@
 }
 
 .topnav .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: #b6adad;
 }
 
 .topnav .dropdown:hover .dropdown-content {
@@ -170,9 +178,15 @@ section {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 150px 150px;
+  padding: 50px 50px;
   background-color: #fff8e6;
   margin: 30px 10px 50px 20px;
+}
+
+.resep-box a .ImageEvent {
+  width: 200px;
+  height: 200px;
+  size: 300px;
 }
 
 .resep h2 {
@@ -207,8 +221,9 @@ section {
 }
 
 .acara-box a .ImageEvent {
-  max-width: 250px;
-  max-height: 250px;
+  width: 200px;
+  height: 200px;
+  size: 300px;
 }
 
 .acara {
@@ -541,5 +556,23 @@ input[type=password]::placeholder {
 .body-profile {
   position: absolute;
   margin-top: 10%;
+}
+
+.bodyPost-resep {
+  position: absolute;
+  padding-top: 10%;
+  padding-left: 3rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.bodyPost-resep .form-resep {
+  margin: auto;
+  width: 50rem;
+}
+
+.bodyPost-resep .form-resep .form-group {
+  margin-top: 1rem;
 }
 /*# sourceMappingURL=style.css.map */
