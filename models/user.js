@@ -1,7 +1,7 @@
-const mongoose = require( 'mongoose' );
-
-const Schema = mongoose.Schema;
+const mongoose = require( 'mongoose' )
+const Schema = mongoose.Schema
 const userSchema = new Schema( {
+    googleId: String,
     name: {
         fname: {
             type: String,
@@ -18,18 +18,20 @@ const userSchema = new Schema( {
     },
     password: {
         type: String,
-        required: true
+
     },
     admin: {
         type: Boolean,
         default: false
     },
-    event: [ {
-        eventId: {
+    picture: String,
+    event: {
+        eventId: [ {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'event',
-        },
-    } ]
+        } ]
+    }
+
 } )
 
-module.exports = mongoose.model( 'User', userSchema );
+module.exports = mongoose.model( 'User', userSchema )

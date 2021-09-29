@@ -1,4 +1,4 @@
-.body{
+.body-home{
     background-image: url(/image/pexels-maarten-van-den-heuvel-2284166.jpg);
     background-size: cover;
 
@@ -28,113 +28,122 @@
             }
             }
     }
-    section {
-        order: 3;
-        display: flex;
-        background-color: #ffb442;
-        .resep {
-            order: 3;
-            flex: 50%;
-            overflow: hidden;
-            .resep-box{
-                flex-flow: row wrap;
-                display: flex;
-                justify-content: space-evenly;
-             & a{
-                display: flex;
-                align-items: center;
-                padding: 150px 150px;
-                background-color: #fff8e6;
-                margin: 30px 10px 50px 20px;
-                }
-                 h2 {
-                    text-align: center;
-                    background-color: #e15d5d;
-                    padding: 10px 0;
-                }
-            }
-        }
-    }
-
-
-
-
-.acara-box {
-  flex-flow: row wrap;
-  display: flex;
-  justify-content: space-evenly;
 }
 
-// .acara-box a {
-//   display: flex;
-//   align-items: center;
-//   padding: 150px 150px;
-//   background-color: #fff8e6;
-//   margin: 30px 10px 50px 20px;
-// }
+section {
+    order: 3;
+    display: flex;
+    background-color: #ffb442;
+}
 
-// .acara {
-//   order: 3;
-//   flex: 50%;
-//   flex-flow: row wrap;
-// }
+.resep {
+    order: 3;
+    flex: 50%;
+    overflow: hidden;
+}
 
-// .acara h2 {
-//   text-align: center;
-//   background-color: #e15d5d;
-//   padding: 10px 0;
-// }
+.resep-box {
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.resep-box a {
+    display: flex;
+    align-items: center;
+    padding: 150px 150px;
+    background-color: #fff8e6;
+    margin: 30px 10px 50px 20px;
+}
+
+.resep h2 {
+    text-align: center;
+    background-color: #e15d5d;
+    padding: 10px 0;
+}
+
+.acara-box {
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.acara-box a {
+    display: flex;
+    align-items: center;
+    // padding: 150px 150px;
+    background-color: #fff8e6;
+    margin: 30px 10px 50px 20px;
+    
+}
+
+.acara {
+    order: 3;
+    flex: 50%;
+    flex-flow: row wrap;
+}
+
+.acara h2 {
+    text-align: center;
+    background-color: #e15d5d;
+    padding: 10px 0;
+}
+    
 
 /* Footer */
 footer {
-  order: 4;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  background-color: #00a29e;
-}
-
-.link-website {
-  display: flex;
-  flex-flow: column wrap;
-  margin: 50px;
-}
-
-.info-website {
-  display: flex;
-  flex-flow: column wrap;
-  margin: 50px;
-}
-    .event-box{
+//     order: 4;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: #00a29e;
+    .link-website {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        align-items: stretch;
-        .boxEvent{
-        width: 20rem;
-        max-width: 95%;
-        margin: 1rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-        .box-header{
-            padding: 1rem;
-            h1{
-                margin:0
-            }
-        }
-        .box-image{
-            // height: 10rem;
-            // width: 100%;
-            background-color: black;
-           
-            text-align: center;
-            & img{
-                width: 150px;
-                // max-height: 100%;
-                // max-width: 100%;
-            }
+        flex-flow: column wrap;
+        margin: 50px;
+            .info-website {
+            display: flex;
+            flex-flow: column wrap;
+            margin: 50px;
         }
     }
-    }
-    
-    
 }
+
+
+
+
+    // .event-box{
+    //     display: flex;
+    //     flex-wrap: wrap;
+    //     justify-content: space-around;
+    //     align-items: stretch;
+    //     background-color: #00a29e;
+    //     .boxEvent{
+    //     margin-left: 2rem;
+    //     background-color: black;
+    //     width: 20rem;
+    //     max-width: 95%;
+    //     margin: 1rem;
+    //     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    //     .box-header{
+    //         padding: 1rem;
+    //         h1{
+    //             margin:0
+    //         }
+    //     }
+    //     .box-image{
+    //         // height: 10rem;
+    //         // width: 100%;
+    //         background-color: black;
+           
+    //         text-align: center;
+    //         & img{
+    //             width: 150px;
+    //             // max-height: 100%;
+    //             // max-width: 100%;
+    //         }
+    //     }
+    // }
+    // }
+    
+    

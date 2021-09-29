@@ -1,0 +1,62 @@
+<%- include ('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <%- include ('component/navbar.ejs') %>
+            <div class="body-profile">
+                <div class="profile">
+                    <p>
+                        <%= user.name.fname %>
+                    </p>
+                    <p>
+                        <%= user.name.lname %>
+                    </p>
+                    <p>
+                        <%= user.email %> 
+                    </p>
+                    <p>
+                        role:
+                        <% if (user.admin==true) { %>
+                        admin
+                        <p><%= user.event.eventId.length %></p>
+                        
+                        <% } else { %>
+                            user
+                        <% } %>
+                    </p>
+                </div>
+                <div class="acara">
+                    
+                    <% if (events.length>0) { %>
+                        <% events.forEach(event=>{ %> 
+                            <%  %> 
+                            <div class="box">
+                            
+                                    <p>
+                                    nama Acara:<%= event.nameEvent %>
+                                    </p>
+                        
+                                    <p>tempat : <%= event.tempat %> </p>
+                                    
+                                    <div class="deskripsi">
+                                        <p>deskripsi: </p>
+                                        <%- event.html.replace(/\n/g,'<br/>')%>
+                                    </div>
+                                    
+                                    <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %> </p>
+                                    <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %> </p>
+                                    <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
+                                    <input type="hidden" value="<%= event._id %>" name="eventId">
+
+                                    <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                            
+                            <%}) %>
+                    <% } %> 
+                </div>
+                
+                </div>
+            <%- include('includes/head.ejs') %>
+
+            
