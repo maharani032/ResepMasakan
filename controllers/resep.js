@@ -2,7 +2,8 @@ const path = require( 'path' )
 const Event = require( '../models/event' )
 exports.getHome = ( req, res, next ) =>
 {
-    Event.find( {}, ( err, events ) =>
+
+    Event.find( {} ).sort( { createByDate: -1 } ).exec( function ( err, events )
     {
         res.render(
             'home',

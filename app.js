@@ -60,7 +60,7 @@ const imageEventStorage = multer.diskStorage( {
     filename: ( req, file, cb ) =>
     {
 
-        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + file.originalname + uuidv4() )
+        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + uuidv4() + file.originalname )
     }
 } )
 const ImageFilter = ( req, file, cb ) =>
@@ -84,8 +84,8 @@ app.use( multer( {
     storage: imageEventStorage,
     fileFilter: ImageFilter
 } ).single( 'ImageEvent' ) )
-app.use( express.static( "public" ) )
 app.use( '/images', express.static( path.join( __dirname, 'images' ) ) )
+app.use( express.static( "public" ) )
 app.use( postRoutes )
 app.use( authRoutes )
 app.use( adminRoutes )

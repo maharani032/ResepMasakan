@@ -39,7 +39,7 @@ exports.postPostEvent = ( req, res, next ) =>
             }
         } )
     }
-    const ImageEvent = pictureEvent.path
+    const ImageEvent = pictureEvent.path.replace( '\\', '/' )
     const event = new Event( {
         userId: req.user._id,
         nameEvent: nameEvent,
@@ -142,7 +142,7 @@ exports.postEditEvent = ( req, res, next ) =>
         event.Deskripsi = Updatedeskripsi
         if ( pictureEvent ) {
             fileHelper.deleteFile( event.ImageEvent )
-            event.ImageEvent = pictureEvent.path
+            event.ImageEvent = pictureEvent.path.replace( '\\', '/' )
         }
         return event.save().then( result =>
         {
