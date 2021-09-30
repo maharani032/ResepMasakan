@@ -28,13 +28,23 @@
             <div class="resep">
                 <h2>Resep</h2>
                 <div class="resep-box">
-                    <div class="rbox1">
+                    <% if (reseps.length>0) { %>
+                        <% for (resep of Object.keys(reseps)){ %>
+                            <% if (resep>4) { %>
+                                <% break %> 
+                            <% } %>
+                            <a href='/resep/<%= reseps[resep]._id %>'>
+                                <img class='ImageEvent' src="/<%=reseps[resep].ImageResep%>" alt="">
+                            </a>
+                            <% } %>  
+                    <% } %>
+                    <!-- <div class="rbox1">
                         <a href=""></a>
                         <a href=""></a>
                     </div>
                     <div class="rbox2">
                         <a href=""></a>
-                        <a href=""></a>
+                        <a href=""></a> -->
                     </div>
                 </div>
             </div>
@@ -42,13 +52,25 @@
                 <h2>Acara</h2>
                 <div class="acara-box">
                     <% if (events.length>0) { %>
-                        <% events.forEach(event => { %> 
+                        <!-- <!% events.forEach(event => { %> 
+                            <!% console.log(events[1]) %> 
                             <a href=''>
-                            <img width='150px' height='150px' src="/<%=event.ImageEvent%>" alt="">
+                            <img class='ImageEvent' src="/<!%=event.ImageEvent%>" alt="">
                             </a>
-                    
-                        <% }) %> 
-                        <% } %>
+                            <!% if (events[3]) { %>
+                                <!% break %>  -->
+                                <% for( event of Object.keys(events)) {%> 
+                                    <% if(event>4){ %>
+                                        <% break %>
+                                    <% } %>
+                                    <a href='/event/<%=events[event]._id%>'>
+                                        <img class='ImageEvent' src="/<%=events[event].ImageEvent%>" alt="">
+                                    </a>
+                                     
+                                    <% } %> 
+                            <% } %>
+                        <!-- <!% }) %> 
+                        <!% } %> -->
                     <!-- <div class="box1">
                         
                         <a href=""></a>
@@ -59,23 +81,7 @@
                         <a href=""></a>
                     </div> -->
                 </div>
-                <!-- <!% if (events.length>0) { %>
-                 <div class="acara-box">
-                    <!% events.forEach(event => {%>
-                        <div class="boxEvent">
-                            <div class="box-header">
-                                <h1 class="nameEvent">
-                                    <!%= event.nameEvent %> 
-                                </h1>
-                            </div>
-                                <div class="box-image">
-                                    <img size='50px'src="/<!%=event.ImageEvent%>" alt="<!%= event.nameEvent %>">
-
-                                </div>
-                        </article>
-                    <!%}); %>
-                        
-                    <!% } %> -->
+            
                  </div>
             
         </section>

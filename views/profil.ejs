@@ -18,15 +18,16 @@
                         role:
                         <% if (user.admin==true) { %>
                         admin
-                        <p><%= user.event.eventId.length %></p>
-                        
+                        <p>jumlah post event :<%= user.event.eventId.length %></p>
                         <% } else { %>
                             user
+                           
                         <% } %>
+                        <p>jumlah post resep: <%= user.resep.resepId.length %>
+                        </p>
                     </p>
                 </div>
                 <div class="acara">
-                    
                     <% if (events.length>0) { %>
                         <% events.forEach(event=>{ %> 
                             <%  %> 
@@ -55,7 +56,33 @@
                             <%}) %>
                     <% } %> 
                 </div>
-                
+                <div class="resep">
+                    <% if (reseps.length>0) { %>
+                        <% reseps.forEach(resep=>{ %>
+                            <% %>
+                                <div class="box">
+                    
+                                    <p>
+                                        nama resep:<%= resep.namaResep %>
+                                    </p>
+                                    <div class="deskripsi">
+                                        <p>deskripsi: </p>
+                                        <%- resep.html.replace(/\n/g,'<br />')%>
+                                    </div>
+                    
+                                    <p>tanggal dibuat : <%= resep.createByDate.toLocaleDateString() %>
+                                    </p>
+                                    <p>selection Option: <%= resep.selectionOption %> </p>
+                                    <a href="/edit-resep/<%=resep._id %>?edit=true">edit event</a>
+                                    <!-- <input type="hidden" value="<!%= event._id %>" name="eventId"> -->
+                    
+                                    <form action="/delete-resep/<%=resep._id %>?_method=DELETE" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                    
+                                <%}) %>
+                                    <% } %>
+                </div>
                 </div>
             <%- include('includes/head.ejs') %>
 

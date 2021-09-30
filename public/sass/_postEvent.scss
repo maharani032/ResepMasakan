@@ -11,3 +11,9 @@
     position: absolute;
     
 }
+textarea{
+        text-align:left;
+        &:focus{
+            text-align:left;
+        }
+    }

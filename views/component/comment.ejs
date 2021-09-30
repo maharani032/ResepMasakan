@@ -1,0 +1,31 @@
+<div class="comment-list">
+    <h1>Daftar Komentar : </h1>
+    <div class="list">
+        <% comments.forEach(comment=> { %>
+            <div class="komentator">
+                <p>
+                   <%= comment.name.fname %><%= comment.name.lname %>  
+                </p>
+                <p>
+                    <%= comment.komentar %>
+                </p>
+                <% if (user.admin==true) { %>
+                    <form action="/delete-comment/<%=comment._id %>?_method=DELETE" method="POST" class='red-button'>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <% } %>
+            </div>
+            <% }) %>
+    </div>
+</div>
+
+<% if(isAuthenticated){ %>
+    <div class="komentar">
+        <form action="/comment/<% if (modeEventorResep==true) { %>event/<%= event._id %> <% } else { %>resep/<%= resep._id %> <% } %>" method="POST" autocomplete="off">
+            <h5>Komentarlah di bawah sini : </h5>
+            <div class="form-froup">
+                <textarea name="Komentar" class="form-control" placeholder="Komentar" cols="40" rows="2"></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark mt-5 btn-komen">Comment</button>
+        </form>
+    </div>
+    <% } %> 

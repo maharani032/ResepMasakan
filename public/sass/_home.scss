@@ -51,9 +51,14 @@ section {
 .resep-box a {
     display: flex;
     align-items: center;
-    padding: 150px 150px;
+    padding: 50px 50px;
     background-color: #fff8e6;
     margin: 30px 10px 50px 20px;
+    .ImageEvent{
+        width: 200px;
+        height: 200px;
+        size:300px
+    }
 }
 
 .resep h2 {
@@ -71,10 +76,14 @@ section {
 .acara-box a {
     display: flex;
     align-items: center;
-    // padding: 150px 150px;
+    padding: 50px 50px;
     background-color: #fff8e6;
     margin: 30px 10px 50px 20px;
-    
+    .ImageEvent{
+        width: 200px;
+        height: 200px;
+        size:300px
+    }
 }
 
 .acara {
