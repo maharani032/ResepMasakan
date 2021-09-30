@@ -23,6 +23,10 @@ const commentSchema = new Schema( {
     eventId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'event',
+    },
+    resepId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'resep',
     }
 
 } )

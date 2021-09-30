@@ -1,0 +1,20 @@
+<%- include ('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <%- include ('../component/navbar.ejs') %>
+            <div class="body-event">
+                <h1>
+                    <%= resep.namaResep %>
+                </h1>
+                <p>
+                    <%=resep.createByDate.toLocaleDateString() %>
+                </p>
+                <p><%= resep.selectionOption %> </p>
+                <img class='img-display' src="/<%=resep.ImageResep%>" alt="">
+                
+                <%- resep.html.replace(/\n/g,'<br />')%>
+
+                <%- include ('../component/comment.ejs') %>
+            </div>
+            <%- include('../includes/end.ejs') %>
