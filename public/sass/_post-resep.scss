@@ -8,6 +8,14 @@ align-items: center;
     width: 50rem;
     .form-group{
         margin-top: 1rem;
+    textarea{
+        text-align:left;
+        &:focus{
+            text-align:left;
+        }
+    }
+
+   
     }
 }
 }

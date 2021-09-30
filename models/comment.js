@@ -1,12 +1,11 @@
 const mongoose = require( 'mongoose' )
-const { stringify } = require( 'uuid' )
 const Schema = mongoose.Schema
 const commentSchema = new Schema( {
-    userId: [ {
+    userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    } ],
+    },
     name: {
         fname: {
             type: String,
@@ -17,10 +16,14 @@ const commentSchema = new Schema( {
             required: true
         }
     },
-    resep: [ {
-        type: Schema.Types.ObjectId,
-        ref: 'Resep',
+    komentar: {
+        type: String,
         required: true
-    } ]
+    },
+    eventId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'event',
+    }
+
 } )
 module.exports = mongoose.model( 'Comment', commentSchema )

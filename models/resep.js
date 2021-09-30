@@ -14,6 +14,10 @@ const resepSchema = new Schema( {
         type: String,
         required: true
     },
+    selectionOption: {
+        type: String,
+        required: true
+    },
     createByDate: {
         type: Date,
         default: Date.now,
@@ -41,7 +45,6 @@ resepSchema.pre( "validate", function ( next )
     if ( this.deskripsi ) {
         this.html = dompurify.sanitize( marked( this.deskripsi ) )
     }
-
     next()
 } );
 module.exports = mongoose.model( 'Resep', resepSchema )

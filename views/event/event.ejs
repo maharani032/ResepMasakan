@@ -4,6 +4,11 @@
     <body>
         <%- include ('../component/navbar.ejs') %>
         <div class="body-event">
+            <h1><%= event.nameEvent %> </h1>
+            <p><%=event.createByDate.toLocaleDateString() %> </p>
+            <img class='img-display'src="/<%=event.ImageEvent%>" alt="">
+            <%- event.html.replace(/\n/g,'<br />')%>
 
+            <%- include ('../component/comment.ejs') %> 
         </div>
     <%- include('../includes/end.ejs') %>
