@@ -4,7 +4,8 @@ const Resep = require( '../models/resep' )
 exports.getEvent = ( req, res ) =>
 {
     const EventId = req.params.eventId
-    console.log( EventId )
+    // console.log( EventId )
+    console.log( req.user )
     Event.findById( EventId )
         .then( event =>
         {

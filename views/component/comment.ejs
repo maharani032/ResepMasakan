@@ -3,6 +3,7 @@
     <div class="list">
         <% comments.forEach(comment=> { %>
             <div class="komentator">
+                <img class='komen-picture'src="<%=user.picture%>" alt="">
                 <p>
                    <%= comment.name.fname %><%= comment.name.lname %>  
                 </p>

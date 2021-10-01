@@ -627,8 +627,16 @@ textarea:focus {
 .body-event .comment-list .komentator {
   padding-right: 50px;
   background-color: #808080;
-  color: purple;
+  color: white;
   border-radius: 0.75em 0.75em;
   margin-bottom: 10px;
+}
+
+.body-event .comment-list .komen-picture {
+  border-radius: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50px;
 }
 /*# sourceMappingURL=style.css.map */

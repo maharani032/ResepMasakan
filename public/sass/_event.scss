@@ -25,11 +25,16 @@
             margin-bottom: 10%;
         }
         .komentator{
+            // display: flex;
             padding-right: 50px;
             background-color: #808080;
-            color: purple;
+            color: white;
             border-radius: 0.75em 0.75em;
             margin-bottom: 10px;
+        }.komen-picture{
+            border-radius: 50px;
+            display: flex;
+            width: 50px;
         }
         // .red-button{
         //     margin-bottom: 10px;
