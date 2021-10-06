@@ -1,0 +1,62 @@
+body{
+    background-image: url(images.png);
+    background-size:cover;
+}
+header{
+    width: 100%;
+    height: 100px;
+    background-color: coral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav{
+    width: 100%;
+    height: 75px;
+    background-color: crimson;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.editprofil{
+    width: 350px;
+    height: 450px;
+    margin: 20px auto;
+}
+.editprofil img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-left: 120px;
+    margin-top: 20px;
+}
+.editprofil ul{
+    align-content: center;
+}
+aside{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    background-color: #FFF8E5;
+}
+main{
+    width: 70%;
+    display: flex;
+    background-color: #FFF8E5;
+}
+.resep img{
+    height: 100px;
+    width: 100px;
+}
+
+.masakan{
+    display: flex;
+    height: 100px;
+    width: 800px;
+    justify-content: space-between;
+    padding: 10px 50px;
+    background-color: coral;
+    margin: 20px 0 20px 0;
+    overflow-x: hidden;
+    align-items: center;
+}
