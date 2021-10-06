@@ -61,7 +61,7 @@ app.use( authRoutes )
 app.use( adminRoutes )
 app.use( commonRoutes )
 app.get( '/500', errorPage.get500 )
-// app.use( errorPage.get404 )
+app.use( errorPage.get404 )
 mongoose
     .connect( process.env.DB,
         {
