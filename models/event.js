@@ -30,6 +30,10 @@ const eventSchema = new Schema( {
     like: [ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    } ],
+    comment: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     } ]
 } )
 eventSchema.pre( "validate", function ( next ) 

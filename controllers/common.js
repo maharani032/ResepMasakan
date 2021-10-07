@@ -40,6 +40,13 @@ exports.postComment = ( req, res ) =>
     } )
     comment.save().then( result =>
     {
+        Event.findOneAndUpdate( { _id: eventId }, { $push: { comment: comment._id } },
+            ( err, sucess ) =>
+            {
+                if ( err ) {
+                    console.log( err )
+                }
+            } )
         res.redirect( '/event/' + eventId )
     } ).catch( err =>
     {

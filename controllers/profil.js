@@ -34,7 +34,6 @@ exports.postUpdateProfil = ( req, res ) =>
             .then( result =>
             {
                 console.log( 'be save' )
-                console.log( user.picture )
                 res.redirect( '/profil' )
             } ).catch( err =>
             {

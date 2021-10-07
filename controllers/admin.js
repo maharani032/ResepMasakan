@@ -2,6 +2,7 @@ const path = require( 'path' )
 const User = require( '../models/user' )
 const Event = require( '../models/event' )
 const fileHelper = require( '../util/file' )
+const Comment = require( '../models/comment' )
 exports.getPostEvent = ( req, res, next ) =>
 {
     res.render(
@@ -90,6 +91,22 @@ exports.deleteEvent = ( req, res, next ) =>
                         console.log( err )
                     }
                 } )
+            Comment.find( { eventId: eventId } ).then( comments =>
+            {
+                var length = comments.length - 1;
+                for ( length; length >= 0; length-- ) {
+                    let id = event.comment[ length ]
+                    Comment.findByIdAndDelete( id, function ( err, docs )
+                    {
+                        if ( err ) {
+                            console.log( err )
+                        }
+                        else {
+                            console.log( 'deleted:', docs )
+                        }
+                    } )
+                }
+            } )
             fileHelper.deleteFile( event.ImageEvent )
             return Event.deleteOne( { _id: eventId, userId: req.user._id } )
 

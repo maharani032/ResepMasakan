@@ -89,15 +89,9 @@ exports.postDeleteResep = ( req, res, next ) =>
                 } )
             Comment.find( { resepId: resepId } ).then( comments =>
             {
-                console.log( comments )
                 var length = comments.length - 1;
-                // var id = resep.comment
-                console.log( resep.comment[ 0 ] )
                 for ( length; length >= 0; length-- ) {
-                    console.log( length )
-                    // console.log( resep.comment[ length ] )
                     let id = resep.comment[ length ]
-                    console.log( JSON.stringify( id ) )
                     Comment.findByIdAndDelete( id, function ( err, docs )
                     {
                         if ( err ) {
