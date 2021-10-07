@@ -2,9 +2,11 @@
     <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
+    <script src="/js/formUpdateProfil.js"></script>
+
         <%- include ('component/navbar.ejs') %>
         <div class="body-profile">
-            <div class="row>
+            <div class="row">
                 <div class="col-4">
                     <div class="profil">
                     <form  enctype='multipart/form-data' action="/update-profil" id='profil' method='POST'>
@@ -53,7 +55,7 @@
                         </label><br>
                         <label for="">nama belakang : 
                             <input type="text" class='form-control' autocomplete="off" name="lname" value='<%= user.name.lname %>'></label><br>
-                        <% if (user.googleId==null) { %>
+                        <% if (user.googleId==null|| user.googleId=='') { %>
                         <label for="">Email : </label><br>
                         <input class='form-control'type="email" autocomplete="off" name="email" value='<%= user.email %>'>
                         <% } %>
@@ -69,13 +71,76 @@
                        
                     </div>
                 </div>
-                <div class="col-8">
+                    <div class="col-8">
+                        <button id='resep-button' class='btn btn-lg btn-expanded'>Resep</button>
+                        <button id='event-button' class='btn btn-lg btn-expanded'>Event</button>
+                        <div id="resep">
+                            <% if (reseps.length>0) { %>
+                                <% reseps.forEach(resep=>{ %>
+                                    <% %>
+                                        <div class="box">
+                            
+                                            <p>
+                                                nama resep:<%= resep.namaResep %>
+                                            </p>
+                                            <div class="deskripsi">
+                                                <p>deskripsi: </p>
+                                                <p>
+                                                    <%= resep.deskripsi.substring(0,30) %>
+                                                </p>
+                                                <!-- <!%- resep.html.replace(/\n/g,'<br />')%> -->
+                                            </div>
+                            
+                                            <p>tanggal dibuat : <%= resep.createByDate.toLocaleDateString() %>
+                                            </p>
+                                            <p>selection Option: <%= resep.selectionOption %>
+                                            </p>
+                                            <a href="/edit-resep/<%=resep._id %>?edit=true">edit event</a>
+                                            <!-- <input type="hidden" value="<!%= event._id %>" name="eventId"> -->
+                            
+                                            <form action="/delete-resep/<%=resep._id %>?_method=DELETE" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                            
+                                        <%}) %>
+                                            <% } %>
+                        </div>
+                        <div id="event">
+                            <% if (events.length>0) { %>
+                                <% events.forEach(event=>{ %>
+                                    <% %>
+                                        <div class="box">
+                            
+                                            <p>
+                                                nama Acara:<%= event.nameEvent %>
+                                            </p>
+                            
+                                            <p>tempat : <%= event.tempat %>
+                                            </p>
+                            
+                                            <div class="deskripsi">
+                                                <p>deskripsi: </p>
+                                                <%- event.html.replace(/\n/g,'<br />')%>
+                                            </div>
+                            
+                                            <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %>
+                                            </p>
+                                            <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %>
+                                            </p>
+                                            <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
+                                            <input type="hidden" value="<%= event._id %>" name="eventId">
+                            
+                                            <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                        </div>
+                            
+                                        <%}) %>
+                                            <% } %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
             
-            <script src="/js/formUpdateProfil.js"></script>           
     <%- include('includes/end.ejs') %>
 
-            
-           

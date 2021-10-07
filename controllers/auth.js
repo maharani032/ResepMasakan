@@ -58,7 +58,6 @@ exports.postRegister = ( req, res, next ) =>
     const email = req.body.email
     const lname = req.body.lname
     const password = req.body.password
-
     const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/register', {
@@ -89,6 +88,7 @@ exports.postRegister = ( req, res, next ) =>
                 },
                 picture: '',
                 email: email,
+                googleId: '',
                 password: hashPassword,
                 event: []
             } )

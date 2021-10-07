@@ -5,7 +5,7 @@ const deleteFile = ( filePath, next ) =>
     {
         if ( err ) {
             // throw ( err )
-            next()
+            next
         }
     } )
 }

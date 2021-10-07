@@ -10,7 +10,7 @@ exports.postUpdateProfil = ( req, res ) =>
     const lname = req.body.lname
     const email = req.body.email
     const imagePicture = req.file
-    console.log( fname, lname )
+    console.log( fname, lname, email )
     User.findById( req.user._id ).then( user =>
     {
         user.name.fname = fname
@@ -18,23 +18,21 @@ exports.postUpdateProfil = ( req, res ) =>
         // user.email = user.email
         user.event = user.event
         user.resep = user.resep
+        console.log( email )
         if ( user.googleId === null || user.googleId === '' ) {
+            console.log( 'disana' )
             user.email = email
         }
-        user.email = user.email
+        else if ( user.googleId != null && user.googleId != '' ) {
+            console.log( 'disini' )
+            user.email = user.email
+        }
+
         if ( imagePicture ) {
             fileHelper.deleteFile( user.picture )
             user.picture = imagePicture.path.replace( '\\', '/' )
-            // if ( user.picture != null && user.picture != '' ) {
-            //     console.log( 'in here' )
-
-            // }
-            // else {
-            //     console.log( 'in there' )
-            //     user.picture = imagePicture.path.replace( '\\', '/' )
-            // }
         }
-        // else if ( user.picture )
+
 
         return user.save()
             .then( result =>

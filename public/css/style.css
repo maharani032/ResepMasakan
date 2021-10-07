@@ -449,23 +449,31 @@ textarea:focus {
 }
 
 .body-profile {
-  position: absolute;
   margin-top: 10%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .body-profile .profil {
+  border-radius: 20px;
   background-color: #7ac7c3;
   margin-left: 20px;
   padding: 20px 20px;
-  height: 85vh;
+  max-height: 90vh;
   max-width: 300px;
+  margin-bottom: 10px;
+}
+
+.body-profile .profil .form-control {
+  width: 260px;
 }
 
 .body-profile .profil .profile-picture {
-  border-radius: 100px;
+  border-radius: 50%;
   display: block;
   margin: 0 auto;
   width: 10em;
+  height: 10em;
 }
 
 .body-profile .profil .gambar-profil {
@@ -475,11 +483,47 @@ textarea:focus {
 
 .body-profile .profil .informasi-user {
   display: block;
-  margin: 20px auto;
 }
 
 .body-profile .profil .button {
   margin-top: 10px;
+}
+
+.body-profile .profil #resep-button #event-button {
+  margin: 10px 10px;
+}
+
+.body-profile #resep {
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  padding: 10px 10px;
+  background-color: transparent;
+}
+
+.body-profile #resep .box {
+  background-color: rgba(85, 214, 182, 0.493);
+  margin: 15px;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.body-profile #event {
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  padding: 10px 10px;
+}
+
+.body-profile #event .box {
+  background-color: rgba(85, 214, 182, 0.493);
+  margin: 15px;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .bodyPost-resep {

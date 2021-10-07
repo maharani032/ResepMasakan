@@ -1,17 +1,26 @@
 .body-profile{
-    position: absolute;
+    // position: absolute;
     margin-top: 10%;
+    max-width: 100%;
+    overflow-x:hidden;
     .profil{
+        // position: absolute;
+        border-radius: 20px;
         background-color: rgb(122, 199, 195);
         margin-left: 20px;
         padding: 20px 20px;
-        height: 85vh;
+        max-height: 90vh;
         max-width: 300px;
+        margin-bottom: 10px;
+        .form-control{
+            width: 260px;
+        }
         .profile-picture{
-            border-radius: 100px;
+            border-radius: 50%;
             display: block;
             margin:0 auto;
             width: 10em;
+            height: 10em;
         }   
         .gambar-profil{
             display: block;
@@ -19,11 +28,44 @@
         }
         .informasi-user{
             display: block;
-            margin: 20px auto;
+            // margin: 20px auto;
         }
         .button{
             margin-top: 10px;
         }
-        
+        #resep-button #event-button{
+            margin: 10px 10px;
+        }
+    }
+    #resep{
+            // position: absolute;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            margin-top: 10px;
+            margin-right: 20px;
+            padding: 10px 10px;
+            // background-color:transparent ;
+            .box{
+                background-color: rgba(85, 214, 182, 0.493);
+                margin: 15px;
+                border-radius: 20px;
+                padding: 10px;
+            }
+        }
+    #event{
+        // position: absolute;
+        max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            margin-top: 10px;
+            margin-right: 20px;
+            padding: 10px 10px;
+            .box{
+                background-color: rgba(85, 214, 182, 0.493);
+                margin: 15px;
+                border-radius: 20px;
+                padding: 10px;
+            }
     }
 }
