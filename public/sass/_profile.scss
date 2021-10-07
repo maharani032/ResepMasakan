@@ -1,4 +1,29 @@
 .body-profile{
     position: absolute;
     margin-top: 10%;
+    .profil{
+        background-color: rgb(122, 199, 195);
+        margin-left: 20px;
+        padding: 20px 20px;
+        height: 85vh;
+        max-width: 300px;
+        .profile-picture{
+            border-radius: 100px;
+            display: block;
+            margin:0 auto;
+            width: 10em;
+        }   
+        .gambar-profil{
+            display: block;
+            margin:0 auto;
+        }
+        .informasi-user{
+            display: block;
+            margin: 20px auto;
+        }
+        .button{
+            margin-top: 10px;
+        }
+        
+    }
 }

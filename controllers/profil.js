@@ -27,3 +27,10 @@ exports.getProfile = ( req, res, next ) =>
 
 
 }
+exports.postUpdateProfil = ( req, res, next ) =>
+{
+    // const fname = req.body.fname
+    // const lname = req.body.lname
+    // const email = req.body.email
+    console.log( req.body )
+}

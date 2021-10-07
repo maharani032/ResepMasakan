@@ -1,3 +1,4 @@
+alert( 'start' )
 $( '.contact-form' ).find( '.form-control' ).each( function ()
 {
     var targetItem = $( this ).parent();
@@ -25,4 +26,8 @@ $( '.contact-form' ).find( '.form-control' ).blur( function ()
             'fontSize': '18px'
         }, 300 );
     }
+} )
+$( '.profile-picture' ).click( function ()
+{
+    $( 'input-gambar' ).click()
 } )

@@ -24,7 +24,8 @@ exports.getRegister = ( req, res, next ) =>
                 },
                 email: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                picture: ''
             },
             validErrors: []
         } )
@@ -71,6 +72,7 @@ exports.postRegister = ( req, res, next ) =>
                 },
                 email: email,
                 password: password,
+                picture: '',
                 confirmPassword: req.body.ConfirmPassword
             },
             validErrors: errors.array()
@@ -85,6 +87,7 @@ exports.postRegister = ( req, res, next ) =>
                     fname: fname,
                     lname: lname,
                 },
+                picture: '',
                 email: email,
                 password: hashPassword,
                 event: []

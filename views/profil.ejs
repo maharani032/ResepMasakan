@@ -3,87 +3,71 @@
     </head>
     <body>
         <%- include ('component/navbar.ejs') %>
-            <div class="body-profile">
-                <div class="profile">
-                    <p>
-                        <%= user.name.fname %>
-                    </p>
-                    <p>
-                        <%= user.name.lname %>
-                    </p>
-                    <p>
-                        <%= user.email %> 
-                    </p>
-                    <p>
-                        role:
-                        <% if (user.admin==true) { %>
-                        admin
-                        <p>jumlah post event :<%= user.event.eventId.length %></p>
-                        <% } else { %>
-                            user
-                           
+        <div class="body-profile">
+            <div class="row>
+                <div class="col-4">
+                    <div class="profil">
+                    <form action="/update-profil" id='profil' method='POST'>
+                        <%if(user.picture!="" && user.picture!=null ){ %>
+                            <img id='profile-picture' class='profile-picture' src="<%=user.picture%>" alt="user-picture">
+                            <!-- <i class="fa fa-picture-o fa-sm" aria-hidden="true"></i> -->
+                            <% } else if(user.picture==="" ) { %>
+                                <i id='profile-picture'class="fas fa-user-circle profile-picture fa-9x">
+                                </i>
+                                <!-- <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i> -->
                         <% } %>
-                        <p>jumlah post resep: <%= user.resep.resepId.length %>
-                        </p>
-                    </p>
-                </div>
-                <div class="acara">
-                    <% if (events.length>0) { %>
-                        <% events.forEach(event=>{ %> 
-                            <%  %> 
-                            <div class="box">
-                            
-                                    <p>
-                                    nama Acara:<%= event.nameEvent %>
-                                    </p>
-                        
-                                    <p>tempat : <%= event.tempat %> </p>
+                        <div class="informasi-user">
+                            <p>
+                                Role:
+                                <% if (user.admin==true) { %>
+                                    Admin
+                                <% } else { %>
+                                    User
+                                <% } %>
+                            </p>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <h5>
+                                        Resep: <%= user.resep.resepId.length %>
+                                    </h5>
                                     
-                                    <div class="deskripsi">
-                                        <p>deskripsi: </p>
-                                        <%- event.html.replace(/\n/g,'<br/>')%>
-                                    </div>
-                                    
-                                    <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %> </p>
-                                    <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %> </p>
-                                    <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
-                                    <input type="hidden" value="<%= event._id %>" name="eventId">
-
-                                    <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                            </div>
-                            
-                            <%}) %>
-                    <% } %> 
-                </div>
-                <div class="resep">
-                    <% if (reseps.length>0) { %>
-                        <% reseps.forEach(resep=>{ %>
-                            <% %>
-                                <div class="box">
-                    
-                                    <p>
-                                        nama resep:<%= resep.namaResep %>
-                                    </p>
-                                    <div class="deskripsi">
-                                        <p>deskripsi: </p>
-                                        <%- resep.html.replace(/\n/g,'<br />')%>
-                                    </div>
-                    
-                                    <p>tanggal dibuat : <%= resep.createByDate.toLocaleDateString() %>
-                                    </p>
-                                    <p>selection Option: <%= resep.selectionOption %> </p>
-                                    <a href="/edit-resep/<%=resep._id %>?edit=true">edit event</a>
-                                    <!-- <input type="hidden" value="<!%= event._id %>" name="eventId"> -->
-                    
-                                    <form action="/delete-resep/<%=resep._id %>?_method=DELETE" method="POST" class="d-inline">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
                                 </div>
-                    
-                                <%}) %>
-                                    <% } %>
+                                <div class="col-sm">
+                                    <% if(user.admin==true){ %>
+                                        <h5>Event :<%= user.event.eventId.length %></h5>
+                                    <% } %>  
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="file"  style='display: none;' id="input-gambar">
+
+                        <label for="">nama depan : <input type="text" class='form-control' name="fname"  value='<%= user.name.fname %>'></label><br>
+                        <label for="">nama belakang : <input type="text" class='form-control'  name="lname" value='<%= user.name.lname %>'></label><br>
+                        <% if (user.googleId==null) { %>
+                        <label for="">Email : </label><br>
+                        <input class='form-control'type="email"  name="email" value='<%= user.email %>'>
+                        <% } %>
+                        
+                        
+                        <button id='save' class='btn btn-danger button'>
+                            save
+                        </button>
+                    </form>
+                        <button id='update' class='btn btn-danger button'>
+                            update
+                        </button>
+                       
+                    </div>
                 </div>
+                <div class="col-8">
                 </div>
-            <%- include('includes/head.ejs') %>
+            </div>
+        </div>
+            
+            <script src="/js/formUpdateProfil.js"></script>           
+    <%- include('includes/end.ejs') %>
 
             
+           
