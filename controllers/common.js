@@ -82,17 +82,26 @@ exports.postCommentResep = ( req, res ) =>
     const komentar = req.body.Komentar
     const fname = req.user.name.fname
     const lname = req.user.name.lname
+    let id = req.user._id
     const comment = new Comment( {
-        userId: req.user._id,
+        userId: id,
+        resepId: resepId,
         name: {
             fname: fname,
             lname: lname
         },
         komentar: komentar,
-        resepId: resepId
+
     } )
-    comment.save().then( result =>
+    comment.save().then( comment =>
     {
+        Resep.findOneAndUpdate( { _id: resepId }, { $push: { comment: comment._id } },
+            ( err, sucess ) =>
+            {
+                if ( err ) {
+                    console.log( err )
+                }
+            } )
         res.redirect( '/resep/' + resepId )
     } ).catch( err =>
     {

@@ -3,17 +3,26 @@
     </head>
     <body>
         <%- include ('../component/navbar.ejs') %>
-            <div class="body-event">
-                <h1>
-                    <%= resep.namaResep %>
-                </h1>
-                <p>
-                    <%=resep.createByDate.toLocaleDateString() %>
-                </p>
-                <p><%= resep.selectionOption %> </p>
-                <img class='img-display' src="/<%=resep.ImageResep%>" alt="">
+            <div class="body-resep">
+                <div class="resep-top">
+                    <h1>
+                        <%= resep.namaResep.toUpperCase()   %>
+                    </h1>
+                    <p>
+                        <%=resep.createByDate.toLocaleDateString() %>
+                    </p>
+                    <p>bahan utama: <%= resep.selectionOption %>
+                    </p>
+                </div>
+                <div class="image-picture">
+                    <img class='img-display' src="/<%=resep.ImageResep%>" alt="">
+                </div>
+                <div class="markdone">
+                    <%- resep.html.replace(/\n/g,'<br />')%>
+                </div>
                 
-                <%- resep.html.replace(/\n/g,'<br />')%>
+                
+                
 
                 <%- include ('../component/comment.ejs') %>
             </div>

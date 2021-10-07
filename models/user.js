@@ -25,18 +25,17 @@ const userSchema = new Schema( {
         default: false
     },
     picture: String,
-    event: {
-        eventId: [ {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'event',
-        } ]
-    },
-    resep: {
-        resepId: [ {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'resep'
-        } ]
-    }
+
+    eventId: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'event',
+    } ],
+
+    resepId: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'resep'
+    } ]
+
 
 } )
 

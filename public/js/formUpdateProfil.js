@@ -67,8 +67,7 @@ $( document ).ready( function ()
     {
         event.hide()
         resep.show()
-        // eventbtn.css( 'background-color', 'rgb(77, 153, 179)' )
-        // resepbtn.css( 'background-color', 'transparent' )
+
     } )
 } )
 

@@ -1,4 +1,6 @@
 const path = require( 'path' )
+
+const Comment = require( '../models/comment' )
 const Event = require( '../models/event' )
 const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
@@ -46,13 +48,14 @@ exports.postAddResep = ( req, res, next ) =>
         namaResep: namaResep,
         deskripsi: deskripsi,
         html: "",
-        ImageResep: ImageResep,
+        ImageResep: ImageResep.replace( '\\', '/' ),
         selectionOption: selectionOption,
-        like: []
+        like: [],
+        comment: []
     } )
     resep.save().then( resep =>
     {
-        User.findOneAndUpdate( { _id: req.user.id }, { $push: { resep: { resepId: resep._id } } },
+        User.findOneAndUpdate( { _id: req.user.id }, { $push: { resepId: resep } },
             ( err, sucess ) =>
             {
                 if ( err ) {
@@ -76,7 +79,7 @@ exports.postDeleteResep = ( req, res, next ) =>
             if ( !resep ) {
                 return next()
             }
-            User.findOneAndUpdate( { _id: req.user._id }, { $pull: { resep: { resepId: resepId } } },
+            User.findOneAndUpdate( { _id: req.user._id }, { $pull: { resepId: resepId } },
                 ( err, sucess ) =>
                 {
                     if ( err ) {
@@ -84,6 +87,28 @@ exports.postDeleteResep = ( req, res, next ) =>
                         res.redirect( '/500' )
                     }
                 } )
+            Comment.find( { resepId: resepId } ).then( comments =>
+            {
+                console.log( comments )
+                var length = comments.length - 1;
+                // var id = resep.comment
+                console.log( resep.comment[ 0 ] )
+                for ( length; length >= 0; length-- ) {
+                    console.log( length )
+                    // console.log( resep.comment[ length ] )
+                    let id = resep.comment[ length ]
+                    console.log( JSON.stringify( id ) )
+                    Comment.findByIdAndDelete( id, function ( err, docs )
+                    {
+                        if ( err ) {
+                            console.log( err )
+                        }
+                        else {
+                            console.log( 'deleted:', docs )
+                        }
+                    } )
+                }
+            } )
             fileHelper.deleteFile( resep.ImageResep )
             return Resep.deleteOne( { _id: resepId, userId: req.user._id } )
         } ).then( () =>
@@ -120,7 +145,7 @@ exports.getEditResep = ( req, res, next ) =>
 exports.postEditResep = ( req, res ) =>
 {
     const updatenamaResep = req.body.namaResep
-    const pictureResep = req.file
+    const pictureResep = req.file.path.replace( '\\', '/' )
     const updatedeskripsi = req.body.deskripsi
     const resepId = req.params.resepId
     const updateSelectionOption = req.body.selectionOption
@@ -131,7 +156,8 @@ exports.postEditResep = ( req, res ) =>
         resep.selectionOption = updateSelectionOption
         if ( pictureResep ) {
             fileHelper.deleteFile( resep.ImageResep )
-            resep.ImageResep = pictureResep.path.replace( '\\', '/' )
+            resep.ImageResep = pictureResep.replace( '\\', '/' )
+            // .replace( '\\', '/' )
         }
         return resep.save()
             .then( result =>

@@ -38,6 +38,10 @@ const resepSchema = new Schema( {
     like: [ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    } ],
+    comment: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
     } ]
 } )
 resepSchema.pre( "validate", function ( next ) 

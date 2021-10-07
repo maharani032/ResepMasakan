@@ -500,7 +500,6 @@ textarea:focus {
   margin-top: 10px;
   margin-right: 20px;
   padding: 10px 10px;
-  background-color: transparent;
 }
 
 .body-profile #resep .box {
@@ -560,33 +559,83 @@ textarea:focus {
   size: 500px;
 }
 
-.body-event .list {
-  overflow-y: scroll;
+.body-resep {
+  padding-top: 10%;
+  margin: auto 5%;
+  width: inherit;
+  overflow-x: hidden;
+}
+
+.body-resep .resep-top {
+  display: block;
+  text-align: center;
+}
+
+.body-resep .resep-top p {
+  text-align: right;
+}
+
+.body-resep .img-display {
+  display: block;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  max-height: 400px;
+  size: 500px;
+}
+
+.body-resep .markdone {
+  display: block;
+  margin-left: 3%;
+}
+
+.body-comment .comment-list {
+  overflow-x: hidden;
   height: 250px;
 }
 
-.body-event .comment-list {
+.comment-list {
   position: relative;
   margin-bottom: 100px;
   margin-left: 3%;
   width: 50%;
 }
 
-.body-event .comment-list .komentar {
+.komentator {
+  padding-left: 50px;
+  background-color: #808080;
+  border-radius: 0.75em 0.75em;
+  margin-bottom: 10px;
+}
+
+.komentator .comment {
+  padding: 10px 10px;
+}
+
+.komentator .img-comment {
+  display: block;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+.komentator .btn-delete {
+  align-items: flex-end;
+  margin: 0 8px 8px 8px;
+}
+
+.komentar {
   border: black 4px solid;
   margin-left: 3%;
   min-height: 250px;
-  width: 50%;
+  width: 600px;
   position: relative;
-  padding: 2% 0 2% 3%;
-  margin-bottom: 10%;
+  padding: 2% 3%;
+  margin-bottom: 10px;
 }
 
-.body-event .comment-list .komentator {
-  padding-right: 50px;
-  background-color: #808080;
-  color: purple;
-  border-radius: 0.75em 0.75em;
-  margin-bottom: 10px;
+.komentar .Komentar {
+  margin-right: 10px;
 }
 /*# sourceMappingURL=style.css.map */

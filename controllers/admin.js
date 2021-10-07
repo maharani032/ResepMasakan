@@ -18,15 +18,14 @@ exports.getPostEvent = ( req, res, next ) =>
 exports.postPostEvent = ( req, res, next ) =>
 {
     const nameEvent = req.body.nameEvent
-    const pictureEvent = req.file
+    const pictureEvent = req.file.path.replace( '\\', '/' )
     const Ondate = req.body.OnDate
     const deskripsi = req.body.deskripsi
     const tempat = req.body.tempat
-    const ImageEvent = pictureEvent.path
     const event = new Event( {
         userId: req.user._id,
         nameEvent: nameEvent,
-        ImageEvent: ImageEvent,
+        ImageEvent: pictureEvent,
         tempat: tempat,
         Ondate: Ondate,
         Deskripsi: deskripsi,
@@ -125,6 +124,7 @@ exports.postEditEvent = ( req, res ) =>
         if ( pictureEvent ) {
             fileHelper.deleteFile( event.ImageEvent )
             event.ImageEvent = pictureEvent.path.replace( '\\', '/' )
+
         }
         return event.save().then( result =>
         {

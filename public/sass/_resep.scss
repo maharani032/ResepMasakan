@@ -1,0 +1,28 @@
+.body-resep{
+    padding-top: 10%;
+    // position: absolute;
+    margin:auto 5%;
+    width:inherit;
+    overflow-x:hidden;
+    .resep-top{
+        display: block;
+        text-align: center;
+        // background-color:black;
+        p{
+            text-align: right;
+        }
+    }
+    .img-display{
+        display: block;
+        border-radius: 50%;
+        display: block;
+        margin:0 auto;
+        max-width: 400px;
+        max-height: 400px;
+        size:500px;
+    }
+    .markdone{
+        display: block;
+        margin-left: 3%;
+    }
+}

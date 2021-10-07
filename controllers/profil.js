@@ -9,7 +9,7 @@ exports.postUpdateProfil = ( req, res ) =>
     const fname = req.body.fname
     const lname = req.body.lname
     const email = req.body.email
-    const imagePicture = req.file
+    const imagePicture = req.file.path.replace( "\\", "/" )
     console.log( fname, lname, email )
     User.findById( req.user._id ).then( user =>
     {
@@ -20,24 +20,21 @@ exports.postUpdateProfil = ( req, res ) =>
         user.resep = user.resep
         console.log( email )
         if ( user.googleId === null || user.googleId === '' ) {
-            console.log( 'disana' )
             user.email = email
         }
         else if ( user.googleId != null && user.googleId != '' ) {
-            console.log( 'disini' )
             user.email = user.email
         }
 
         if ( imagePicture ) {
             fileHelper.deleteFile( user.picture )
-            user.picture = imagePicture.path.replace( '\\', '/' )
+            user.picture = imagePicture.replace( '\\', '/' )
         }
-
-
         return user.save()
             .then( result =>
             {
                 console.log( 'be save' )
+                console.log( user.picture )
                 res.redirect( '/profil' )
             } ).catch( err =>
             {
