@@ -7,7 +7,7 @@
             <div class="row>
                 <div class="col-4">
                     <div class="profil">
-                    <form action="/update-profil" id='profil' method='POST'>
+                    <form  enctype='multipart/form-data' action="/update-profil" id='profil' method='POST'>
                         <%if(user.picture!="" && user.picture!=null ){ %>
                             <img id='profile-picture' class='profile-picture' src="<%=user.picture%>" alt="user-picture">
                             <!-- <i class="fa fa-picture-o fa-sm" aria-hidden="true"></i> -->
@@ -41,13 +41,21 @@
                             </div>
                         </div>
                         
-                        <input type="file"  style='display: none;' id="input-gambar">
+                        <input type="file" name='profil-image' style='display: none;' id="input-gambar">
 
-                        <label for="">nama depan : <input type="text" class='form-control' name="fname"  value='<%= user.name.fname %>'></label><br>
-                        <label for="">nama belakang : <input type="text" class='form-control'  name="lname" value='<%= user.name.lname %>'></label><br>
+                        <label for="fname">nama depan : 
+                            <input type="text" 
+                            class='form-control' 
+                            name="fname"
+                            value='<%= user.name.fname %>'
+                            autocomplete="off"
+                            >
+                        </label><br>
+                        <label for="">nama belakang : 
+                            <input type="text" class='form-control' autocomplete="off" name="lname" value='<%= user.name.lname %>'></label><br>
                         <% if (user.googleId==null) { %>
                         <label for="">Email : </label><br>
-                        <input class='form-control'type="email"  name="email" value='<%= user.email %>'>
+                        <input class='form-control'type="email" autocomplete="off" name="email" value='<%= user.email %>'>
                         <% } %>
                         
                         

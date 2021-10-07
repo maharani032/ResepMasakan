@@ -17,10 +17,14 @@ $( document ).ready( function ()
     {
         $( '#input-gambar' ).click()
     } )
-    disableform( 'profil' )
+    // disableform( 'profil' )
     var update = $( '#update' )
     var save = $( '#save' )
     save.hide()
+    // alert( save.hide() )
+    if ( save === save.hide() ) {
+        disableform( 'profil' )
+    }
     update.click( function ()
     {
         save.show()
@@ -31,7 +35,7 @@ $( document ).ready( function ()
     {
         save.hide()
         update.show()
-        disableform( 'profil' )
+        // disableform( 'profil' )
     } )
 } )
 
