@@ -597,9 +597,8 @@ textarea:focus {
 
 .body-resep {
   padding-top: 10%;
-  margin: 3% 15% 3% 5%;
+  margin: 3% 15% 3% 7%;
   width: inherit;
-  overflow-x: hidden;
 }
 
 .body-resep .resep-top {
@@ -625,8 +624,38 @@ textarea:focus {
   margin: 3% 3%;
 }
 
+.body-resep .card-group {
+  margin: 10px 10px;
+}
+
+.body-resep .card-style {
+  position: relative;
+  display: block;
+  max-width: 200px;
+  max-height: 150px;
+  background-color: #72dbb8;
+  margin: auto 20px;
+  margin-bottom: 200px;
+}
+
+.body-resep .card-style .img {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.body-resep .card-footer .btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.body-resep .likelength {
+  display: flex;
+}
+
 .body-comment {
-  margin: 3% 15% 3% 5%;
+  margin: 3% 0;
 }
 
 .comment-list {
@@ -663,10 +692,10 @@ textarea:focus {
 }
 
 .komentar {
-  border: black 4px solid;
+  border: #cfbaba 4px solid;
   margin-left: 3%;
   min-height: 250px;
-  width: 600px;
+  width: 550px;
   position: relative;
   padding: 2% 3%;
   margin-bottom: 10px;

@@ -6,12 +6,12 @@
             <div class="body-resep">
                 <div class="resep-top">
                     <h1>
-                        <%= resep.namaResep.toUpperCase()   %>
+                        <%= resep.namaResep.toUpperCase() %>
                     </h1>
                     <p>
                         <%=resep.createByDate.toLocaleDateString() %>
                     </p>
-                    <p>bahan utama: <%= resep.selectionOption %>
+                    <p>Categori: <%= resep.selectionOption %>
                     </p>
                 </div>
                 <div class="image-picture">
@@ -20,10 +20,44 @@
                 <div class="markdone">
                     <%- resep.html.replace(/\n/g,'<br />')%>
                 </div>
-                <%- include ('../component/like-resep.ejs') %> 
-                
-                
-
-                <%- include ('../component/comment.ejs') %>
-            </div>
-            <%- include('../includes/end.ejs') %>
+                <%- include ('../component/like-resep.ejs') %>
+                <div class="card-group card-deck">
+                    <%if(resep.bahanId.length!=0) {%> 
+                        <% for( let i = 0; i < resep.bahanId.length; i++ ) { %>
+                            <% for( let x = 0; x < bahanId.length; x++ ) { %>
+                                <% if(resep.bahanId[i].toString()===bahanId[x].toString()) {%> 
+                                    <% bahans.forEach(bahan => { %>
+                                        <% if(bahan._id==resep.bahanId[i].toString()){ %>
+                                            <div class="card card-style">
+                                                <img src="/<%=bahan.image%>" alt="" class='card-img-top img'>
+                                                <div class="card-body">
+                                                    <p>
+                                                        <%= bahan.namaBahan.toUpperCase() %>
+                                                    </p>
+                                                    <p>
+                                                        <%= bahan.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>
+                                                    </p>
+                                                    <p>
+                                                        <%= bahan.Deskripsi.substring(0,30) %>
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <form action="/add-cart" method="post" class="d-inline">
+                                                        <button class='btn btn-success'>
+                                                            add cart
+                                                            <i class="fas fa-cart-plus"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                            <% }) %>
+                                            
+                                            <% } %>
+                                            <% } %>
+                                            <% } %>
+                                            <% } %>
+                                        </div>
+                                        <%- include ('../component/comment.ejs') %>
+                                    </div>
+                                    <%- include('../includes/end.ejs') %>

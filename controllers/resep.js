@@ -134,13 +134,19 @@ exports.getEditResep = ( req, res, next ) =>
         {
             if ( !resep ) {
                 return res.redirect( '/profil' )
-            } res.render( 'resep/post-resep', {
-                pageTitle: 'Edit Resep',
-                path: 'edit-resep',
-                resep: resep,
-                user: user,
-                editMode: true,
+            }
+            Bahan.find( {}, ( err, bahans ) =>
+            {
+                res.render( 'resep/post-resep', {
+                    pageTitle: 'Edit Resep',
+                    path: 'edit-resep',
+                    resep: resep,
+                    user: user,
+                    editMode: true,
+                    bahans: bahans
+                } )
             } )
+
         } )
 }
 exports.postEditResep = ( req, res ) =>
@@ -149,6 +155,14 @@ exports.postEditResep = ( req, res ) =>
     const pictureResep = req.file.path.replace( '\\', '/' )
     const updatedeskripsi = req.body.deskripsi
     const resepId = req.params.resepId
+    const bahan = req.body.bahan
+    const updatebahanId = []
+
+    bahan.forEach( id =>
+    {
+        let x = id.split( '-' )[ 0 ]
+        updatebahanId.push( x )
+    } );
     const updateSelectionOption = req.body.selectionOption
     Resep.findById( resepId ).then( resep =>
     {
@@ -159,6 +173,9 @@ exports.postEditResep = ( req, res ) =>
             fileHelper.deleteFile( resep.ImageResep )
             resep.ImageResep = pictureResep.replace( '\\', '/' )
             // .replace( '\\', '/' )
+        }
+        if ( updatebahanId ) {
+            resep.bahanId = updatebahanId
         }
         return resep.save()
             .then( result =>

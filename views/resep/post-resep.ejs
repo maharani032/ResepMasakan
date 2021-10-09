@@ -35,14 +35,10 @@
             <% bahans.forEach(bahan=>{ %>
                 
                 <option>
-                    <%= bahan._id %>-<%= bahan.namaBahan.toUpperCase() %> @ <%= bahan.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> 
+                    <%= bahan._id %>-<%= bahan.namaBahan.toUpperCase() %> 
                 </option>
-            <!-- <input type="hidden" value='<!%= bahan._id %>' name='bahanId'> -->
             <% }) %>
         <% } %>  
-            <!-- <option value="Daging">Daging</option>
-            <option value="Ikan">Ikan</option>
-            <option value="Sayur">Sayur</option> -->
         </select>
     </div>
         <div class="form-group">

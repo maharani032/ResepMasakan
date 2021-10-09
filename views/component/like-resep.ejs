@@ -1,21 +1,31 @@
 <div class="body-like">
     <% if(likes.length==0){ %>
     <form action="/like/resep/<%=resep._id %>" id='likeOrdislike' method="POST" class='red-button'>
-    <button type="submit" class="btn btn-primary">like</button>
+    
+        <button type="submit" class="btn btn-primary">like</button>
     </form>
     <% }else{ %>
         <% likes.forEach(like=> { %>
             <% if(like.userId.toString()===user._id.toString()) {%>
                 <form action="/dislike/resep/<%=resep._id %>/<%= like._id %>" id='likeOrdislike' method="POST"
                 class='red-button'>
+                
                 <button type="submit" class="btn btn-info">Dislike</button>
-                </form>
+                    <p class=likelength>
+                        <%= resep.like.length %> orang menyukai posting ini
+                    </p>
+            </form>
             <% } else { %>
                 <form action="/like/resep/<%=resep._id %>" id='likeOrdislike' method="POST"
                     class='red-button'>
+                    <p class=likelength>
+                        <%= resep.like.length %> orang menyukai posting ini
+                    </p>
                     <button type="submit" class="btn btn-primary">like</button>
+                    
                 </form>
                     <% } %>
                         <% }) %>
                             <% } %>
+    
 </div>

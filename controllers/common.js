@@ -2,6 +2,7 @@ const Event = require( '../models/event' )
 const Comment = require( '../models/comment' )
 const Resep = require( '../models/resep' )
 const Like = require( '../models/like' )
+const Bahan = require( '../models/bahan' )
 const { UpdateEventComment,
     UpdateResepComment,
     DeleteEventComment,
@@ -44,23 +45,33 @@ exports.getEvent = ( req, res ) =>
 exports.getResep = ( req, res ) =>
 {
     const resepId = req.params.resepId
-
+    const bahanId = []
     Resep.findById( resepId ).then( resep =>
     {
         Like.find( { resepId: resepId }, ( err, likes ) =>
         {
             Comment.find( { resepId: resepId }, ( err, comments ) =>
             {
-
-                res.render( 'resep/resep', {
-                    pageTitle: resep.namaResep,
-                    path: '/resep/:resepId',
-                    user: req.user,
-                    resep: resep,
-                    likes: likes,
-                    comments: comments,
-                    modeEventorResep: false,
+                Bahan.find( {}, ( err, bahans ) =>
+                {
+                    bahans.forEach( bahan =>
+                    {
+                        let x = bahan._id
+                        bahanId.push( x )
+                    } )
+                    res.render( 'resep/resep', {
+                        pageTitle: resep.namaResep,
+                        path: '/resep/:resepId',
+                        user: req.user,
+                        resep: resep,
+                        likes: likes,
+                        comments: comments,
+                        modeEventorResep: false,
+                        bahans: bahans,
+                        bahanId: bahanId
+                    } )
                 } )
+
             } )
         } )
 
