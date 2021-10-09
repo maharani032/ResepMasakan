@@ -4,11 +4,21 @@
     <body>
         <%- include ('../component/navbar.ejs') %>
         <div class="body-event">
-            <h1><%= event.nameEvent %> </h1>
-            <p><%=event.createByDate.toLocaleDateString() %> </p>
-            <img class='img-display'src="/<%=event.ImageEvent%>" alt="">
-            <%- event.html.replace(/\n/g,'<br />')%>
-
+            <div class="top-event">
+                <h1>
+                    <%= event.nameEvent.toUpperCase() %>
+                </h1>
+                <p>
+                    <%=event.createByDate.toLocaleDateString() %>
+                </p>
+            </div>
+            <div class="image-picture">
+                <img class='img-display' src="/<%=event.ImageEvent%>" alt="">
+            </div>
+            <div class="markdone">
+                <%- event.html.replace(/\n/g,'<br />')%>
+            </div>
+            <%- include ('../component/like-event.ejs') %> 
             <%- include ('../component/comment.ejs') %> 
         </div>
     <%- include('../includes/end.ejs') %>

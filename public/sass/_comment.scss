@@ -1,16 +1,16 @@
 
 .body-comment{
+margin: 3% 15% 3% 5%;
 
-  .comment-list{
-    overflow-x: hidden;
-  height: 250px;
-  }
 }
     .comment-list{
         position: relative;
         margin-bottom: 100px;
-        margin-left: 3%;
-        width: 50%;
+        margin-left: 5%;
+        width: 500px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 250px;
         }
         .komentator{
             padding-left: 50px;

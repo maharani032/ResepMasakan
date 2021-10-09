@@ -68,4 +68,18 @@
                 padding: 10px;
             }
     }
+    #bahan{
+        max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            margin-top: 10px;
+            margin-right: 20px;
+            padding: 10px 10px;
+            .box{
+                background-color: rgba(85, 214, 182, 0.493);
+                margin: 15px;
+                border-radius: 20px;
+                padding: 10px;
+            }
+    }
 }

@@ -1,9 +1,27 @@
 .body-event{
     padding-top: 10%;
+    margin: 3% 15% 3% 5%;
+    width:inherit;
+    overflow-x:hidden;
+    .top-event{
+        display: block;
+        text-align: center;
+        p{
+            text-align: right;
+        }
+    }
     .img-display{
-        width: 400px;
-        height: 400px;
+        display: block;
+        // border-radius: 50%;
+        display: block;
+        margin:0 auto;
+        max-width: 400px;
+        max-height: 400px;
         size:500px;
+    }
+    .markdone{
+        display: block;
+        margin: 3% 3%;
     }
     
 

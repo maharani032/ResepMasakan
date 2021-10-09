@@ -3,7 +3,7 @@ const Event = require( '../models/event' )
 const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
 const fileHelper = require( '../util/file' )
-
+const Bahan = require( '../models/bahan' )
 exports.postUpdateProfil = ( req, res ) =>
 {
     const fname = req.body.fname
@@ -28,7 +28,7 @@ exports.postUpdateProfil = ( req, res ) =>
 
         if ( imagePicture ) {
             fileHelper.deleteFile( user.picture )
-            user.picture = imagePicture.replace( '\\', '/' )
+            user.picture = ( '/' + imagePicture.replace( '\\', '/' ) )
         }
         return user.save()
             .then( result =>
@@ -51,19 +51,24 @@ exports.getProfile = ( req, res, next ) =>
     {
         Resep.find( { userId: id } ).sort( { createByDate: -1 } ).exec( function ( err, reseps )
         {
-            if ( !err ) {
-                res.render( 'profil', {
-                    path: '/profil',
-                    pageTitle: 'Profil',
-                    user: user,
-                    events: event,
-                    reseps: reseps
-                } )
-            } else {
-                console.log( err )
-                res.redirect( '/500' )
+            Bahan.find( { userId: id }, ( err, bahans ) =>
+            {
+                if ( !err ) {
+                    res.render( 'profil', {
+                        path: '/profil',
+                        pageTitle: 'Profil',
+                        user: user,
+                        events: event,
+                        reseps: reseps,
+                        bahans: bahans
+                    } )
+                } else {
+                    console.log( err )
+                    res.redirect( '/500' )
 
-            }
+                }
+            } )
+
         } )
     } )
 

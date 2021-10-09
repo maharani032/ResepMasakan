@@ -1,0 +1,20 @@
+<div class="body-like">
+    <% if(likes.length==0){ %>
+        <form action="/like/<%=event._id %>" id='likeOrdislike' method="POST" class='red-button'>
+            <button type="submit" class="btn btn-primary">like</button>
+        </form>
+        <% }else{ %>
+            <% likes.forEach(like=> { %>
+                <% if(like.userId.toString()===user._id.toString()) {%>
+                    <form action="/dislike/<%=event._id %>/<%= like._id %>" id='likeOrdislike' method="POST"
+                        class='red-button'>
+                        <button type="submit" class="btn btn-info">Dislike</button>
+                    </form>
+                    <% } else { %>
+                        <form action="/like/<%=event._id %>" id='likeOrdislike' method="POST" class='red-button'>
+                            <button type="submit" class="btn btn-primary">like</button>
+                        </form>
+                        <% } %>
+                            <% }) %>
+                                <% } %>
+</div>

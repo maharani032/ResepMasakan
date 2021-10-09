@@ -1,0 +1,41 @@
+<%- include ('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <%- include ('../component/navbar.ejs') %>
+            <div class="bodyPost-product">
+                <% if (editMode==true) { %>
+                    <h1>Edit Product</h1>
+                    <% } else { %>
+                        <h1>Add Product</h1>
+                        <% } %>
+                        <div class="form-product">
+                            <form action="/<% if (editMode===true){%>edit-product/<%= bahan._id %> <%}else{%>add-product<%} %>" method="post"
+                                enctype='multipart/form-data'>
+                                    <div class="form-group">
+                                        <input type="text" name="namaBahan" id="" class='form-control' autocomplete="off" placeholder='Nama Bahan'
+                                            value='<% if(editMode===true){%><%= bahan.namaBahan%> <%} %>'>
+                                    </div>
+                                <div class="form-group">
+                                <input type="number" name="hargaBahan" id="" class='form-control' autocomplete="off" placeholder='Harga Bahan'
+                                    value='<% if(editMode===true){%><%= bahan.harga%> <%} %>'>
+                                </div>
+                                <div class="form-group">
+                                    <textarea placeholder='deskripsi' name="deskripsiBahan" class='form-control' rows="10" autocomplete="off"><% if(editMode===true){%><%= bahan.Deskripsi %><%} %></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Upload Image : </label>
+                                    <input type="file" class='form-control' name='ImageBahan'>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-postProduct">
+                                    <% if (editMode) { %>
+                                        Edit Product
+                                        <% } else { %>
+                                            Add Product
+                                            <% } %>
+                                </button>
+                            </form>
+                        </div>
+               
+            </div>
+        <%- include('../includes/end.ejs') %>

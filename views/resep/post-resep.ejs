@@ -1,5 +1,6 @@
 <%- include ('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/resep.js"></script>
     </head>
     <body>
         <%- include ('../component/navbar.ejs') %>
@@ -14,16 +15,34 @@
                         enctype='multipart/form-data'>
     <div class="form-group">
         <input type="text" name="namaResep" id="" class='form-control' autocomplete="off" placeholder='nama Resep'
-        value='<% if(editMode===true){%><%= resep.namaResep %> <%} %> '>
+        value='<% if(editMode===true){%><%= resep.namaResep %> <%} %>'>
     </div>
     <div class="form-group">
         <textarea placeholder='deskripsi'name="deskripsi" class='form-control' rows="10" autocomplete="off"><% if(editMode===true){%><%= resep.deskripsi %><%} %></textarea>
     </div>
     <div class="form-group">
+        <label>Categori</label>
         <select name="selectionOption" class='form-control'>
             <option value="Daging">Daging</option>
             <option value="Ikan">Ikan</option>
             <option value="Sayur">Sayur</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Bahan Utama</label>
+        <select id='bahan'name="bahan[]" class='form-control' multiple="multiple">
+        <% if (bahans.length>0) { %>
+            <% bahans.forEach(bahan=>{ %>
+                
+                <option>
+                    <%= bahan._id %>-<%= bahan.namaBahan.toUpperCase() %> @ <%= bahan.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> 
+                </option>
+            <!-- <input type="hidden" value='<!%= bahan._id %>' name='bahanId'> -->
+            <% }) %>
+        <% } %>  
+            <!-- <option value="Daging">Daging</option>
+            <option value="Ikan">Ikan</option>
+            <option value="Sayur">Sayur</option> -->
         </select>
     </div>
         <div class="form-group">

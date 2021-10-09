@@ -525,6 +525,22 @@ textarea:focus {
   padding: 10px;
 }
 
+.body-profile #bahan {
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  margin-top: 10px;
+  margin-right: 20px;
+  padding: 10px 10px;
+}
+
+.body-profile #bahan .box {
+  background-color: rgba(85, 214, 182, 0.493);
+  margin: 15px;
+  border-radius: 20px;
+  padding: 10px;
+}
+
 .bodyPost-resep {
   position: absolute;
   padding-top: 10%;
@@ -551,17 +567,37 @@ textarea:focus {
 
 .body-event {
   padding-top: 10%;
+  margin: 3% 15% 3% 5%;
+  width: inherit;
+  overflow-x: hidden;
+}
+
+.body-event .top-event {
+  display: block;
+  text-align: center;
+}
+
+.body-event .top-event p {
+  text-align: right;
 }
 
 .body-event .img-display {
-  width: 400px;
-  height: 400px;
+  display: block;
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  max-height: 400px;
   size: 500px;
+}
+
+.body-event .markdone {
+  display: block;
+  margin: 3% 3%;
 }
 
 .body-resep {
   padding-top: 10%;
-  margin: auto 5%;
+  margin: 3% 15% 3% 5%;
   width: inherit;
   overflow-x: hidden;
 }
@@ -577,7 +613,6 @@ textarea:focus {
 
 .body-resep .img-display {
   display: block;
-  border-radius: 50%;
   display: block;
   margin: 0 auto;
   max-width: 400px;
@@ -587,19 +622,21 @@ textarea:focus {
 
 .body-resep .markdone {
   display: block;
-  margin-left: 3%;
+  margin: 3% 3%;
 }
 
-.body-comment .comment-list {
-  overflow-x: hidden;
-  height: 250px;
+.body-comment {
+  margin: 3% 15% 3% 5%;
 }
 
 .comment-list {
   position: relative;
   margin-bottom: 100px;
-  margin-left: 3%;
-  width: 50%;
+  margin-left: 5%;
+  width: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 250px;
 }
 
 .komentator {
@@ -637,5 +674,19 @@ textarea:focus {
 
 .komentar .Komentar {
   margin-right: 10px;
+}
+
+.bodyPost-product {
+  padding-top: 10%;
+  padding-left: 3rem;
+  align-items: center;
+}
+
+.bodyPost-product .form-group {
+  margin: 10px 50px 10px 0;
+}
+
+.bodyPost-product .btn-postProduct {
+  margin: 10px 0;
 }
 /*# sourceMappingURL=style.css.map */

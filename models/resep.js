@@ -42,6 +42,10 @@ const resepSchema = new Schema( {
     comment: [ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
+    } ],
+    bahanId: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bahan'
     } ]
 } )
 resepSchema.pre( "validate", function ( next ) 

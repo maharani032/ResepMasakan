@@ -5,7 +5,8 @@ const Event = require( '../models/event' )
 const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
 const fileHelper = require( '../util/file' )
-
+const { UpdateArrayPost, DeleteArrayPost, PullArrayUserResep, PushArrayUserResep } = require( '../functions/function' )
+const Bahan = require( '../models/bahan' )
 exports.getHome = ( req, res, next ) =>
 {
     const user = req.user
@@ -29,20 +30,36 @@ exports.getHome = ( req, res, next ) =>
 exports.getAddResep = ( req, res, next ) =>
 {
     var editMode = false
-    res.render( 'resep/post-resep', {
-        user: req.user,
-        path: '/add-resep',
-        pageTitle: 'Add Resep',
-        editMode: editMode
+    Bahan.find( {}, ( err, bahans ) =>
+    {
+        res.render( 'resep/post-resep', {
+            user: req.user,
+            path: '/add-resep',
+            pageTitle: 'Add Resep',
+            editMode: editMode,
+            bahans: bahans
+        } )
     } )
 }
+
+
 exports.postAddResep = ( req, res, next ) =>
 {
+    const id = req.user._id
     const namaResep = req.body.namaResep
     const deskripsi = req.body.deskripsi
     const selectionOption = req.body.selectionOption
     const resepPicture = req.file
     const ImageResep = resepPicture.path.replace( '\\', '/' )
+    const bahan = req.body.bahan
+    const bahanId = []
+
+    bahan.forEach( id =>
+    {
+        let x = id.split( '-' )[ 0 ]
+        bahanId.push( x )
+    } );
+
     const resep = new Resep( {
         userId: req.user._id,
         namaResep: namaResep,
@@ -51,17 +68,12 @@ exports.postAddResep = ( req, res, next ) =>
         ImageResep: ImageResep.replace( '\\', '/' ),
         selectionOption: selectionOption,
         like: [],
-        comment: []
+        comment: [],
+        bahanId: bahanId,
     } )
     resep.save().then( resep =>
     {
-        User.findOneAndUpdate( { _id: req.user.id }, { $push: { resepId: resep } },
-            ( err, sucess ) =>
-            {
-                if ( err ) {
-                    console.log( err )
-                }
-            } )
+        { PushArrayUserResep( id, resep._id ) }
         res.redirect( '/' )
     } ).catch( err =>
     {
@@ -73,20 +85,15 @@ exports.postAddResep = ( req, res, next ) =>
 exports.postDeleteResep = ( req, res, next ) =>
 {
     let resepId = req.params.resepId
+    let id = req.user._id
+    let resepID = req.user.resepId
     Resep.findById( resepId )
         .then( resep =>
         {
             if ( !resep ) {
                 return next()
             }
-            User.findOneAndUpdate( { _id: req.user._id }, { $pull: { resepId: resepId } },
-                ( err, sucess ) =>
-                {
-                    if ( err ) {
-                        console.log( err )
-                        res.redirect( '/500' )
-                    }
-                } )
+            { PullArrayUserResep( id, resepId ) }
             Comment.find( { resepId: resepId } ).then( comments =>
             {
                 var length = comments.length - 1;

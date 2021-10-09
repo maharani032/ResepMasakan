@@ -50,7 +50,19 @@ const profilStorage = multer.diskStorage( {
         cb( null, 'upload' + " - " + 'profil' + ' - ' + uuidv4() + file.originalname )
     }
 } )
+const productStorage = multer.diskStorage( {
+    destination: ( req, file, cb ) =>
+    {
+        cb( null, 'images/product' )
+    },
+    filename: ( req, file, cb ) =>
+    {
+
+        cb( null, 'upload' + " - " + 'bahan' + ' - ' + uuidv4() + file.originalname )
+    }
+} )
 const Eventupload = multer( { storage: imageEventStorage, fileFilter: ImageFilter } );
 const Resepupload = multer( { storage: imageResepStorage, fileFilter: ImageFilter } )
 const Profilupload = multer( { storage: profilStorage, fileFilter: ImageFilter } )
-module.exports = { Eventupload, Resepupload, Profilupload }
+const Bahanupload = multer( { storage: productStorage, fileFilter: ImageFilter } )
+module.exports = { Eventupload, Resepupload, Profilupload, Bahanupload }

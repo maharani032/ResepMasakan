@@ -34,12 +34,17 @@
                                     </h5>
                                     
                                 </div>
+                                
+                            <% if(user.admin==true){ %>
                                 <div class="col-sm">
-                                    <% if(user.admin==true){ %>
-                                        <h5>Event :<%= user.eventId.length %></h5>
-                                    <% } %>  
-                                    
+                                <h5>Event :<%= user.eventId.length %></h5>
                                 </div>
+                                <!-- <div class="col-sm">
+                                    <h5>Product : </h5>
+                                </div> -->
+                                <% } %>  
+                               
+                                
                             </div>
                         </div>
                         
@@ -74,6 +79,9 @@
                     <div class="col-8">
                         <button id='resep-button' class='btn btn-lg btn-expanded'>Resep</button>
                         <button id='event-button' class='btn btn-lg btn-expanded'>Event</button>
+                        <% if(user.admin==true){ %> 
+                        <button id='bahan-button' class='btn btn-lg btn-expanded'>Product</button>
+                        <% } %> 
                         <div id="resep">
                             <% if (reseps.length>0) { %>
                                 <% reseps.forEach(resep=>{ %>
@@ -81,7 +89,7 @@
                                         <div class="box">
                             
                                             <p>
-                                                nama resep:<%= resep.namaResep %>
+                                                nama resep: <%= resep.namaResep %>
                                             </p>
                                             <div class="deskripsi">
                                                 <p>deskripsi: </p>
@@ -100,7 +108,8 @@
                             
                                             <form action="/delete-resep/<%=resep._id %>?_method=DELETE" method="POST" class="d-inline">
                                                 <button type="submit" class="btn btn-danger">Delete</button>
-                                        </div>
+                                                </form>
+                                            </div>
                             
                                         <%}) %>
                                             <% } %>
@@ -132,6 +141,33 @@
                             
                                             <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
                                                 <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                            </div>
+                            
+                                        <%}) %>
+                                            <% } %>
+                        </div>
+                        <div id="bahan">
+                            <% if (bahans.length>0) { %>
+                                <% bahans.forEach(bahan=>{ %>
+                                    <% %>
+                                        <div class="box">
+                            
+                                            <p>
+                                                nama Bahan: <%= bahan.namaBahan %>
+                                            </p>
+                                            <div class="deskripsi">
+                                                <p>deskripsi: <%= bahan.Deskripsi %> </p>
+                                                
+                                            </div>
+                                            <p>Harga : <%= bahan.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
+                                            </p>
+                                            <a href="/edit-bahan/<%=bahan._id %>?edit=true">edit bahan</a>
+                                            <input type="hidden" value="<%= bahan._id %>" name="bahanId">
+                            
+                                            <form action="/delete-bahan/<%=bahan._id %>?_method=DELETE" method="POST" class="d-inline">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </div>
                             
                                         <%}) %>

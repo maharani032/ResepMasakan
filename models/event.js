@@ -29,11 +29,11 @@ const eventSchema = new Schema( {
     },
     like: [ {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Like'
     } ],
-    comment: [ {
+    commentId: [ {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Comment'
     } ]
 } )
 eventSchema.pre( "validate", function ( next ) 

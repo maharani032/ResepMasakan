@@ -3,6 +3,9 @@ const User = require( '../models/user' )
 const Event = require( '../models/event' )
 const fileHelper = require( '../util/file' )
 const Comment = require( '../models/comment' )
+const Like = require( '../models/like' )
+const { DeletePostLike, UpdateArrayPost, DeleteArrayPost, PushArrayUserEvent, PullArrayUserEvent } = require( '../functions/function' )
+const { DeletePostComment } = require( '../functions/function' )
 exports.getPostEvent = ( req, res, next ) =>
 {
     res.render(
@@ -23,6 +26,7 @@ exports.postPostEvent = ( req, res, next ) =>
     const Ondate = req.body.OnDate
     const deskripsi = req.body.deskripsi
     const tempat = req.body.tempat
+    const id = req.user._id
     const event = new Event( {
         userId: req.user._id,
         nameEvent: nameEvent,
@@ -31,19 +35,13 @@ exports.postPostEvent = ( req, res, next ) =>
         Ondate: Ondate,
         Deskripsi: deskripsi,
         html: "",
-        like: [],
+        // like: ,
         comment: []
     } )
 
     event.save().then( event =>
     {
-        User.findOneAndUpdate( { _id: req.user.id }, { $push: { event: { eventId: event._id } } },
-            ( err, sucess ) =>
-            {
-                if ( err ) {
-                    console.log( err )
-                }
-            } )
+        { PushArrayUserEvent( id, event._id ) }
         res.redirect( '/' )
     } ).catch( err =>
     {
@@ -78,35 +76,22 @@ exports.getEditEvent = ( req, res, next ) =>
 exports.deleteEvent = ( req, res, next ) =>
 {
     let eventId = req.params.eventId
+    let userId = req.user._id
+    const EventID = req.user.eventId
     Event.findById( eventId )
         .then( event =>
         {
             if ( !event ) {
                 return next()
             }
-            User.findOneAndUpdate( { _id: req.user._id }, { $pull: { event: { eventId: event._id } } },
-                ( err, sucess ) =>
-                {
-                    if ( err ) {
-                        console.log( err )
-                    }
-                } )
-            Comment.find( { eventId: eventId } ).then( comments =>
-            {
-                var length = comments.length - 1;
-                for ( length; length >= 0; length-- ) {
-                    let id = event.comment[ length ]
-                    Comment.findByIdAndDelete( id, function ( err, docs )
-                    {
-                        if ( err ) {
-                            console.log( err )
-                        }
-                        else {
-                            console.log( 'deleted:', docs )
-                        }
-                    } )
-                }
-            } )
+            { PullArrayUserEvent( userId, eventId ) }
+            if ( event.like.length != 0 ) {
+                { DeletePostLike( event, eventId, eventId ) }
+            }
+            if ( event.commentId.length != 0 ) {
+
+                { DeletePostComment( event, eventId, eventId ) }
+            }
             fileHelper.deleteFile( event.ImageEvent )
             return Event.deleteOne( { _id: eventId, userId: req.user._id } )
 

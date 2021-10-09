@@ -39,35 +39,32 @@ $( document ).ready( function ()
     } )
     var resepbtn = $( '#resep-button' )
     var eventbtn = $( '#event-button' )
+    var bahanbtn = $( '#bahan-button' )
     var resep = $( '#resep' )
     var event = $( '#event' )
+    var bahan = $( '#bahan' )
     event.hide()
-    // resepbtn.css( 'background-color', 'rgb(77, 153, 179)' )
     if ( event == event.hide() ) {
         resep.show()
+        bahan.hide()
     }
     eventbtn.click( function ()
     {
-        // if ( eventbtn === eventbtn.css( 'background-color', 'rgb(77, 153, 179)' ) ) {
-        // eventbtn.css( 'background-color', 'transparent' )
         event.show()
         resep.hide()
-        // }
-        // else if ( eventbtn === eventbtn.css( 'background-color', 'transparent' ) ) {
-        //     event.show()
-        //     resep.hide()
-        //     // eventbtn.css( 'background-color', 'rgb(77, 153, 179)' )
-        //     // resepbtn.css( 'background-color', 'transparent' )
-        // }
-
-
-
+        bahan.hide()
     } )
     resepbtn.click( function ()
     {
         event.hide()
         resep.show()
-
+        bahan.hide()
+    } )
+    bahanbtn.click( function ()
+    {
+        bahan.show()
+        resep.hide()
+        event.hide()
     } )
 } )
 

@@ -66,7 +66,9 @@ mongoose
     .connect( process.env.DB,
         {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            // useCreateIndex: true,   
+            autoIndex: true, 
         } )
     .then( result => 
     {
