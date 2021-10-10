@@ -1,3 +1,12 @@
+::-webkit-scrollbar-track-piece {
+  background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 10px;
+  background-color: #9febd8;
+}
+
 .topnav {
   background-color: #00a29e;
   float: right;

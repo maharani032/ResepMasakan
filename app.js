@@ -10,6 +10,7 @@ const authRoutes = require( './routes/auth' )
 const postRoutes = require( './routes/post' )
 const adminRoutes = require( './routes/admin' )
 const commonRoutes = require( './routes/common' )
+const shopRoutes = require( './routes/shop' )
 const passport = require( 'passport' )
 require( './controllers/passport-auth-google' )( passport )
 const User = require( './models/user' )
@@ -60,6 +61,7 @@ app.use( postRoutes )
 app.use( authRoutes )
 app.use( adminRoutes )
 app.use( commonRoutes )
+app.use( shopRoutes )
 app.get( '/500', errorPage.get500 )
 app.use( errorPage.get404 )
 mongoose
@@ -68,7 +70,7 @@ mongoose
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useCreateIndex: true,   
-            autoIndex: true, 
+            autoIndex: true,
         } )
     .then( result => 
     {

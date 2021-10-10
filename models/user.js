@@ -33,10 +33,44 @@ const userSchema = new Schema( {
 
     resepId: [ {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'resep'
-    } ]
-
-
+        ref: 'Resep'
+    } ],
+    cart: {
+        items: [
+            {
+                bahanId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Bahan',
+                    required: true
+                },
+                quantity: { type: Number, required: true }
+            }
+        ]
+    }
 } )
+userSchema.methods.addToCart = function ( bahan )
+{
+    const cartProductIndex = this.cart.items.findIndex( cp =>
+    // console.log( cartProductIndex )
+    {
+        return cp.bahanId.toString() == bahan._id.toString()
+    } )
+    let newQuantity = 1;
+    const updatedCartItems = [ ...this.cart.items ];
 
+    if ( cartProductIndex >= 0 ) {
+        newQuantity = this.cart.items[ cartProductIndex ].quantity + 1;
+        updatedCartItems[ cartProductIndex ].quantity = newQuantity;
+    } else {
+        updatedCartItems.push( {
+            bahanId: bahan._id,
+            quantity: newQuantity
+        } );
+    }
+    const updatedCart = {
+        items: updatedCartItems
+    };
+    this.cart = updatedCart;
+    return this.save();
+}
 module.exports = mongoose.model( 'User', userSchema )

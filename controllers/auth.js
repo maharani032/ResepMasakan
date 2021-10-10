@@ -90,7 +90,9 @@ exports.postRegister = ( req, res, next ) =>
                 email: email,
                 googleId: '',
                 password: hashPassword,
-                event: []
+                event: [],
+                resep: [],
+                cart: { items: [] }
             } )
             return user.save()
         } )

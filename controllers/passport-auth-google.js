@@ -18,6 +18,9 @@ module.exports = ( passport ) =>
                 },
                 email: profile.emails[ 0 ].value,
                 picture: profile.photos[ 0 ].value,
+                resep: [],
+                event: [],
+                cart: { items: [] }
             }
             try {
                 let user = await User.findOne( { googleId: profile.id } )

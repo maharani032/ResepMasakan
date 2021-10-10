@@ -30,16 +30,18 @@ exports.getHome = ( req, res, next ) =>
 exports.getAddResep = ( req, res, next ) =>
 {
     var editMode = false
-    Bahan.find( {}, ( err, bahans ) =>
-    {
-        res.render( 'resep/post-resep', {
-            user: req.user,
-            path: '/add-resep',
-            pageTitle: 'Add Resep',
-            editMode: editMode,
-            bahans: bahans
+    if ( Bahan.length != 0 ) {
+        Bahan.find( {}, ( err, bahans ) =>
+        {
+            res.render( 'resep/post-resep', {
+                user: req.user,
+                path: '/add-resep',
+                pageTitle: 'Add Resep',
+                editMode: editMode,
+                bahans: bahans
+            } )
         } )
-    } )
+    }
 }
 
 
@@ -51,15 +53,17 @@ exports.postAddResep = ( req, res, next ) =>
     const selectionOption = req.body.selectionOption
     const resepPicture = req.file
     const ImageResep = resepPicture.path.replace( '\\', '/' )
-    const bahan = req.body.bahan
+    const bahans = req.body.bahan
     const bahanId = []
 
-    bahan.forEach( id =>
-    {
-        let x = id.split( '-' )[ 0 ]
-        bahanId.push( x )
-    } );
-
+    if ( bahans != null ) {
+        console.log( 'in herre' )
+        bahan.forEach( id =>
+        {
+            let x = id.split( '-' )[ 0 ]
+            bahanId.push( x )
+        } );
+    }
     const resep = new Resep( {
         userId: req.user._id,
         namaResep: namaResep,
@@ -152,27 +156,33 @@ exports.getEditResep = ( req, res, next ) =>
 exports.postEditResep = ( req, res ) =>
 {
     const updatenamaResep = req.body.namaResep
-    const pictureResep = req.file.path.replace( '\\', '/' )
+    let pictureResep = req.file
     const updatedeskripsi = req.body.deskripsi
     const resepId = req.params.resepId
     const bahan = req.body.bahan
     const updatebahanId = []
+    if ( bahan != null ) {
+        bahan.forEach( id =>
+        {
+            let x = id.split( '-' )[ 0 ]
+            updatebahanId.push( x )
+        } );
+    }
 
-    bahan.forEach( id =>
-    {
-        let x = id.split( '-' )[ 0 ]
-        updatebahanId.push( x )
-    } );
     const updateSelectionOption = req.body.selectionOption
     Resep.findById( resepId ).then( resep =>
     {
         resep.namaResep = updatenamaResep
         resep.deskripsi = updatedeskripsi
         resep.selectionOption = updateSelectionOption
-        if ( pictureResep ) {
+        if ( pictureResep != null ) {
+            pictureResep = req.file.path.replace( '\\', '/' )
             fileHelper.deleteFile( resep.ImageResep )
             resep.ImageResep = pictureResep.replace( '\\', '/' )
             // .replace( '\\', '/' )
+        }
+        else if ( pictureResep == null ) {
+            resep.ImageResep = resep.ImageResep
         }
         if ( updatebahanId ) {
             resep.bahanId = updatebahanId

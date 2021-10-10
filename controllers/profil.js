@@ -4,12 +4,13 @@ const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
 const fileHelper = require( '../util/file' )
 const Bahan = require( '../models/bahan' )
+const e = require( 'connect-flash' )
 exports.postUpdateProfil = ( req, res ) =>
 {
     const fname = req.body.fname
     const lname = req.body.lname
     const email = req.body.email
-    const imagePicture = req.file.path.replace( "\\", "/" )
+    let imagePicture = req.file
     console.log( fname, lname, email )
     User.findById( req.user._id ).then( user =>
     {
@@ -26,9 +27,13 @@ exports.postUpdateProfil = ( req, res ) =>
             user.email = user.email
         }
 
-        if ( imagePicture ) {
+        if ( imagePicture != null ) {
+            imagePicture = req.file.path.replace( "\\", "/" )
             fileHelper.deleteFile( user.picture )
             user.picture = ( '/' + imagePicture.replace( '\\', '/' ) )
+        }
+        else if ( imagePicture == null ) {
+            user.picture = user.picture
         }
         return user.save()
             .then( result =>
