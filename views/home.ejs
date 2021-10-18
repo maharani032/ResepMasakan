@@ -16,9 +16,12 @@
                         setiap
                         resep yang ingin kamu buat</p>
                     <p>Tunggu apa lagi? Bergabunglah dengan kami!</p>
+                    <% if (user==null) { %>
                     <button type="button">
                         <a href="/register">Bergabung</a>
                     </button>
+                    <% } %>
+                    
                 </div>
             </div>
         </div>
@@ -28,7 +31,7 @@
                 <div class="resep-box">
                     <% if (reseps.length>0) { %>
                         <% for (resep of Object.keys(reseps)){ %>
-                            <% if (resep>4) { %>
+                            <% if (resep>2) { %>
                                 <% break %> 
                             <% } %>
                             <a href='/resep/<%= reseps[resep]._id %>'>
@@ -36,13 +39,6 @@
                             </a>
                             <% } %>  
                     <% } %>
-                    <!-- <div class="rbox1">
-                        <a href=""></a>
-                        <a href=""></a>
-                    </div>
-                    <div class="rbox2">
-                        <a href=""></a>
-                        <a href=""></a> -->
                     </div>
                 </div>
             </div>
@@ -50,15 +46,8 @@
                 <h2>Acara</h2>
                 <div class="acara-box">
                     <% if (events.length>0) { %>
-                        <!-- <!% events.forEach(event => { %> 
-                            <!% console.log(events[1]) %> 
-                            <a href=''>
-                            <img class='ImageEvent' src="/<!%=event.ImageEvent%>" alt="">
-                            </a>
-                            <!% if (events[3]) { %>
-                                <!% break %>  -->
                                 <% for( event of Object.keys(events)) {%> 
-                                    <% if(event>4){ %>
+                                    <% if(event>2){ %>
                                         <% break %>
                                     <% } %>
                                     <a href='/event/<%=events[event]._id%>'>
@@ -67,38 +56,13 @@
                                      
                                     <% } %> 
                             <% } %>
-                        <!-- <!% }) %> 
-                        <!% } %> -->
-                    <!-- <div class="box1">
-                        
-                        <a href=""></a>
-                        <a href=""></a>
-                    </div>
-                    <div class="box2">
-                        <a href=""></a>
-                        <a href=""></a>
-                    </div> -->
+
                 </div>
             
                  </div>
             
         </section>
-            <footer>
-                <div class="link-website">
-                    <h2>Navigasi Website</h2>
-                    <a>Resep</a>
-                    <a>Acara</a>
-                    <a>Tentang Kami</a>
-                </div>
-                <div class="info-website">
-                    <h2>Kontak Kami</h2>
-                    <p>Apabila terdapat kritik dan saran atau pertanyaan lebih lanjut, hubungi kami melalui:</p>
-                    <p><i class="fab fa-whatsapp"></i> : 08xx-xxxx-xxxx</p>
-                    <a><i class="fab fa-twitter"></i> : @namasupermarket</a>
-                    <a><i class="fab fa-instagram"></i> : @namasupermarket</a>
-                    <a></a>
-                </div>
-            </footer>
+<%- include ('includes/footer.ejs')  %> 
     
     
-<%- include('includes/head.ejs') %>
+<%- include('includes/end.ejs') %>

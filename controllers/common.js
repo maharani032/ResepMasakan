@@ -3,6 +3,7 @@ const Comment = require( '../models/comment' )
 const Resep = require( '../models/resep' )
 const Like = require( '../models/like' )
 const Bahan = require( '../models/bahan' )
+
 const { UpdateEventComment,
     UpdateResepComment,
     DeleteEventComment,
@@ -76,6 +77,39 @@ exports.getResep = ( req, res ) =>
         } )
 
     } )
+}
+exports.getReseps = ( req, res ) =>
+{
+    const ITEM_PER_PAGE = 3;
+    const page = + req.query.page || 1;
+    let totalItems;
+    Resep.find()
+        .countDocuments()
+        .then( numReseps =>
+        {
+            totalItems = numReseps
+            return Resep.find()
+                .skip( ( page - 1 ) * ITEM_PER_PAGE )
+                .limit( ITEM_PER_PAGE )
+        } ).then( reseps =>
+        {
+            res.render( 'resep/reseps', {
+                reseps: reseps,
+                pageTitle: 'Reseps',
+                path: '/reseps',
+                user: req.user,
+                currentPage: page,
+                hasNextPage: ITEM_PER_PAGE * page < totalItems,
+                hasPreviousPage: page > 1,
+                nextPage: page + 1,
+                previousPage: page - 1,
+                lastPage: Math.ceil( totalItems / ITEM_PER_PAGE )
+            } )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+        } )
 }
 exports.postComment = ( req, res ) =>
 {
@@ -258,4 +292,41 @@ exports.deleteLikeResep = ( req, res, next ) =>
     {
         console.log( err )
     } )
+}
+exports.getResepsCategory = ( req, res ) =>
+{
+    const category = req.params.kategori
+    console.log( category )
+    const ITEM_PER_PAGE = 3;
+    const page = + req.query.page || 1;
+    let totalItems;
+    Resep.find( { selectionOption: category } )
+        .then( numReseps =>
+        {
+            const count = numReseps.length
+            totalItems = count
+            return Resep.find( { selectionOption: category } )
+                .skip( ( page - 1 ) * ITEM_PER_PAGE )
+                .limit( ITEM_PER_PAGE )
+        } ).then( resepskategori =>
+        {
+            console.log( resepskategori.length )
+            res.render( 'resep/reseps', {
+                modeSort: true,
+                pageTitle: 'Reseps',
+                path: '/reseps/' + category,
+                user: req.user,
+                currentPage: page,
+                hasNextPage: ITEM_PER_PAGE * page < totalItems,
+                hasPreviousPage: page > 1,
+                nextPage: page + 1,
+                previousPage: page - 1,
+                lastPage: Math.ceil( totalItems / ITEM_PER_PAGE ),
+                reseps: resepskategori,
+            } )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+        } )
 }

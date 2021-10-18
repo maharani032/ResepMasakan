@@ -58,7 +58,7 @@ exports.postAddResep = ( req, res, next ) =>
 
     if ( bahans != null ) {
         console.log( 'in herre' )
-        bahan.forEach( id =>
+        bahans.forEach( id =>
         {
             let x = id.split( '-' )[ 0 ]
             bahanId.push( x )
@@ -73,6 +73,7 @@ exports.postAddResep = ( req, res, next ) =>
         selectionOption: selectionOption,
         like: [],
         comment: [],
+        bahans: bahans,
         bahanId: bahanId,
     } )
     resep.save().then( resep =>

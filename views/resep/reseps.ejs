@@ -1,0 +1,62 @@
+<%- include ('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <%- include ('../component/navbar.ejs') %>
+        <div class="body-reseps">
+            <div class="sort-bahan">
+                
+                <a class='icon-sort'href="/reseps/daging">
+                
+                <i class='fas fa-drumstick-bite'>
+                    Daging
+                </i>
+                </a>
+                <a class='icon-sort' href="/reseps/ikan">
+                    <i class='fas fa-fish'>
+                        Ikan
+                    </i>
+                </a>
+                <a class='icon-sort' href="/reseps/sayur">
+                    <i class='fas fa-leaf'>
+                        Sayur
+                    </i>
+                </a>
+                <a class='icon-sort' href="/reseps/telur">
+                    <i class='fas fa-egg'>
+                        Telur
+                    </i>
+                </a>
+            </div>
+        <% if (reseps.length>0) { %>
+        
+            <% reseps.forEach(resep => { %>
+                <div class="resepItem">
+                    <div class="row">
+                        <div class="col">
+                        <h1>
+                            <%= resep.namaResep.toUpperCase() %>
+                        </h1>
+                        <p>
+                            <%= resep.deskripsi.substring(0,50)  %> 
+                        </p>
+                        </div>
+                        <div class="col">
+                            <img class='resepImageItem' src="/<%=resep.ImageResep%>" alt="">
+                        </div>
+                        
+                    </div>
+                </div>
+            <% }) %>
+        
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage,
+                lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+
+        <% } else { %>
+        <div class="not-Found">
+            tidak ada resep
+        </div>
+        <% } %>
+    </div>
+
+<%- include('../includes/end.ejs') %>
