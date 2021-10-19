@@ -1,7 +1,6 @@
 const path = require( 'path' )
 require( "dotenv" ).config()
 const express = require( 'express' )
-
 const session = require( 'express-session' )
 const MongoDBStore = require( 'connect-mongodb-session' )( session )
 const errorPage = require( './controllers/error' )

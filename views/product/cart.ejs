@@ -5,7 +5,10 @@
         <%- include ('../component/navbar.ejs') %>
         <div class='body-cart'>
             <% if(bahans.length==0){ %> 
-                <h1>Keranjang Kosong</h1>
+                <div class="centered">
+                    <h1>Keranjang Kosong</h1>
+                </div>
+                
                 <% } else { %>
                     <ul class="cart-item-list">
                         <% bahans.forEach(bahan=>{%> 
