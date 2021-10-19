@@ -1,0 +1,34 @@
+<%- include ('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <%- include ('../component/navbar.ejs') %>
+        <div class="body-events">
+            <% if (events.length==0) { %>
+             <div class="centered">
+                 <h2>tidak ada event</h2>
+             </div>
+             <% } else { %>
+                <% events.forEach(event=> { %>
+                    <div class="resepItem">
+                        <div class="row">
+                            <div class="col">
+                                <a href="/event/<%=event._id  %> ">
+                                    <h1>
+                                        <%= event.nameEvent.toUpperCase() %>
+                                    </h1>
+                                </a>
+                                <p>
+                                    <%= event.Deskripsi.substring(0,50) %>
+                                </p>
+                            </div>
+                            <div class="col">
+                                <img class='resepImageItem' src="/<%=event.ImageEvent%>" alt="">
+                            </div>
+                
+                        </div>
+                    </div>
+              <% }) %> 
+            <% } %>
+        
+        <%- include ('../includes/end.ejs') %>

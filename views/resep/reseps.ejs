@@ -34,9 +34,11 @@
                 <div class="resepItem">
                     <div class="row">
                         <div class="col">
-                        <h1>
+                        <a href="/resep/<%=resep._id  %> ">
+                            <h1>
                             <%= resep.namaResep.toUpperCase() %>
                         </h1>
+                        </a>
                         <p>
                             <%= resep.deskripsi.substring(0,50)  %> 
                         </p>

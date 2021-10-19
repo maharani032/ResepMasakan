@@ -141,3 +141,20 @@ exports.postDeleteItemCart = ( req, res ) =>
             res.redirect( '/500' )
         } )
 }
+exports.getOrder = ( req, res ) =>
+{
+    Order.find( { 'user.userId': req.user._id } )
+        .then( orders =>
+        {
+            
+            res.render( 'product/order', {
+                path: '/order',
+                pageTitle: 'Your Order',
+                orders: orders,
+                user: req.user
+            } )
+        } ).catch( err =>
+        {
+            console.log( err )
+        } )
+}

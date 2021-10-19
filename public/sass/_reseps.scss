@@ -10,7 +10,10 @@
         margin: 0 10px;
     }
     .resepItem{
-        
+        a{
+        text-decoration: none;
+        color: black;
+    }
         padding: 10px;
         margin: 10px;
         .resepImageItem{
@@ -23,4 +26,3 @@
         font-size: 25px;
         margin: 10px;
     }
-    

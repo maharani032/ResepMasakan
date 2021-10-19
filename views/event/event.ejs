@@ -15,8 +15,10 @@
             <div class="image-picture">
                 <img class='img-display' src="/<%=event.ImageEvent%>" alt="">
             </div>
+            
             <div class="markdone">
                 <%- event.html.replace(/\n/g,'<br />')%>
+                tanggal diadakan : <%= event.Ondate.toLocaleDateString() %> 
             </div>
             <%- include ('../component/like-event.ejs') %> 
             <%- include ('../component/comment.ejs') %> 

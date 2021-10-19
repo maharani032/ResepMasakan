@@ -1,0 +1,12 @@
+.body-order{
+    padding-top: 10%;
+    .orders{
+        margin: 0 20px;
+        list-style: none;
+        border: 1px black solid;
+        font-size: 15px;
+        .order-bahan{
+            list-style: none;
+        }
+    }
+}

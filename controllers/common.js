@@ -111,6 +111,39 @@ exports.getReseps = ( req, res ) =>
             res.redirect( '/500' )
         } )
 }
+exports.getEvents = ( req, res ) =>
+{
+    const ITEM_PER_PAGE = 3;
+    const page = + req.query.page || 1;
+    let totalItems;
+    Event.find()
+        .countDocuments()
+        .then( numReseps =>
+        {
+            totalItems = numReseps
+            return Event.find()
+                .skip( ( page - 1 ) * ITEM_PER_PAGE )
+                .limit( ITEM_PER_PAGE )
+        } ).then( events =>
+        {
+            res.render( 'event/events', {
+                events: events,
+                pageTitle: 'Event',
+                path: '/events',
+                user: req.user,
+                currentPage: page,
+                hasNextPage: ITEM_PER_PAGE * page < totalItems,
+                hasPreviousPage: page > 1,
+                nextPage: page + 1,
+                previousPage: page - 1,
+                lastPage: Math.ceil( totalItems / ITEM_PER_PAGE )
+            } )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+        } )
+}
 exports.postComment = ( req, res ) =>
 {
     const eventId = req.params.eventId

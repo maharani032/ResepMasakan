@@ -6,15 +6,13 @@
         <div class="list">
 <a href="/reseps">Resep</a>
 <a href="/events">Acara</a>
-<% if(isAuthenticated){ %> 
-    <a href="/cart">Cart</a>
-    <a href="/order">Order</a>
-    <% } %> 
 <a href="/aboutUs">Tentang Kami</a>
 <% if (isAuthenticated) { %>
     <div class="dropdown">
         <button class="dropbtn">Profil</button>
         <div class="dropdown-content">
+            <a href="/cart">Cart</a>
+            <a href="/order">Order</a>
             <a href="/profil">Profil</a>
             <a href="/add-resep">Resep</a>
             <% if (user.admin==true) { %>
