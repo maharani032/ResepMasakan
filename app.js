@@ -73,7 +73,7 @@ mongoose
         } )
     .then( result => 
     {
-        app.listen( 3000 )
+        app.listen( process.env.PORT || 3000 )
         console.log( 'connection to database on port http://localhost:3000' )
     } ).catch( err =>
     {
