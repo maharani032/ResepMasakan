@@ -5,50 +5,60 @@ const User = require( '../models/user' )
 
 exports.getRegister = ( req, res, next ) =>
 {
-    let message = ''
-    if ( message.length > 0 ) {
-        message = message[ 0 ]
-    } else {
-        message = null
+    if ( req.session.isLoggedIn == true ) {
+        res.redirect( '/' )
     }
-    res.render(
-        'auth/register',
-        {
-            path: '/register',
-            pageTitle: 'Register',
-            errorMessage: message,
-            inputPage: {
-                name: {
-                    fname: '',
-                    lname: '',
+    else {
+        let message = ''
+        if ( message.length > 0 ) {
+            message = message[ 0 ]
+        } else {
+            message = null
+        }
+        res.render(
+            'auth/register',
+            {
+                path: '/register',
+                pageTitle: 'Register',
+                errorMessage: message,
+                inputPage: {
+                    name: {
+                        fname: '',
+                        lname: '',
+                    },
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                    picture: ''
                 },
-                email: '',
-                password: '',
-                confirmPassword: '',
-                picture: ''
-            },
-            validErrors: []
-        } )
+                validErrors: []
+            } )
+    }
 }
 exports.getLogIn = ( req, res, next ) =>
 {
-    let message = ''
-    if ( message.length > 0 ) {
-        message = message[ 0 ]
+    if ( req.session.isLoggedIn == true ) {
+        res.redirect( '/' )
     } else {
-        message = null
+        let message = ''
+        if ( message.length > 0 ) {
+            message = message[ 0 ]
+        } else {
+            message = null
+        }
+        res.render(
+            'auth/login',
+            {
+                errorMessage: message,
+                pageTitle: 'Log In',
+                path: '/login',
+                inputPage: {
+                    email: '',
+                    password: ''
+                }, validErrors: []
+            } )
     }
-    res.render(
-        'auth/login',
-        {
-            errorMessage: message,
-            pageTitle: 'Log In',
-            path: '/login',
-            inputPage: {
-                email: '',
-                password: ''
-            }, validErrors: []
-        } )
+
 }
 
 //post

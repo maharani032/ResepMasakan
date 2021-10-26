@@ -12,7 +12,14 @@ const { UpdateEventComment,
     UpdateEventLike,
     UpdateResepLike,
     DeleteResepLike } = require( '../functions/function' )
-
+exports.getAbout = ( req, res ) =>
+{
+    res.render( 'about', {
+        user: req.user,
+        pageTitle: 'About Us',
+        path: '/about'
+    } )
+}
 exports.getEvent = ( req, res ) =>
 {
     const EventId = req.params.eventId

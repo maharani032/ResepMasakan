@@ -5,6 +5,7 @@ const commonController = require( '../controllers/common' )
 const router = express.Router()
 // / update - profil
 router.get( '/events', commonController.getEvents )
+router.get( '/about', commonController.getAbout )
 router.get( '/event/:eventId', commonController.getEvent )
 router.get( '/resep/:resepId', commonController.getResep )
 router.get( '/reseps', commonController.getReseps )

@@ -5,7 +5,7 @@ const Event = require( '../models/event' )
 const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
 const fileHelper = require( '../util/file' )
-const { UpdateArrayPost, DeleteArrayPost, PullArrayUserResep, PushArrayUserResep } = require( '../functions/function' )
+const { PullArrayUserResep, PushArrayUserResep } = require( '../functions/function' )
 const Bahan = require( '../models/bahan' )
 exports.getHome = ( req, res, next ) =>
 {

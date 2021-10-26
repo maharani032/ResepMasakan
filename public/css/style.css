@@ -1,15 +1,38 @@
-::-webkit-scrollbar-track-piece {
-  background-color: #000000;
-}
-
-::-webkit-scrollbar-thumb:vertical {
-  height: 10px;
-  background-color: #9febd8;
-}
-
 .centered {
   display: block;
   text-align: center;
+}
+
+footer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  background-color: #00a29e;
+}
+
+footer .link-website {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 50px;
+}
+
+footer .link-website .info-website {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 50px;
+}
+
+.pagination {
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  display: block;
+  margin: none 7%;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: black;
 }
 
 .topnav {
@@ -117,6 +140,7 @@
 .body-home {
   background-image: url(/image/pexels-maarten-van-den-heuvel-2284166.jpg);
   background-size: cover;
+  /* Footer */
 }
 
 .body-home .box-info {
@@ -154,25 +178,25 @@
   color: black;
 }
 
-section {
+.body-home section {
   order: 3;
   display: flex;
   background-color: #ffb442;
 }
 
-.resep {
+.body-home .resep {
   order: 3;
   flex: 50%;
   overflow: hidden;
 }
 
-.resep-box {
+.body-home .resep-box {
   flex-flow: row wrap;
   display: flex;
   justify-content: space-evenly;
 }
 
-.resep-box a {
+.body-home .resep-box a {
   display: flex;
   align-items: center;
   padding: 50px 50px;
@@ -180,25 +204,25 @@ section {
   margin: 30px 10px 50px 20px;
 }
 
-.resep-box a .ImageEvent {
+.body-home .resep-box a .ImageEvent {
   width: 200px;
   height: 200px;
   size: 300px;
 }
 
-.resep h2 {
+.body-home .resep h2 {
   text-align: center;
   background-color: #e15d5d;
   padding: 10px 0;
 }
 
-.acara-box {
+.body-home .acara-box {
   flex-flow: row wrap;
   display: flex;
   justify-content: space-evenly;
 }
 
-.acara-box a {
+.body-home .acara-box a {
   display: flex;
   align-items: center;
   padding: 50px 50px;
@@ -206,39 +230,38 @@ section {
   margin: 30px 10px 50px 20px;
 }
 
-.acara-box a .ImageEvent {
+.body-home .acara-box a .ImageEvent {
   width: 200px;
   height: 200px;
   size: 300px;
 }
 
-.acara {
+.body-home .acara {
   order: 3;
   flex: 50%;
   flex-flow: row wrap;
 }
 
-.acara h2 {
+.body-home .acara h2 {
   text-align: center;
   background-color: #e15d5d;
   padding: 10px 0;
 }
 
-/* Footer */
-footer {
+.body-home footer {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   background-color: #00a29e;
 }
 
-footer .link-website {
+.body-home footer .link-website {
   display: flex;
   flex-flow: column wrap;
   margin: 50px;
 }
 
-footer .link-website .info-website {
+.body-home footer .link-website .info-website {
   display: flex;
   flex-flow: column wrap;
   margin: 50px;
@@ -776,19 +799,6 @@ textarea:focus {
   margin-right: 10px;
 }
 
-.pagination {
-  width: 100%;
-  text-align: center;
-  background-color: transparent;
-  display: block;
-  margin: none 7%;
-}
-
-.pagination a {
-  text-decoration: none;
-  color: black;
-}
-
 .bodyPost-product {
   padding-top: 10%;
   padding-left: 3rem;
@@ -858,5 +868,80 @@ textarea:focus {
   margin-right: 1rem;
   font-size: 1.2rem;
   margin: 0;
+}
+
+.body-about {
+  padding-top: 8%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.body-about .cover {
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+  background-image: url(/image/calum-lewis-vA1L1jRTM70-unsplash.jpg);
+  height: 500px;
+  background-size: cover;
+}
+
+.body-about .cover h1 {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+  position: absolute;
+}
+
+.body-about .konten1 {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffb442;
+}
+
+.body-about .konten1 .teks1 {
+  flex: 50%;
+  margin: 20px;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.body-about .konten1 .teks1 p {
+  text-indent: 20px;
+  text-align: justify;
+}
+
+.body-about .konten1 .teks1 h2 {
+  text-align: center;
+}
+
+.body-about .konten1 .foto1 {
+  order: 3;
+  flex: 50%;
+  flex-flow: row wrap;
+}
+
+.body-about .konten1 .foto1 img {
+  align-self: center;
+  margin: 40px;
+  object-position: right;
+  object-fit: cover;
+  height: 400px;
+  width: 600px;
+  border: 3px solid #00a29e;
+}
+
+.body-about section {
+  background-color: #ffb442;
+}
+
+.body-about section .konten2 {
+  margin: 0 20px 20px 20px;
+  margin-bottom: 0;
+  padding-bottom: 20px;
 }
 /*# sourceMappingURL=style.css.map */

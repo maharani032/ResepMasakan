@@ -32,9 +32,7 @@
             }
             }
     }
-}
-
-section {
+    section {
     order: 3;
     display: flex;
     background-color: #ffb442;
@@ -102,10 +100,7 @@ section {
     padding: 10px 0;
 }
     
-
-/* Footer */
 footer {
-//     order: 4;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -121,6 +116,11 @@ footer {
         }
     }
 }
+/* Footer */
+
+}
+
+
 
 
 

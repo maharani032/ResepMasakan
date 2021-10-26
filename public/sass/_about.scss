@@ -1,0 +1,67 @@
+.body-about{
+    padding-top: 8%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+.cover {
+    // order: 2;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    background-image: url(/image/calum-lewis-vA1L1jRTM70-unsplash.jpg);
+    height: 500px;
+    background-size: cover;
+    & h1{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    position: absolute;
+    }
+}
+
+
+.konten1 {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(255, 180, 66);
+    .teks1 {
+    flex: 50%;
+    margin: 20px;
+    // order: 3;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    p {
+    text-indent: 20px;
+    text-align: justify;
+}h2 {
+    text-align: center;
+}
+}      
+.foto1 {
+    order: 3;
+    flex: 50%;
+    flex-flow: row wrap;
+    img {
+    align-self: center;
+    margin: 40px;
+    object-position: right;
+    object-fit: cover;
+    height: 400px;
+    width: 600px;
+    border: 3px solid #00a29e;
+    }
+}
+}
+section{
+    background-color: rgb(255, 180, 66);
+.konten2 {
+    margin: 0 20px 20px 20px;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}}
+}
+
