@@ -165,7 +165,8 @@ exports.postComment = ( req, res ) =>
         },
         komentar: komentar,
         eventId: eventId,
-        resepId: null
+        resepId: null,
+
     } )
     comment.save().then( comment =>
     {
@@ -218,7 +219,8 @@ exports.postCommentResep = ( req, res ) =>
             lname: lname
         },
         komentar: komentar,
-
+        eventId: null,
+        html: "",
     } )
     comment.save().then( comment =>
     {

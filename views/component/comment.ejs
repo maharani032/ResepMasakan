@@ -6,20 +6,24 @@
     
                 <div class="komentator">
                     <div class="row comment">
-                        <div class="col-4">
+                        <div class="col-2 foto">
                             <% if (user.picture!="" && user.picture!=null) { %>
                                 <img src="<%=user.picture%>" class='img-comment' alt="gambar-profil">
                                 <% } %>
                         </div>
-                        <div class="col-8">
-                            <p>
+                        <div class="col-10 deskripsi">
+                            <p class='nama'>
                                 <%= comment.name.fname %>
-                                    <%= comment.name.lname %>
+                                <%= comment.name.lname %>
                             </p>
-    
-                            <p>
-                                <%= comment.komentar %>
-                            </p>
+                            <div class="konten">
+                                <%- comment.html.replace(/\n/g,'<br />') %>
+                            </div>
+                                
+                               
+                            
+                                
+                            
                             <% if (user.admin==true) { %>
                                 <form action="/delete-comment/<%=comment._id %>?_method=DELETE" method="POST"
                                     class='red-button'>
@@ -48,3 +52,4 @@
         </div>
         <% } %>
 </div>
+

@@ -4,6 +4,7 @@
 }
 
 footer {
+  padding: 0 30px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -42,7 +43,7 @@ footer .link-website .info-website {
   top: 0;
   z-index: 1;
   width: 100%;
-  max-height: 100px;
+  height: 100px;
 }
 
 .topnav .logo {
@@ -59,7 +60,7 @@ footer .link-website .info-website {
   text-align: center;
   color: #fff8e6;
   text-decoration: none;
-  padding: 10px 10px;
+  padding: 10px 0 0 20px;
 }
 
 .topnav .brand {
@@ -92,6 +93,8 @@ footer .link-website .info-website {
 }
 
 .topnav .dropdown {
+  padding-left: 20px;
+  width: 70px;
   position: relative;
   display: inline-block;
 }
@@ -140,7 +143,6 @@ footer .link-website .info-website {
 .body-home {
   background-image: url(/image/pexels-maarten-van-den-heuvel-2284166.jpg);
   background-size: cover;
-  /* Footer */
 }
 
 .body-home .box-info {
@@ -246,25 +248,6 @@ footer .link-website .info-website {
   text-align: center;
   background-color: #e15d5d;
   padding: 10px 0;
-}
-
-.body-home footer {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  background-color: #00a29e;
-}
-
-.body-home footer .link-website {
-  display: flex;
-  flex-flow: column wrap;
-  margin: 50px;
-}
-
-.body-home footer .link-website .info-website {
-  display: flex;
-  flex-flow: column wrap;
-  margin: 50px;
 }
 
 .btn-register {
@@ -488,7 +471,8 @@ textarea:focus {
 }
 
 .body-profile {
-  margin-top: 10%;
+  padding-top: 100px;
+  margin-top: 3%;
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -582,7 +566,7 @@ textarea:focus {
 
 .bodyPost-resep {
   position: absolute;
-  padding-top: 10%;
+  padding-top: 100px;
   padding-left: 3rem;
   align-items: center;
 }
@@ -605,8 +589,8 @@ textarea:focus {
 }
 
 .body-event {
-  padding-top: 10%;
-  margin: 3% 15% 3% 5%;
+  padding-top: 100px;
+  margin: 1% 15% 3% 7%;
   width: inherit;
   overflow-x: hidden;
 }
@@ -635,14 +619,14 @@ textarea:focus {
 }
 
 .body-events {
-  padding-top: 10%;
-  margin: 3% 15% 3% 7%;
+  padding-top: 100px;
+  margin: 1% 15% 3% 7%;
   width: inherit;
 }
 
 .body-resep {
-  padding-top: 10%;
-  margin: 3% 15% 3% 7%;
+  padding-top: 100px;
+  margin: 1% 15% 3% 7%;
   width: inherit;
 }
 
@@ -700,8 +684,8 @@ textarea:focus {
 }
 
 .body-reseps {
-  padding-top: 10%;
-  margin: 3% 15% 3% 7%;
+  padding-top: 100px;
+  margin: 1% 15% 3% 7%;
   width: inherit;
 }
 
@@ -734,7 +718,7 @@ textarea:focus {
 }
 
 .body-order {
-  padding-top: 10%;
+  padding-top: 100px;
 }
 
 .body-order .orders {
@@ -755,8 +739,7 @@ textarea:focus {
 .comment-list {
   position: relative;
   margin-bottom: 100px;
-  margin-left: 5%;
-  width: 500px;
+  width: auto;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 250px;
@@ -765,24 +748,41 @@ textarea:focus {
 .komentator {
   padding-left: 50px;
   background-color: #808080;
-  border-radius: 0.75em 0.75em;
-  margin-bottom: 10px;
+  border-radius: 0.75em;
+  max-width: 100%;
+  margin: 0 20px 20px 20px;
 }
 
 .komentator .comment {
   padding: 10px 10px;
 }
 
-.komentator .img-comment {
+.komentator .comment .foto {
+  display: block;
+}
+
+.komentator .comment .foto .img-comment {
   display: block;
   border-radius: 50%;
   width: 120px;
   height: 120px;
 }
 
+.komentator .comment .deskripsi .nama {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: -1px;
+}
+
+.komentator .comment .deskripsi .konten {
+  width: 80%;
+  display: flex;
+  word-break: break-all;
+}
+
 .komentator .btn-delete {
-  align-items: flex-end;
-  margin: 0 8px 8px 8px;
+  float: right;
+  margin: 0 20px 20px 20px;
 }
 
 .komentar {
@@ -800,7 +800,7 @@ textarea:focus {
 }
 
 .bodyPost-product {
-  padding-top: 10%;
+  padding-top: 100px;
   padding-left: 3rem;
   align-items: center;
 }
@@ -815,7 +815,8 @@ textarea:focus {
 
 .body-cart {
   position: absolute;
-  padding-top: 10%;
+  padding-top: 100px;
+  margin-top: 10px;
   width: 100%;
 }
 
@@ -871,7 +872,8 @@ textarea:focus {
 }
 
 .body-about {
-  padding-top: 8%;
+  padding-top: 100px;
+  background-color: black;
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;

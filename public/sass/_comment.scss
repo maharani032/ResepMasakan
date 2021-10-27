@@ -7,8 +7,8 @@ margin: 3% 0;
     .comment-list{
         position: relative;
         margin-bottom: 100px;
-        margin-left: 5%;
-        width: 500px;
+        // margin:0 5%;
+        width: auto;
         overflow-y: scroll;
         overflow-x: hidden;
         height: 250px;
@@ -16,21 +16,45 @@ margin: 3% 0;
         .komentator{
             padding-left: 50px;
             background-color: #808080;
-            border-radius: 0.75em 0.75em;
-            margin-bottom: 10px;
+            border-radius: 0.75em;
+            max-width:100%;
+            margin: 0 20px 20px 20px;
             .comment{
-                padding: 10px 10px;
-            }
-            .img-comment{
-                // background-color:green ;
+                 padding: 10px 10px;
+                //  background-color: pink;
+                 .foto{
+                    //  background-color: aqua;
+                     display: block;
+                    .img-comment{
                 display: block;
                 border-radius: 50%;
                 width: 120px;
                 height: 120px;
+                }
             }
+            .deskripsi{
+                
+                    
+                .nama{
+                    font-weight:bold;
+                    font-size: 20px;
+                    margin-bottom: -1px;
+                }
+                
+                    .konten{
+                width: 80%;
+                display: flex;
+                word-break: break-all;  
+            }
+                }
+
+            
+            }
+            
+            
             .btn-delete{
-                align-items: flex-end;
-                margin: 0 8px 8px 8px;
+                float: right;
+                margin: 0 20px 20px 20px;
             }
         }
         .komentar {
