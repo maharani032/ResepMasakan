@@ -4,45 +4,71 @@
     <body>
         <%- include ('../component/navbar.ejs') %>
         <div class='body-cart'>
-            <% if(bahans.length==0){ %> 
+            <% if(items.length==0){ %> 
                 <div class="centered">
                     <h1>Keranjang Kosong</h1>
                 </div>
                 
                 <% } else { %>
                     <ul class="cart-item-list">
-                        <% bahans.forEach(bahan=>{%> 
+                        <% items.forEach(item=>{%> 
                             <li class="cart-item">
                                 <div class="row">
-                                    <div class="col">
-                                        <h1>
-                                            <%= bahan.bahanId.namaBahan.toUpperCase() %>
-                                        </h1>
-                                        <h2>Jumlah item = <%= bahan.quantity %>
-                                        </h2>
-                                        <h2>Harga =<%= bahan.bahanId.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> </h2>
-                                    </div>
-                                    <div class="col col-img">
-                                        <img class='img-cart' src="/<%=bahan.bahanId.image%>" alt="test">
-                                    </div>
-                                </div>
-                               
+                                    <!-- <!% console.log(item) %>  -->
                                 
-                                <form action="/cart-delete-item" method="post">
-                                    <input type="hidden" name="bahanId" value='<%= bahan.bahanId._id %>' id="">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
+                                    <% if (item.eventId) { %>
+                                        <div class="col">
+                                        <h1>
+                                            <%=item.eventId.nameEvent.toUpperCase() %>
+                                        </h1>
+                                        <h2>Jumlah item = <%= item.quantity %>
+                                        </h2>
+                                        <h2>Harga =<%= item.eventId.Harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>
+                                        </h2>
+                                        </div>
+                                        <div class="col col-img">
+                                            <img class='img-cart' src="/<%=item.eventId.ImageEvent%>" alt="test">
+                                        </div>
+                                        <form action="/cart-delete-item" method="post">
+                                            <input type="hidden" name="eventId" value='<%= item.eventId._id %>' id="">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    <% } else if (item.bahanId) { %>
+                                        <div class="col">
+                                            <h1>
+                                                <%=item.bahanId.namaBahan.toUpperCase() %>
+                                            </h1>
+                                            <h2>Jumlah item = <%= item.quantity %>
+                                            </h2>
+                                            <h2>Harga =<%= item.bahanId.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>
+                                            </h2>
+                                        </div>
+                                        <div class="col col-img">
+                                            <img class='img-cart' src="/<%=item.bahanId.image%>" alt="test">
+                                        </div>
+                                        <form action="/cart-delete-item" method="post">
+                                            <input type="hidden" name="bahanId" value='<%= item.bahanId._id %>' id="">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    <% } %>
+                                
                             </li>
                         <% }) %> 
                     </ul>
                     
                     
                     <div class="order">
-                        <% bahans.forEach(bahan=> { %>
-                            <% sum=sum +bahan.bahanId.harga %>
+                        <% items.forEach(item=> { %>
+                            <% if (item.eventId) { %>
+                             <% sum=sum+(item.eventId.Harga * item.quantity) %> 
+                            
+                            <% } else if (item.bahanId) { %>
+                                <% sum=sum+(item.bahanId.harga* item.quantity) %> 
+                            <% } %>
                             <% }) %>
-                            <h2>Total : <%=sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")%></h2>
-                        <a href="/checkout" class="btn">Beli Sekarang!</a>
+                                    <h2>Total : <%=sum.toString().replace( /\B(?=(\d{3})+(?!\d))/g, "," )%>
+                                    </h2>
+                                    <a href="/checkout" class="btn">Beli Sekarang!</a>
                     </div>
                 <% } %> 
         </div>

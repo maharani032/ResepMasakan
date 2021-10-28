@@ -5,24 +5,29 @@
     <body>
         <%- include ('../component/navbar.ejs') %>
             <div class="bodyPost-resep">
+                <% if (errorMessage) { %>
+                    <div class="user-message user-message--error">
+                        <%= errorMessage %>
+                    </div>
+                <% } %>
                 <% if (editMode==true) { %>
                 <h1>Edit Resep</h1>
                 <% } else { %>
                     <h1>Add Resep</h1>
                 <% } %>
                 <div class="form-resep">
-                    <form action="/<% if (editMode===true){%>edit-resep/<%= resep._id %> <%}else{%>add-resep<%} %>" method="POST"
+                    <form action="/<% if (editMode===true){%>edit-resep/<%= resep._id %>?edit=true <%}else{%>add-resep<%} %>" method="POST"
                         enctype='multipart/form-data'>
     <div class="form-group">
-        <input type="text" name="namaResep" id="" class='form-control' autocomplete="off" placeholder='nama Resep'
-        value='<% if(editMode===true){%><%= resep.namaResep %> <%} %>'>
+        <input type="text" name="namaResep" id="" class='form-control <%= validErrors.find(e=>e.param==='namaResep')?'invalid': '' %>' autocomplete="off" placeholder='nama Resep'
+        value='<% if(editMode===true){%><%= resep.namaResep %> <% } %>'>
     </div>
     <div class="form-group">
-        <textarea placeholder='deskripsi'name="deskripsi" class='form-control' rows="10" autocomplete="off"><% if(editMode===true){%><%= resep.deskripsi %><%} %></textarea>
+        <textarea placeholder='deskripsi'name="deskripsi" class='form-control <%= validErrors.find(e=>e.param==='deskripsi')?'invalid': '' %>' rows="10" autocomplete="off"><% if(editMode===true){%><%= resep.deskripsi %><%} %></textarea>
     </div>
     <div class="form-group">
         <label>Categori</label>
-        <select name="selectionOption" class='form-control'>
+        <select name="selectionOption" class='form-control <%= validErrors.find(e=>e.param==='selectionOption')?'invalid': '' %>'>
             <option value="daging">Daging</option>
             <option value="ikan">Ikan</option>
             <option value="sayur">Sayur</option>
@@ -30,7 +35,7 @@
     </div>
     <div class="form-group">
         <label>Bahan Utama</label>
-        <select id='bahan'name="bahan[]" class='form-control' multiple="multiple">
+        <select id='bahan'name="bahan[]" class='form-control <%= validErrors.find(e=>e.param==='bahan[]')?'invalid': '' %>' multiple="multiple">
         <% if (bahans.length>0) { %>
             <% bahans.forEach(bahan=>{ %>
                 
@@ -43,7 +48,7 @@
     </div>
         <div class="form-group">
             <label>Upload Image</label>
-            <input type="file" class='form-control' name='ImageResep'>
+            <input type="file" class='form-control <%= validErrors.find(e=>e.param==='ImageResep')?'invalid': '' %>' name='ImageResep'>
         </div>
         <button type="submit" class="btn btn-primary btn-postEvent">
             <% if (editMode) { %>

@@ -1,4 +1,5 @@
 const path = require( 'path' )
+const { validationResult } = require( 'express-validator' )
 
 const Comment = require( '../models/comment' )
 const Event = require( '../models/event' )
@@ -33,12 +34,20 @@ exports.getAddResep = ( req, res, next ) =>
     if ( Bahan.length != 0 ) {
         Bahan.find( {}, ( err, bahans ) =>
         {
+            let message = ''
+            if ( message.length > 0 ) {
+                message = message[ 0 ]
+            } else {
+                message = null
+            }
             res.render( 'resep/post-resep', {
                 user: req.user,
                 path: '/add-resep',
                 pageTitle: 'Add Resep',
                 editMode: editMode,
-                bahans: bahans
+                bahans: bahans,
+                errorMessage: message,
+                validErrors: []
             } )
         } )
     }
@@ -47,45 +56,68 @@ exports.getAddResep = ( req, res, next ) =>
 
 exports.postAddResep = ( req, res, next ) =>
 {
+    var editMode = false
     const id = req.user._id
     const namaResep = req.body.namaResep
     const deskripsi = req.body.deskripsi
     const selectionOption = req.body.selectionOption
     const resepPicture = req.file
-    const ImageResep = resepPicture.path.replace( '\\', '/' )
     const bahans = req.body.bahan
     const bahanId = []
-
-    if ( bahans != null ) {
-        console.log( 'in herre' )
-        bahans.forEach( id =>
-        {
-            let x = id.split( '-' )[ 0 ]
-            bahanId.push( x )
-        } );
+    const errors = validationResult( req )
+    
+    if ( !errors.isEmpty() ) {
+        if ( Bahan.length != 0 ) {
+            Bahan.find( {}, ( err, bahans ) =>
+            {
+                return res.render( 'resep/post-resep', {
+                    user: req.user,
+                    path: '/add-resep',
+                    pageTitle: 'Add Resep',
+                    editMode: editMode,
+                    bahans: bahans,
+                    errorMessage: errors.array()[ 0 ].msg,
+                    validErrors: errors.array()
+                } )
+            } )
+        }
     }
-    const resep = new Resep( {
-        userId: req.user._id,
-        namaResep: namaResep,
-        deskripsi: deskripsi,
-        html: "",
-        ImageResep: ImageResep.replace( '\\', '/' ),
-        selectionOption: selectionOption,
-        like: [],
-        comment: [],
-        bahans: bahans,
-        bahanId: bahanId,
-    } )
-    resep.save().then( resep =>
-    {
-        { PushArrayUserResep( id, resep._id ) }
-        res.redirect( '/' )
-    } ).catch( err =>
-    {
-        console.log( err )
-        res.redirect( '/500' )
+    // }
+    else {
+        const ImageResep = resepPicture.path.replace( '\\', '/' )
+        if ( bahans != null ) {
+            console.log( 'in herre' )
+            bahans.forEach( id =>
+            {
+                let x = id.split( '-' )[ 0 ]
+                bahanId.push( x )
+            } );
+        }
 
-    } )
+        const resep = new Resep( {
+            userId: req.user._id,
+            namaResep: namaResep,
+            deskripsi: deskripsi,
+            html: "",
+            ImageResep: ImageResep.replace( '\\', '/' ),
+            selectionOption: selectionOption,
+            like: [],
+            comment: [],
+            bahans: bahans,
+            bahanId: bahanId,
+        } )
+        resep.save().then( resep =>
+        {
+            { PushArrayUserResep( id, resep._id ) }
+            res.redirect( '/' )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+
+        } )
+    }
+
 }
 exports.postDeleteResep = ( req, res, next ) =>
 {
@@ -142,13 +174,21 @@ exports.getEditResep = ( req, res, next ) =>
             }
             Bahan.find( {}, ( err, bahans ) =>
             {
+                let message = ''
+                if ( message.length > 0 ) {
+                    message = message[ 0 ]
+                } else {
+                    message = null
+                }
                 res.render( 'resep/post-resep', {
                     pageTitle: 'Edit Resep',
                     path: 'edit-resep',
                     resep: resep,
                     user: user,
                     editMode: true,
-                    bahans: bahans
+                    bahans: bahans,
+                    errorMessage: message,
+                    validErrors: []
                 } )
             } )
 
@@ -162,6 +202,13 @@ exports.postEditResep = ( req, res ) =>
     const resepId = req.params.resepId
     const bahan = req.body.bahan
     const updatebahanId = []
+    const updateSelectionOption = req.body.selectionOption
+    const errors = validationResult( req )
+
+
+    // else {
+
+    // }
     if ( bahan != null ) {
         bahan.forEach( id =>
         {
@@ -170,36 +217,55 @@ exports.postEditResep = ( req, res ) =>
         } );
     }
 
-    const updateSelectionOption = req.body.selectionOption
     Resep.findById( resepId ).then( resep =>
     {
-        resep.namaResep = updatenamaResep
-        resep.deskripsi = updatedeskripsi
-        resep.selectionOption = updateSelectionOption
-        if ( pictureResep != null ) {
-            pictureResep = req.file.path.replace( '\\', '/' )
-            fileHelper.deleteFile( resep.ImageResep )
-            resep.ImageResep = pictureResep.replace( '\\', '/' )
-            // .replace( '\\', '/' )
+        if ( !errors.isEmpty() ) {
+            if ( Bahan.length != 0 ) {
+                Bahan.find( {}, ( err, bahans ) =>
+                {
+                    return res.render( 'resep/post-resep', {
+                        user: req.user,
+                        path: '/edit-resep',
+                        pageTitle: 'Edit Resep',
+                        editMode: true,
+                        resep: resep,
+                        bahans: bahans,
+                        errorMessage: errors.array()[ 0 ].msg,
+                        validErrors: errors.array()
+                    } )
+                } )
+            }
         }
-        else if ( pictureResep == null ) {
-            resep.ImageResep = resep.ImageResep
+        else {
+            resep.namaResep = updatenamaResep
+            resep.deskripsi = updatedeskripsi
+            resep.selectionOption = updateSelectionOption
+            if ( pictureResep != null ) {
+                pictureResep = req.file.path.replace( '\\', '/' )
+                fileHelper.deleteFile( resep.ImageResep )
+                resep.ImageResep = pictureResep.replace( '\\', '/' )
+                // .replace( '\\', '/' )
+            }
+            else if ( pictureResep == null ) {
+                resep.ImageResep = resep.ImageResep
+            }
+            if ( updatebahanId ) {
+                resep.bahanId = updatebahanId
+            }
+            return resep.save()
+                .then( result =>
+                {
+                    res.redirect( '/profil' )
+                } ).catch( err =>
+                {
+                    console.log( err )
+                    res.redirect( '/500' )
+                } )
         }
-        if ( updatebahanId ) {
-            resep.bahanId = updatebahanId
-        }
-        return resep.save()
-            .then( result =>
-            {
-                res.redirect( '/profil' )
-            } ).catch( err =>
-            {
-                console.log( err )
-                res.redirect( '/500' )
-            } )
     } ).catch( err =>
     {
         console.log( err )
         res.redirect( '/500' )
     } )
+
 }

@@ -1,44 +1,66 @@
 require( "dotenv" ).config()
 const Bahan = require( '../models/bahan' )
+const Event = require( '../models/event' )
 const User = require( '../models/user' )
 const Order = require( '../models/order' );
 const stripe = require( 'stripe' )( process.env.API_KEY_STRIPE_SECRET )
 exports.postAddCart = ( req, res ) =>
 {
     const bahanId = req.body.bahanId
-    Bahan.findById( bahanId )
-        .then( bahan =>
+    const eventId = req.body.eventId
+    if ( bahanId == null ) {
+        Event.findById( eventId ).then( event =>
         {
-            return req.user.addToCart( bahan )
-        } )
-        .then( result =>
+            return req.user.addToCart( "", event )
+        } ).then( result =>
         {
             console.log( result )
             res.redirect( '/' )
-
-        } )
-        .catch(
+        } ).catch(
             err =>
             {
                 console.log( err )
                 res.redirect( '/500' )
             }
         )
+    }
+    else if ( eventId == null ) {
+        Bahan.findById( bahanId )
+            .then( bahan =>
+            {
+                return req.user.addToCart( bahan, "" )
+            } )
+            .then( result =>
+            {
+                console.log( result )
+                res.redirect( '/' )
+
+            } )
+            .catch(
+                err =>
+                {
+                    console.log( err )
+                    res.redirect( '/500' )
+                }
+            )
+    }
+
 }
 exports.getCart = ( req, res, next ) =>
 {
     // console.log( req.user )
     User.findById( req.user._id )
         .populate( 'cart.items.bahanId' )
+        .populate( 'cart.items.eventId' )
         .then( user =>
         {
             let sum = 0
-            const bahans = user.cart.items
-            console.log( bahans )
+            const item = user.cart.items
+
             res.render( 'product/cart', {
                 path: '/cart',
                 pageTitle: 'Cart',
-                bahans: bahans,
+                items: item,
                 user: req.user,
                 sum: sum
             } )
@@ -50,28 +72,50 @@ exports.getCart = ( req, res, next ) =>
 }
 exports.getCheckOut = ( req, res ) =>
 {
-    let bahan
+    let item
     let total = 0
     User.findById( req.user._id )
         .populate( 'cart.items.bahanId' )
+        .populate( 'cart.items.eventId' )
         .then( user =>
         {
             total = 0
-            bahan = user.cart.items
-            bahan.forEach( b =>
+            item = user.cart.items
+            item.forEach( b =>
             {
-                total += b.quantity * b.bahanId.harga
+                if ( b.bahanId ) {
+                    total = total + ( b.quantity * b.bahanId.harga )
+                }
+                else if ( b.eventId ) {
+                    total = total + ( b.quantity * b.eventId.Harga )
+                }
+                // console.log( 'disini' + b.bahanId )
+
+                // total = total + ( b.quantity * b.eventId.Harga ) + ( b.quantity * b.bahanId.harga )
+
+                console.log( total )
+
             } )
             return stripe.checkout.sessions.create( {
                 payment_method_types: [ 'card' ],
-                line_items: bahan.map( b =>
+                line_items: item.map( b =>
                 {
-                    return {
-                        name: b.bahanId.namaBahan,
-                        amount: Math.round( b.bahanId.harga / 15000 * 100 ),
-                        currency: 'usd',
-                        quantity: b.quantity
-                    };
+                    if ( b.bahanId ) {
+                        return {
+                            name: b.bahanId.namaBahan,
+                            amount: Math.round( b.bahanId.harga / 15000 * 100 ),
+                            currency: 'usd',
+                            quantity: b.quantity
+                        };
+                    }
+                    if ( b.eventId ) {
+                        return {
+                            name: b.eventId.nameEvent,
+                            amount: Math.round( b.eventId.Harga / 15000 * 100 ),
+                            currency: 'usd',
+                            quantity: b.quantity
+                        };
+                    }
                 } ),
                 success_url: req.protocol + '://' + req.get( 'host' ) + '/checkout/sucess',
                 cancel_url: req.protocol + '://' + req.get( 'host' ) + '/checkout/cancel',
@@ -83,7 +127,7 @@ exports.getCheckOut = ( req, res ) =>
             res.render( 'product/checkout', {
                 path: '/checkout',
                 pageTitle: 'checkout',
-                bahans: bahan,
+                items: item,
                 user: req.user,
                 totalSum: total,
                 sessionId: session.id,
@@ -99,22 +143,37 @@ exports.getCheckOutSuccess = ( req, res ) =>
 {
     User.findById( req.user._id )
         .populate( 'cart.items.bahanId' )
+        .populate( 'cart.items.eventId' )
         .then( user =>
         {
-            const bahans = user.cart.items.map( i =>
+            const item = user.cart.items.map( i =>
             {
-                return { quantity: i.quantity, bahan: { ...i.bahanId._doc } }
+                if ( i.bahanId ) {
+                    console.log( i )
+                    return { quantity: i.quantity, item: { ...i.bahanId._doc } }
+                }
+                else if ( i.eventId ) {
+                    console.log( i )
+                    return { quantity: i.quantity, item: { ...i.eventId._doc } }
+                }
             } )
+            // const bahan = ser.cart.items.map( i =>
+            // {
+
+
+            // } )
             const order = new Order( {
                 user: {
                     email: req.user.email,
                     userId: req.user
                 },
-                bahans: bahans
+                item: item
+
             } )
             return order.save()
         } ).then( result =>
         {
+            
             return req.user.clearCart()
         } )
         .then( () =>
@@ -123,7 +182,7 @@ exports.getCheckOutSuccess = ( req, res ) =>
         } ).catch( err =>
         {
             console.log( err )
-            res.redirect( '/500' )
+            // res.redirect( '/500' )
         } )
 }
 exports.postDeleteItemCart = ( req, res ) =>
@@ -146,7 +205,7 @@ exports.getOrder = ( req, res ) =>
     Order.find( { 'user.userId': req.user._id } )
         .then( orders =>
         {
-            
+
             res.render( 'product/order', {
                 path: '/order',
                 pageTitle: 'Your Order',

@@ -69,6 +69,7 @@ exports.postRegister = ( req, res, next ) =>
     const lname = req.body.lname
     const password = req.body.password
     const errors = validationResult( req )
+    console.log( errors )
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/register', {
             path: '/register',

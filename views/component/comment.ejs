@@ -1,4 +1,5 @@
 <div class="body-comment">
+    
     <div class="comment-list">
         <h1>Daftar Komentar : </h1>
         <div class="list">
@@ -42,10 +43,15 @@
     
     <% if(isAuthenticated){ %>
         <div class="komentar"> 
+            <% if (errorMessage) { %>
+                <div class="user-message user-message--error">
+                    <%= errorMessage %>
+                </div>
+                <% } %>
             <form action="/comment/<% if (modeEventorResep==true) { %>event/<%= event._id %> <% } else { %>resep/<%= resep._id %> <% } %>"
                 method="POST" autocomplete="off">
                 <h5>Komentarlah di bawah sini : </h5>
-                <textarea name="Komentar" class="form-control Komentar" row='4' cols='4' placeholder="Komentar"></textarea>
+                <textarea name="Komentar" class="form-control Komentar <%= validErrors.find(e=>e.param==='Komentar')?'invalid': '' %>" row='4' cols='4' placeholder="Komentar"></textarea>
     
                 <button type="submit" class="btn btn-dark mt-5 btn-komen">Comment</button>
             </form>
