@@ -19,7 +19,7 @@ router.post( '/dislike/:eventId/:likeId', isAuth, commonController.deleteLikeEve
 router.post( '/comment/resep/:resepId', isAuth, [
     check( 'Komentar', 'komentar tidak boleh kosong' ).not().isEmpty(),
 ], commonController.postCommentResep )
-router.post( '/comment/event/:eventId', isAuth, commonController.postComment )
+router.post( '/comment/event/:eventId', isAuth, [ check( 'Komentar', 'komentar tidak boleh kosong' ).not().isEmpty(), ], commonController.postComment )
 router.post( '/delete-comment/:commentId', commonController.deleteComment )
 
 module.exports = router

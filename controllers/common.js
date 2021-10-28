@@ -174,29 +174,56 @@ exports.postComment = ( req, res ) =>
     const komentar = req.body.Komentar
     const fname = req.user.name.fname
     const lname = req.user.name.lname
+    const errors = validationResult( req )
+    if ( !errors.isEmpty() ) {
+        Event.findById( eventId )
+            .then( event =>
+            {
+                Like.find( { eventId: eventId }, ( err, likes ) =>
+                {
+                    Comment.find( { eventId: eventId }, ( err, comments ) =>
+                    {
+                        res.render( 'event/event', {
+                            pageTitle: event.nameEvent,
+                            path: '/event/:eventId',
+                            user: req.user,
+                            event: event,
+                            comments: comments,
+                            likes: likes,
+                            modeEventorResep: true,
+                            errorMessage: errors.array()[ 0 ].msg,
+                            validErrors: errors.array()
+                            //if true== comment.event,false==comment.resep
+                        } )
+                    } )
+                } )
+            } )
+    }
+    else {
+        const comment = new Comment( {
+            userId: req.user._id,
+            name: {
+                fname: fname,
+                lname: lname
+            },
+            komentar: komentar,
+            eventId: eventId,
+            resepId: null,
 
-    const comment = new Comment( {
-        userId: req.user._id,
-        name: {
-            fname: fname,
-            lname: lname
-        },
-        komentar: komentar,
-        eventId: eventId,
-        resepId: null,
+        } )
+        comment.save().then( comment =>
+        {
+            console.log( comment )
+            { UpdateEventComment( eventId, comment._id ) }
 
-    } )
-    comment.save().then( comment =>
-    {
-        console.log( comment )
-        { UpdateEventComment( eventId, comment._id ) }
+            res.redirect( '/event/' + eventId )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+        } )
+    }
 
-        res.redirect( '/event/' + eventId )
-    } ).catch( err =>
-    {
-        console.log( err )
-        res.redirect( '/500' )
-    } )
 }
 
 exports.deleteComment = ( req, res, next ) =>

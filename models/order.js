@@ -9,16 +9,7 @@ const orderSchema = new Schema( {
             quantity: { type: Number, required: true }
         }
     ],
-    // item: [ {
-    //     bahanId: {
-    //         bahan: { type: Object },
-    //         quantity: { type: Number, }
-    //     },
-    //     eventId: {
-    //         event: { type: Object },
-    //         quantity: { type: Number }
-    //     }
-    // } ],
+
     user: {
         email: {
             type: String,
