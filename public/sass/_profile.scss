@@ -1,11 +1,11 @@
 .body-profile{
-    // position: absolute;
+    
     padding-top: 100px;
     margin-top: 3%;
     max-width: 100%;
     overflow-x:hidden;
     .profil{
-        // position: absolute;
+        position: absolute;
         border-radius: 20px;
         background-color: rgb(122, 199, 195);
         margin-left: 20px;
@@ -17,18 +17,40 @@
             width: 260px;
         }
         .profile-picture{
+            // background-color: pink;
             border-radius: 50%;
-            display: block;
-            margin:0 auto;
-            width: 10em;
-            height: 10em;
-        }   
+            // display: block;
+            margin:20px auto;
+            width: 150px;
+            height: 150px;
+        display: inline-block;
+        text-align: center;
+        
+
+            
+        } 
+        #input-gambar{
+            // top: 110px;
+            // position: absolute;
+            left: 0;
+            // width: 300px;
+            // height: 125px;
+            // z-index: -1;
+            // background: black;
+            
+
+        }
+         
         .gambar-profil{
             display: block;
             margin:0 auto;
+            
         }
         .informasi-user{
-            display: block;
+            // background-color: purple;
+            top:0
+            // position: absolute;
+            // display: block;
             // margin: 20px auto;
         }
         .button{

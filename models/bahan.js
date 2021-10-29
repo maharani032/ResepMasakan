@@ -10,6 +10,9 @@ const bahanSchema = new Schema( {
         type: String,
         required: true,
     },
+    imageKey: {
+        type: String
+    },
     harga: {
         type: Number,
         required: true

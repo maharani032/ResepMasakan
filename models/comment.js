@@ -6,9 +6,8 @@ const dompurify = createDomPurify( new JSDOM().window )
 
 const Schema = mongoose.Schema
 const commentSchema = new Schema( {
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+    gambar: {
+        type: String,
         required: true
     },
     name: {

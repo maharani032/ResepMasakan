@@ -31,6 +31,9 @@ const resepSchema = new Schema( {
         type: String,
         required: true
     },
+    imageKey: {
+        type: String
+    },
     html: {
         type: String,
         required: true

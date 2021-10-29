@@ -1,4 +1,5 @@
 const path = require( 'path' )
+const { deletefile } = require( '../util/eventUpload' )
 const Event = require( '../models/event' )
 const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
@@ -10,7 +11,7 @@ exports.postUpdateProfil = ( req, res ) =>
     const fname = req.body.fname
     const lname = req.body.lname
     const email = req.body.email
-    let imagePicture = req.file
+
     console.log( fname, lname, email )
     User.findById( req.user._id ).then( user =>
     {
@@ -19,6 +20,7 @@ exports.postUpdateProfil = ( req, res ) =>
         // user.email = user.email
         user.event = user.event
         user.resep = user.resep
+
         console.log( email )
         if ( user.googleId === null || user.googleId === '' ) {
             user.email = email
@@ -27,13 +29,27 @@ exports.postUpdateProfil = ( req, res ) =>
             user.email = user.email
         }
 
-        if ( imagePicture != null ) {
-            imagePicture = req.file.path.replace( "\\", "/" )
-            fileHelper.deleteFile( user.picture )
-            user.picture = ( '/' + imagePicture.replace( '\\', '/' ) )
+        if ( user.picture != null ) {
+            let imagePicture = req.file.location
+            let pictureKey = req.file.key
+            console.log( 'disini' )
+            if ( user.pictureKey == '' ) {
+                user.pictureKey = pictureKey
+                user.picture = imagePicture
+            } else {
+                console.log( 'sss' )
+                deletefile( user.pictureKey )
+                user.pictureKey = pictureKey
+                user.picture = imagePicture
+            }
+
         }
-        else if ( imagePicture == null ) {
-            user.picture = user.picture
+        else if ( user.picture == null ) {
+            console.log( 'disana' )
+            let imagePicture = req.file.location
+            let pictureKey = req.file.key
+            user.picture = imagePicture
+            user.pictureKey = pictureKey
         }
         return user.save()
             .then( result =>

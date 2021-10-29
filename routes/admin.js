@@ -29,17 +29,17 @@ router.post( '/edit-event/:eventId', isAdmin, Eventupload.single( 'ImageEvent' )
         }
     } ).withMessage( 'tanggal kadaluarsa(tanggal acara tidak boleh kurang dari tanggal hari ini' ),
     // check( 'selectionOption', 'isi kategory' ).not().isEmpty(),
-    check( 'ImageEvent' ).custom( ( value, { req } ) =>
-    {
-        if ( req.file.mimetype === 'image/png' ||
-            req.file.mimetype === 'image/jpg' ||
-            req.file.mimetype === 'image/jpeg' ) {
-            return true;
-        }
-        else {
-            return false; // return "falsy" value to indicate invalid data
-        }
-    } ).withMessage( 'isi imageResep' ),
+    // check( 'ImageEvent' ).custom( ( value, { req } ) =>
+    // {
+    //     if ( req.file.mimetype === 'image/png' ||
+    //         req.file.mimetype === 'image/jpg' ||
+    //         req.file.mimetype === 'image/jpeg' ) {
+    //         return true;
+    //     }
+    //     else {
+    //         return false; // return "falsy" value to indicate invalid data
+    //     }
+    // } ).withMessage( 'isi imageResep' ),
 
     check( 'harga' ).custom( ( value, { req } ) =>
     {
@@ -56,7 +56,7 @@ router.post( '/edit-event/:eventId', isAdmin, Eventupload.single( 'ImageEvent' )
         }
     } ).withMessage( 'Harga tidak boleh kurang dari sama dengan 0' ),
     check( 'Kapasitas', 'isi kapasitas' ).not().isEmpty(),
-],adminController.postEditEvent )
+], adminController.postEditEvent )
 router.post( '/add-event', isAdmin, Eventupload.single( 'ImageEvent' ), [
     check( 'nameEvent', 'isi judul event' ).not().isEmpty(),
     check( 'tempat', 'isi tempat' ).not().isEmpty(),
@@ -84,7 +84,7 @@ router.post( '/add-event', isAdmin, Eventupload.single( 'ImageEvent' ), [
             return false; // return "falsy" value to indicate invalid data
         }
     } ).withMessage( 'isi imageResep' ),
-    
+
     check( 'harga' ).custom( ( value, { req } ) =>
     {
         let category = req.body.Category;

@@ -1,6 +1,6 @@
 const User = require( '../models/user' )
 const Bahan = require( '../models/bahan' )
-const fileHelper = require( '../util/file' )
+const { deletefile } = require( '../util/eventUpload' )
 const Resep = require( '../models/resep' )
 exports.getAddProduct = ( req, res ) =>
 {
@@ -19,14 +19,16 @@ exports.postAddProduct = ( req, res ) =>
     const namaBahan = req.body.namaBahan
     const harga = req.body.hargaBahan
     const file = req.file
-    const image = file.path.replace( '\\', '/' )
+    const image = file.location
+    const imageKey = file.key
     const deskripsi = req.body.deskripsiBahan
     const bahan = new Bahan( {
         userId: req.user._id,
         namaBahan: namaBahan,
         harga: harga,
         Deskripsi: deskripsi,
-        image: image
+        image: image,
+        imageKey: imageKey
     } )
     bahan.save().then( bahan =>
     {
@@ -49,7 +51,8 @@ exports.DeleteProduct = ( req, res ) =>
                     console.log( err )
                 }
             } )
-        fileHelper.deleteFile( bahan.image )
+        // fileHelper.deleteFile( bahan.image )
+        deletefile( bahan.imageKey )
         return Bahan.deleteOne( { _id: bahanid, userId: req.user._id } )
 
     } ).then( () =>
@@ -92,17 +95,18 @@ exports.postEditProduct = ( req, res ) =>
     const namaBahan = req.body.namaBahan
     const harga = req.body.hargaBahan
     const file = req.file
-    const image = file.path.replace( '\\', '/' )
+    const image = file.location
+    const imageKey = file.key
     const deskripsi = req.body.deskripsiBahan
-    // console.log( bahanId, namaBahan, harga, deskripsi )
     Bahan.findById( bahanId ).then( bahan =>
     {
         bahan.namaBahan = namaBahan
         bahan.harga = harga
         bahan.Deskripsi = deskripsi
         if ( image ) {
-            fileHelper.deleteFile( bahan.image )
-            bahan.image = image.replace( '\\', '/' )
+            deletefile( bahan.imageKey )
+            bahan.image = image
+            bahan.imageKey = imageKey
         }
         return bahan.save()
             .then( res.redirect( '/profil' ) )

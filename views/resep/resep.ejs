@@ -15,7 +15,7 @@
                     </p>
                 </div>
                 <div class="image-picture">
-                    <img class='img-display' src="/<%=resep.ImageResep%>" alt="">
+                    <img class='img-display' src="<%=resep.ImageResep%>" alt="">
                 </div>
                 <div class="markdone">
                     <%- resep.html.replace(/\n/g,'<br />')%>
@@ -29,7 +29,7 @@
                                     <% bahans.forEach(bahan => { %>
                                         <% if(bahan._id==resep.bahanId[i].toString()){ %>
                                             <div class="card card-style">
-                                                <img src="/<%=bahan.image%>" alt="" class='card-img-top img'>
+                                                <img src="<%=bahan.image%>" alt="" class='card-img-top img'>
                                                 <div class="card-body">
                                                     <p>
                                                         <%= bahan.namaBahan.toUpperCase() %>

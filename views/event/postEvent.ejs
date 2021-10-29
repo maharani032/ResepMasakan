@@ -22,25 +22,25 @@
                     <form action="/<% if (editMode===true){%>edit-event/<%= event._id %>?edit=true <%}else{%>add-event<%} %>" method="POST" enctype='multipart/form-data'>
                         <div class="form-group">
                             <label>Nama acara</label>
-                            <input name='nameEvent' type="text" class='form-control <%= validErrors.find(e=>e.param==='nameEvent')?'invalid': '' %>'autocomplete="off"
+                            <input required name='nameEvent' type="text" class='form-control <%= validErrors.find(e=>e.param==='nameEvent')?'invalid': '' %>'autocomplete="off"
                             value='<% if (editMode===true) { %><%= event.nameEvent %> <% } %>'>
                         </div>
                         <div class="form-group">
                             <label>Tempat</label>
-                            <input name='tempat' type="text" class='form-control <%= validErrors.find(e=>e.param==='tempat')?'invalid': '' %>' autocomplete="off"
+                            <input required name='tempat' type="text" class='form-control <%= validErrors.find(e=>e.param==='tempat')?'invalid': '' %>' autocomplete="off"
                             value='<% if (editMode===true) { %><%= event.tempat %> <% } %>'>
                         </div>
                         <div class="form-group">
                             <label>deskripsi</label>
-                            <textarea name="deskripsi" class='form-control <%= validErrors.find(e=>e.param==='deksripsi')?'invalid': '' %>'rows="4" autocomplete="off"><% if (editMode===true) { %><%= event.Deskripsi %><% } %></textarea>
+                            <textarea required name="deskripsi" class='form-control <%= validErrors.find(e=>e.param==='deksripsi')?'invalid': '' %>'rows="4" autocomplete="off"><% if (editMode===true) { %><%= event.Deskripsi %><% } %></textarea>
                         </div>
                         <div class="form-group">
                             <label>Tanggal acara</label>
-                            <input name='OnDate' type="date" class='form-control <%= validErrors.find(e=>e.param==='Ondate')?'invalid': '' %>'>
+                            <input required name='OnDate' type="date" class='form-control <%= validErrors.find(e=>e.param==='Ondate')?'invalid': '' %>'>
                         </div>
                         <div class="form-group">
                             <label>Upload Image</label>
-                            <input type="file" class='form-control <%= validErrors.find(e=>e.param==='ImageEvent')?'invalid': '' %>' name='ImageEvent'>
+                            <input required type="file" class='form-control <%= validErrors.find(e=>e.param==='ImageEvent')?'invalid': '' %>' name='ImageEvent'>
                         </div>
                         <div class="form-group form-check-inline">
                             <input type="radio" id='free' class="custom-control-input" name="Category" value='free' required>
@@ -52,12 +52,12 @@
                         </div> 
                         <div class="form-group number">
                             <label>Harga</label>
-                            <input name='harga'id='harga' min='0' type="Number" class='form-control <%= validErrors.find(e=>e.param==='harga')?'invalid': '' %>'autocomplete="off"
+                            <input required name='harga'id='harga' min='0' type="Number" class='form-control <%= validErrors.find(e=>e.param==='harga')?'invalid': '' %>'autocomplete="off"
                             value='<% if (editMode===true) { %><%= event.Harga %><% } %>'>
                         </div>
                         <div class="form-group number">
                             <label>Kapasitas orang</label>
-                            <input type="Number" name='Kapasitas' min='0' class='form-control <%= validErrors.find(e=>e.param==='Kapasitas')?'invalid': '' %>'value='<% if (editMode===true) { %><%= event.Kapasitas %><% } %>'>
+                            <input required type="Number" name='Kapasitas' min='0' class='form-control <%= validErrors.find(e=>e.param==='Kapasitas')?'invalid': '' %>'value='<% if (editMode===true) { %><%= event.Kapasitas %><% } %>'>
                         </div>
                         <button type="submit" class="btn btn-primary btn-postEvent">
                             <% if (editMode) { %>

@@ -1,19 +1,20 @@
+require( 'dotenv' ).config()
+const aws = require( 'aws-sdk' )
 const multer = require( 'multer' )
+const multerS3 = require( 'multer-s3' )
 const path = require( 'path' )
+const bucketName = process.env.AWS_BUCKET_NAME
+const region = process.env.AWS_BUCKET_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY
+const secretAccessKey = process.env.AWS_SECRET_KEY
 
 const { v4: uuidv4 } = require( 'uuid' );
-
-const imageEventStorage = multer.diskStorage( {
-    destination: ( req, file, cb ) =>
-    {
-        cb( null, 'images/event' )
-    },
-    filename: ( req, file, cb ) =>
-    {
-
-        cb( null, 'upload' + " - " + 'imageEvent' + ' - ' + uuidv4() + file.originalname )
-    }
+const s3 = new aws.S3( {
+    accessKeyId,
+    secretAccessKey,
+    region,
 } )
+
 const ImageFilter = ( req, file, cb ) =>
 {
     if (
@@ -28,41 +29,83 @@ const ImageFilter = ( req, file, cb ) =>
 
     }
 }
-const imageResepStorage = multer.diskStorage( {
-    destination: ( req, file, cb ) =>
+
+const imageEventStorage = multerS3( {
+    s3,
+    bucket: bucketName,
+    metadata: ( req, file, cb ) =>
     {
-        cb( null, 'images/resep' )
+        cb( null, { fieldName: file.fieldname } )
     },
-    filename: ( req, file, cb ) =>
+    key: ( req, file, cb ) =>
     {
 
-        cb( null, 'upload' + " - " + 'imageResep' + ' - ' + uuidv4() + file.originalname )
+        cb( null, 'event-picture' + '/' + 'upload' + " - " + 'imageEvent' + ' - ' + uuidv4() + file.originalname )
     }
 } )
-const profilStorage = multer.diskStorage( {
-    destination: ( req, file, cb ) =>
+const imageResepStorage = multerS3( {
+    s3,
+    bucket: bucketName,
+    metadata: ( req, file, cb ) =>
     {
-        cb( null, 'images/profil' )
+        cb( null, { fieldName: file.fieldname } )
     },
-    filename: ( req, file, cb ) =>
+    key: ( req, file, cb ) =>
     {
 
-        cb( null, 'upload' + " - " + 'profil' + ' - ' + uuidv4() + file.originalname )
+        cb( null, 'resep-picture' + '/' + 'upload' + " - " + 'imageResep' + ' - ' + uuidv4() + file.originalname )
     }
 } )
-const productStorage = multer.diskStorage( {
-    destination: ( req, file, cb ) =>
+
+const profilStorage = multerS3( {
+    s3,
+    bucket: bucketName,
+    metadata: ( req, file, cb ) =>
     {
-        cb( null, 'images/product' )
+        cb( null, { fieldName: file.fieldname } )
     },
-    filename: ( req, file, cb ) =>
+    key: ( req, file, cb ) =>
     {
 
-        cb( null, 'upload' + " - " + 'bahan' + ' - ' + uuidv4() + file.originalname )
+        cb( null, 'profil-picture' + '/' + 'upload' + " - " + 'profil' + ' - ' + uuidv4() + file.originalname )
     }
 } )
+
+
+
+const productStorage = multerS3( {
+    s3,
+    bucket: bucketName,
+    metadata: ( req, file, cb ) =>
+    {
+        cb( null, { fieldName: file.fieldname } )
+    },
+    key: ( req, file, cb ) =>
+    {
+
+        cb( null, 'product-picture' + '/' + 'upload' + " - " + 'bahan' + ' - ' + uuidv4() + file.originalname )
+    }
+} )
+const deletefile = ( filekey ) =>
+{
+    console.log( 'in here' )
+    s3.deleteObject( {
+        Bucket: bucketName,
+        Key: filekey
+    }, function ( err, data )
+    {
+        if ( err ) {
+
+            console.log( err )
+        }
+        else {
+            console.log( "harus delete" )
+        }
+    } )
+}
 const Eventupload = multer( { storage: imageEventStorage, fileFilter: ImageFilter } );
 const Resepupload = multer( { storage: imageResepStorage, fileFilter: ImageFilter } )
-const Profilupload = multer( { storage: profilStorage, fileFilter: ImageFilter } )
 const Bahanupload = multer( { storage: productStorage, fileFilter: ImageFilter } )
-module.exports = { Eventupload, Resepupload, Profilupload, Bahanupload }
+const Profilupload = multer( { storage: profilStorage, fileFilter: ImageFilter } )
+module.exports = { Eventupload, deletefile, Resepupload, Profilupload, Bahanupload }
+

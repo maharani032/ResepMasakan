@@ -5,6 +5,7 @@ const fileHelper = require( '../util/file' )
 const { validationResult } = require( 'express-validator' )
 const Comment = require( '../models/comment' )
 const Like = require( '../models/like' )
+const { deletefile } = require( "../util/eventUpload" )
 const { DeletePostLike, PushArrayUserEvent, PullArrayUserEvent } = require( '../functions/function' )
 const { DeletePostComment } = require( '../functions/function' )
 exports.getPostEvent = ( req, res, next ) =>
@@ -54,11 +55,13 @@ exports.postPostEvent = ( req, res, next ) =>
             console.log( 'set value harga =0' )
             harga = 0
         }
-        const pictureEvent = req.file.path.replace( '\\', '/' )
+        const imageKey = req.file.key
+        const pictureEvent = req.file.location
         const event = new Event( {
             userId: req.user._id,
             nameEvent: nameEvent,
             ImageEvent: pictureEvent,
+            imageKey: imageKey,
             tempat: tempat,
             Ondate: Ondate,
             Deskripsi: deskripsi,
@@ -78,10 +81,9 @@ exports.postPostEvent = ( req, res, next ) =>
             res.redirect( '/500' )
         } )
     }
-
-
-
 }
+
+
 exports.getEditEvent = ( req, res, next ) =>
 {
 
@@ -132,7 +134,9 @@ exports.deleteEvent = ( req, res, next ) =>
 
                 { DeletePostComment( event, eventId, eventId ) }
             }
-            fileHelper.deleteFile( event.ImageEvent )
+
+            deletefile( event.imageKey )
+
             return Event.deleteOne( { _id: eventId, userId: req.user._id } )
 
         } )
@@ -152,7 +156,8 @@ exports.postEditEvent = ( req, res ) =>
 {
     let eventId = req.params.eventId
     const UpdatenameEvent = req.body.nameEvent
-    const pictureEvent = req.file
+    const pictureEvent = req.file.location
+    const imageKey = req.file.key
     const UpdateOndate = req.body.OnDate
     const Updatedeskripsi = req.body.deskripsi
     const Updatetempat = req.body.tempat
@@ -183,9 +188,12 @@ exports.postEditEvent = ( req, res ) =>
             event.tempat = Updatetempat
             event.html = ''
             event.Deskripsi = Updatedeskripsi
+
             if ( pictureEvent ) {
-                fileHelper.deleteFile( event.ImageEvent )
-                event.ImageEvent = pictureEvent.path.replace( '\\', '/' )
+                // fileHelper.deleteFile( event.ImageEvent )
+                deletefile( event.imageKey )
+                event.imageKey = imageKey
+                event.ImageEvent = pictureEvent
 
             }
             return event.save().then( result =>

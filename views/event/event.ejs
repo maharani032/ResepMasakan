@@ -24,7 +24,7 @@
                 
             </div>
             <div class="image-picture">
-                <img class='img-display' src="/<%=event.ImageEvent%>" alt="">
+                <img class='img-display' src="<%=event.ImageEvent%>" alt="">
             </div>
             
             <div class="markdone">
@@ -35,7 +35,8 @@
                 <Button class='btn btn-lg btn-success btn-daftar'>
                     Pendaftaran
                     <input type="hidden" name="eventId" value='<%= event._id %>'>
-                </Button></form>
+                </Button>
+            </form>
             </div>
             <%- include ('../component/like-event.ejs') %> 
             <%- include ('../component/comment.ejs') %> 

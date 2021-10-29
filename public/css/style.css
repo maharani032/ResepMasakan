@@ -482,6 +482,7 @@ textarea:focus {
 }
 
 .body-profile .profil {
+  position: absolute;
   border-radius: 20px;
   background-color: #7ac7c3;
   margin-left: 20px;
@@ -497,10 +498,15 @@ textarea:focus {
 
 .body-profile .profil .profile-picture {
   border-radius: 50%;
-  display: block;
-  margin: 0 auto;
-  width: 10em;
-  height: 10em;
+  margin: 20px auto;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  text-align: center;
+}
+
+.body-profile .profil #input-gambar {
+  left: 0;
 }
 
 .body-profile .profil .gambar-profil {
@@ -509,7 +515,7 @@ textarea:focus {
 }
 
 .body-profile .profil .informasi-user {
-  display: block;
+  top: 0;
 }
 
 .body-profile .profil .button {

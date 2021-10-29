@@ -8,9 +8,16 @@
                 <div class="komentator">
                     <div class="row comment">
                         <div class="col-2 foto">
-                            <% if (user.picture!="" && user.picture!=null) { %>
-                                <img src="<%=user.picture%>" class='img-comment' alt="gambar-profil">
-                                <% } %>
+                            <img  class='img-comment' src="<%= comment.gambar %> " alt="">
+                            <!-- <!% if (isAuthenticated) { %>
+                            <!% if (user.picture!="" && user.picture!=null) { %>
+                                <img src="<!%=user.picture%>" class='img-comment' alt="gambar-profil">
+                                <!% } %>
+                            
+                            <!% } else { %>
+                                <i class="fas fa-user fa-7x img-comment"></i>
+                             <!% } %> -->
+                            
                         </div>
                         <div class="col-10 deskripsi">
                             <p class='nama'>
@@ -23,14 +30,15 @@
                                 
                                
                             
-                                
-                            
+                            <% if (isAuthenticated) { %>
                             <% if (user.admin==true) { %>
-                                <form action="/delete-comment/<%=comment._id %>?_method=DELETE" method="POST"
-                                    class='red-button'>
+                                <form action="/delete-comment/<%=comment._id %>?_method=DELETE" method="POST" class='red-button'>
                                     <button type="submit" class="btn btn-danger btn-delete">Delete</button>
                                 </form>
-                                    <% } %>
+                                <% } %>
+                            <% } %>
+                            
+                            
                         </div>
                     </div>
     

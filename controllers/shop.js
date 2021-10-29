@@ -72,6 +72,7 @@ exports.getCart = ( req, res, next ) =>
 }
 exports.getCheckOut = ( req, res ) =>
 {
+
     let item
     let total = 0
     User.findById( req.user._id )
@@ -89,13 +90,10 @@ exports.getCheckOut = ( req, res ) =>
                 else if ( b.eventId ) {
                     total = total + ( b.quantity * b.eventId.Harga )
                 }
-                // console.log( 'disini' + b.bahanId )
 
-                // total = total + ( b.quantity * b.eventId.Harga ) + ( b.quantity * b.bahanId.harga )
-
-                console.log( total )
 
             } )
+
             return stripe.checkout.sessions.create( {
                 payment_method_types: [ 'card' ],
                 line_items: item.map( b =>
@@ -109,12 +107,25 @@ exports.getCheckOut = ( req, res ) =>
                         };
                     }
                     if ( b.eventId ) {
-                        return {
-                            name: b.eventId.nameEvent,
-                            amount: Math.round( b.eventId.Harga / 15000 * 100 ),
-                            currency: 'usd',
-                            quantity: b.quantity
-                        };
+                        if ( total = 0 ) {
+                            return {
+                                name: b.eventId.nameEvent,
+                                amount: ( b.eventId.Harga == 0 ) ? b.eventId.Harga = 0.50 * 100 : b.eventId.Harga / 15000 * 100,
+                                // amount: Math.round( b.eventId.Harga / 15000 * 100 ),
+                                currency: 'usd',
+                                quantity: b.quantity
+                            };
+                        }
+                        else {
+                            return {
+                                name: b.eventId.nameEvent,
+                                // amount: ( b.eventId.Harga == 0 ) ? b.eventId.Harga = 0.50 * 100 : b.eventId.Harga / 15000 * 100,
+                                amount: Math.round( b.eventId.Harga / 15000 * 100 ),
+                                currency: 'usd',
+                                quantity: b.quantity
+                            };
+                        }
+
                     }
                 } ),
                 success_url: req.protocol + '://' + req.get( 'host' ) + '/checkout/sucess',
@@ -173,7 +184,7 @@ exports.getCheckOutSuccess = ( req, res ) =>
             return order.save()
         } ).then( result =>
         {
-            
+
             return req.user.clearCart()
         } )
         .then( () =>

@@ -98,6 +98,7 @@ exports.postRegister = ( req, res, next ) =>
                     lname: lname,
                 },
                 picture: '',
+                pictureKey:'',
                 email: email,
                 googleId: '',
                 password: hashPassword,

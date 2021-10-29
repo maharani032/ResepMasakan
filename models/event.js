@@ -17,6 +17,7 @@ const eventSchema = new Schema( {
     },
     tempat: String,
     Kapasitas: { type: Number, required: true },
+    imageKey:{type:String,required:true},
     Harga: { type: Number, required: true },
     ImageEvent: { type: String, required: true },
     nameEvent: { type: String, required: true },

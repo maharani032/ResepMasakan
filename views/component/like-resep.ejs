@@ -2,30 +2,43 @@
     <% if(likes.length==0){ %>
     <form action="/like/resep/<%=resep._id %>" id='likeOrdislike' method="POST" class='red-button'>
     
-        <button type="submit" class="btn btn-primary">like</button>
+        <button type="submit" class="btn btn-primary">
+            <i class='fas fa-thumbs-up'></i>
+            like</button>
     </form>
     <% }else{ %>
         <% likes.forEach(like=> { %>
-            <% if(like.userId.toString()===user._id.toString()) {%>
-                <form action="/dislike/resep/<%=resep._id %>/<%= like._id %>" id='likeOrdislike' method="POST"
-                class='red-button'>
+            <% if (isAuthenticated) { %>
+                <% if(like.userId.toString()===user._id.toString()) {%>
+                    <form action="/dislike/resep/<%=resep._id %>/<%= like._id %>" id='likeOrdislike' method="POST" class='red-button'>
                 
-                <button type="submit" class="btn btn-info">Dislike</button>
-                    <p class=likelength>
-                        <%= resep.like.length %> orang menyukai posting ini
-                    </p>
-            </form>
-            <% } else { %>
-                <form action="/like/resep/<%=resep._id %>" id='likeOrdislike' method="POST"
-                    class='red-button'>
-                    <p class=likelength>
-                        <%= resep.like.length %> orang menyukai posting ini
-                    </p>
-                    <button type="submit" class="btn btn-primary">like</button>
+                        <button type="submit" class="btn btn-info">
+                            <i class='fas fa-thumbs-down'></i>
+                            Dislike</button>
+                        
+                            <%= resep.like.length %> orang menyukai posting ini
+                        
+                    </form>
+                    <% } else { %>
                     
-                </form>
-                    <% } %>
-                        <% }) %>
+                        <form action="/like/resep/<%=resep._id %>" id='likeOrdislike' method="POST" class='red-button'>
+                        
+                            <button type="submit" class="btn btn-primary d-inline">
+                                <i class='fas fa-thumbs-up'></i>
+                                like</button>
+                            <%= resep.like.length %> orang menyukai posting ini
+                        </form>
+                        <% } %>
+                <% } else { %>
+                    <form action="/like/resep/<%=resep._id %>" id='likeOrdislike' method="POST" class='red-button'>
+                       
+                        <button type="submit" class="btn btn-primary d-inline">
+                            <i class='fas fa-thumbs-up'></i>
+                            like</button>
+                        <%= resep.like.length %> orang menyukai posting ini
+                    </form>
+                    <%}%>
+        <% }) %>
                             <% } %>
     
 </div>

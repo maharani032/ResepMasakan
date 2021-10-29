@@ -5,7 +5,7 @@ module.exports = ( passport ) =>
     passport.use( new GoogleStrategy( {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "https://resep-masakan-kel7.herokuapp.com/auth/google/webmasakan",
+        // callbackURL: "https://resep-masakan-kel7.herokuapp.com/auth/google/webmasakan",
         callbackURL: 'http://localhost:3000/auth/google/webmasakan',
         userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
@@ -19,6 +19,7 @@ module.exports = ( passport ) =>
                 },
                 email: profile.emails[ 0 ].value,
                 picture: profile.photos[ 0 ].value,
+                pictureKey: "",
                 resep: [],
                 event: [],
                 cart: { items: [] }

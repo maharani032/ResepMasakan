@@ -34,8 +34,8 @@
                             <% if (resep>2) { %>
                                 <% break %> 
                             <% } %>
-                            <a href='/resep/<%= reseps[resep]._id %>'>
-                                <img class='ImageEvent' src="/<%=reseps[resep].ImageResep%>" alt="">
+                            <a href='resep/<%= reseps[resep]._id %>'>
+                                <img class='ImageEvent' src="<%=reseps[resep].ImageResep%>" alt="">
                             </a>
                             <% } %>  
                     <% } %>
@@ -51,7 +51,7 @@
                                         <% break %>
                                     <% } %>
                                     <a href='/event/<%=events[event]._id%>'>
-                                        <img class='ImageEvent' src="/<%=events[event].ImageEvent%>" alt="">
+                                        <img class='ImageEvent' src="<%=events[event].ImageEvent%>" alt="">
                                     </a>
                                      
                                     <% } %> 

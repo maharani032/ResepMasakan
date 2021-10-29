@@ -170,7 +170,9 @@ exports.getEvents = ( req, res ) =>
 }
 exports.postComment = ( req, res ) =>
 {
+
     const eventId = req.params.eventId
+    let gambar = req.user.picture
     const komentar = req.body.Komentar
     const fname = req.user.name.fname
     const lname = req.user.name.lname
@@ -200,8 +202,12 @@ exports.postComment = ( req, res ) =>
             } )
     }
     else {
+        if ( gambar == '' ) {
+            gambar = 'https://cookbook-kel7.s3.ap-southeast-1.amazonaws.com/icon/icon_profil.png'
+        }
         const comment = new Comment( {
             userId: req.user._id,
+            gambar: gambar,
             name: {
                 fname: fname,
                 lname: lname
@@ -213,7 +219,6 @@ exports.postComment = ( req, res ) =>
         } )
         comment.save().then( comment =>
         {
-            console.log( comment )
             { UpdateEventComment( eventId, comment._id ) }
 
             res.redirect( '/event/' + eventId )
@@ -255,7 +260,7 @@ exports.postCommentResep = ( req, res ) =>
     const komentar = req.body.Komentar
     const fname = req.user.name.fname
     const lname = req.user.name.lname
-
+    let gambar = req.user.picture
     let id = req.user._id
     const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
@@ -292,9 +297,13 @@ exports.postCommentResep = ( req, res ) =>
         } )
     }
     else {
+        if ( gambar == '' ) {
+            gambar = 'https://cookbook-kel7.s3.ap-southeast-1.amazonaws.com/icon/icon_profil.png'
+        }
         const comment = new Comment( {
             userId: id,
             resepId: resepId,
+            gambar: gambar,
             name: {
                 fname: fname,
                 lname: lname

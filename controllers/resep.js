@@ -6,6 +6,7 @@ const Event = require( '../models/event' )
 const Resep = require( '../models/resep' )
 const User = require( '../models/user' )
 const fileHelper = require( '../util/file' )
+const { deleteFile, deletefile } = require( '../util/eventUpload' )
 const { PullArrayUserResep, PushArrayUserResep } = require( '../functions/function' )
 const Bahan = require( '../models/bahan' )
 exports.getHome = ( req, res, next ) =>
@@ -61,11 +62,11 @@ exports.postAddResep = ( req, res, next ) =>
     const namaResep = req.body.namaResep
     const deskripsi = req.body.deskripsi
     const selectionOption = req.body.selectionOption
-    const resepPicture = req.file
+
     const bahans = req.body.bahan
     const bahanId = []
     const errors = validationResult( req )
-    
+
     if ( !errors.isEmpty() ) {
         if ( Bahan.length != 0 ) {
             Bahan.find( {}, ( err, bahans ) =>
@@ -84,7 +85,8 @@ exports.postAddResep = ( req, res, next ) =>
     }
     // }
     else {
-        const ImageResep = resepPicture.path.replace( '\\', '/' )
+        const resepPicture = req.file.location
+        const pictureKey = req.file.key
         if ( bahans != null ) {
             console.log( 'in herre' )
             bahans.forEach( id =>
@@ -99,7 +101,8 @@ exports.postAddResep = ( req, res, next ) =>
             namaResep: namaResep,
             deskripsi: deskripsi,
             html: "",
-            ImageResep: ImageResep.replace( '\\', '/' ),
+            ImageResep: resepPicture,
+            imageKey: pictureKey,
             selectionOption: selectionOption,
             like: [],
             comment: [],
@@ -147,7 +150,8 @@ exports.postDeleteResep = ( req, res, next ) =>
                     } )
                 }
             } )
-            fileHelper.deleteFile( resep.ImageResep )
+            deletefile( resep.imageKey )
+            // fileHelper.deleteFile( resep.ImageResep )
             return Resep.deleteOne( { _id: resepId, userId: req.user._id } )
         } ).then( () =>
         {
@@ -197,7 +201,8 @@ exports.getEditResep = ( req, res, next ) =>
 exports.postEditResep = ( req, res ) =>
 {
     const updatenamaResep = req.body.namaResep
-    let pictureResep = req.file
+    let pictureResep = req.file.location
+    let imageKey = req.file.key
     const updatedeskripsi = req.body.deskripsi
     const resepId = req.params.resepId
     const bahan = req.body.bahan
@@ -205,10 +210,6 @@ exports.postEditResep = ( req, res ) =>
     const updateSelectionOption = req.body.selectionOption
     const errors = validationResult( req )
 
-
-    // else {
-
-    // }
     if ( bahan != null ) {
         bahan.forEach( id =>
         {
@@ -237,13 +238,14 @@ exports.postEditResep = ( req, res ) =>
             }
         }
         else {
+
             resep.namaResep = updatenamaResep
             resep.deskripsi = updatedeskripsi
             resep.selectionOption = updateSelectionOption
             if ( pictureResep != null ) {
-                pictureResep = req.file.path.replace( '\\', '/' )
-                fileHelper.deleteFile( resep.ImageResep )
-                resep.ImageResep = pictureResep.replace( '\\', '/' )
+                deletefile( resep.imageKey )
+                resep.imageKey = imageKey
+                resep.ImageResep = pictureResep
                 // .replace( '\\', '/' )
             }
             else if ( pictureResep == null ) {
