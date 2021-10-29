@@ -1,0 +1,36 @@
+<div class="col">
+                                        <h1>
+                                            <%=item.eventId.nameEvent.toUpperCase() %>
+                                        </h1>
+                                        <h2>Jumlah item = <%= item.quantity %>
+                                        </h2>
+                                        <h2>Harga =<%= item.eventId.Harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>
+                                        </h2>
+                                    </div>
+                                    <div class="col col-img">
+                                        <img class='img-cart' src="/<%=item.eventId.image%>" alt="test">
+                                    </div>
+                                    <div class="col">
+                                        <h1>
+                                            <%= item.bahanId.namaBahan.toUpperCase() %>
+                                        </h1>
+                                        <h2>Jumlah item = <%= item.quantity %>
+                                        </h2>
+                                        <h2>Harga =<%= item.bahanId.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %> </h2>
+                                    </div>
+                                    <div class="col col-img">
+                                        <img class='img-cart' src="/<%=item.bahanId.image%>" alt="test">
+                                    </div>
+                                </div>
+                                <form action="/cart-delete-item" method="post">
+                                    <input type="hidden" name="bahanId" value='<%= bahan.bahanId._id %>' id="">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                                <div class="order">
+                                    <% items.forEach(item=> { %>
+                                        <% sum=sum +item.bahanId.harga+item.eventId.Harga %>
+                                            <% }) %>
+                                                <h2>Total : <%=sum.toString().replace( /\B(?=(\d{3})+(?!\d))/g, "," )%>
+                                                </h2>
+                                                <a href="/checkout" class="btn">Beli Sekarang!</a>
+                                </div>

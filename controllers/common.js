@@ -1,4 +1,5 @@
 const Event = require( '../models/event' )
+const { validationResult } = require( 'express-validator' )
 const Comment = require( '../models/comment' )
 const Resep = require( '../models/resep' )
 const Like = require( '../models/like' )
@@ -30,6 +31,12 @@ exports.getEvent = ( req, res ) =>
             {
                 Comment.find( { eventId: EventId }, ( err, comments ) =>
                 {
+                    let message = ''
+                    if ( message.length > 0 ) {
+                        message = message[ 0 ]
+                    } else {
+                        message = null
+                    }
                     res.render( 'event/event', {
                         pageTitle: event.nameEvent,
                         path: '/event/:eventId',
@@ -38,6 +45,8 @@ exports.getEvent = ( req, res ) =>
                         comments: comments,
                         likes: likes,
                         modeEventorResep: true,
+                        errorMessage: message,
+                        validErrors: []
                         //if true== comment.event,false==comment.resep
                     } )
                 } )
@@ -62,6 +71,12 @@ exports.getResep = ( req, res ) =>
             {
                 Bahan.find( {}, ( err, bahans ) =>
                 {
+                    let message = ''
+                    if ( message.length > 0 ) {
+                        message = message[ 0 ]
+                    } else {
+                        message = null
+                    }
                     bahans.forEach( bahan =>
                     {
                         let x = bahan._id
@@ -76,7 +91,9 @@ exports.getResep = ( req, res ) =>
                         comments: comments,
                         modeEventorResep: false,
                         bahans: bahans,
-                        bahanId: bahanId
+                        bahanId: bahanId,
+                        errorMessage: message,
+                        validErrors: []
                     } )
                 } )
 
@@ -157,28 +174,56 @@ exports.postComment = ( req, res ) =>
     const komentar = req.body.Komentar
     const fname = req.user.name.fname
     const lname = req.user.name.lname
-    const comment = new Comment( {
-        userId: req.user._id,
-        name: {
-            fname: fname,
-            lname: lname
-        },
-        komentar: komentar,
-        eventId: eventId,
-        resepId: null,
+    const errors = validationResult( req )
+    if ( !errors.isEmpty() ) {
+        Event.findById( eventId )
+            .then( event =>
+            {
+                Like.find( { eventId: eventId }, ( err, likes ) =>
+                {
+                    Comment.find( { eventId: eventId }, ( err, comments ) =>
+                    {
+                        res.render( 'event/event', {
+                            pageTitle: event.nameEvent,
+                            path: '/event/:eventId',
+                            user: req.user,
+                            event: event,
+                            comments: comments,
+                            likes: likes,
+                            modeEventorResep: true,
+                            errorMessage: errors.array()[ 0 ].msg,
+                            validErrors: errors.array()
+                            //if true== comment.event,false==comment.resep
+                        } )
+                    } )
+                } )
+            } )
+    }
+    else {
+        const comment = new Comment( {
+            userId: req.user._id,
+            name: {
+                fname: fname,
+                lname: lname
+            },
+            komentar: komentar,
+            eventId: eventId,
+            resepId: null,
 
-    } )
-    comment.save().then( comment =>
-    {
-        console.log( comment )
-        { UpdateEventComment( eventId, comment._id ) }
+        } )
+        comment.save().then( comment =>
+        {
+            console.log( comment )
+            { UpdateEventComment( eventId, comment._id ) }
 
-        res.redirect( '/event/' + eventId )
-    } ).catch( err =>
-    {
-        console.log( err )
-        res.redirect( '/500' )
-    } )
+            res.redirect( '/event/' + eventId )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+        } )
+    }
+
 }
 
 exports.deleteComment = ( req, res, next ) =>
@@ -210,27 +255,65 @@ exports.postCommentResep = ( req, res ) =>
     const komentar = req.body.Komentar
     const fname = req.user.name.fname
     const lname = req.user.name.lname
+
     let id = req.user._id
-    const comment = new Comment( {
-        userId: id,
-        resepId: resepId,
-        name: {
-            fname: fname,
-            lname: lname
-        },
-        komentar: komentar,
-        eventId: null,
-        html: "",
-    } )
-    comment.save().then( comment =>
-    {
-        { UpdateResepComment( resepId, comment._id ) }
-        res.redirect( '/resep/' + resepId )
-    } ).catch( err =>
-    {
-        console.log( err )
-        res.redirect( '/500' )
-    } )
+    const errors = validationResult( req )
+    if ( !errors.isEmpty() ) {
+        Resep.findById( resepId ).then( resep =>
+        {
+            Like.find( { resepId: resepId }, ( err, likes ) =>
+            {
+                Comment.find( { resepId: resepId }, ( err, comments ) =>
+                {
+                    Bahan.find( {}, ( err, bahans ) =>
+                    {
+                        const bahanId = []
+                        bahans.forEach( bahan =>
+                        {
+                            let x = bahan._id
+                            bahanId.push( x )
+                        } )
+                        return res.render( 'resep/resep', {
+                            pageTitle: resep.namaResep,
+                            path: '/resep/:resepId',
+                            user: req.user,
+                            resep: resep,
+                            likes: likes,
+                            comments: comments,
+                            modeEventorResep: false,
+                            bahans: bahans,
+                            bahanId: bahanId,
+                            errorMessage: errors.array()[ 0 ].msg,
+                            validErrors: errors.array()
+                        } )
+                    } )
+                } )
+            } )
+        } )
+    }
+    else {
+        const comment = new Comment( {
+            userId: id,
+            resepId: resepId,
+            name: {
+                fname: fname,
+                lname: lname
+            },
+            komentar: komentar,
+            eventId: null,
+            html: "",
+        } )
+        comment.save().then( comment =>
+        {
+            { UpdateResepComment( resepId, comment._id ) }
+            res.redirect( '/resep/' + resepId )
+        } ).catch( err =>
+        {
+            console.log( err )
+            res.redirect( '/500' )
+        } )
+    }
+
 }
 exports.postLikeEvent = ( req, res, next ) =>
 {

@@ -38,22 +38,34 @@ const userSchema = new Schema( {
     cart: {
         items: [
             {
+                eventId: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Event',
+
+                },
                 bahanId: {
                     type: Schema.Types.ObjectId,
                     ref: 'Bahan',
-                    required: true
+
                 },
                 quantity: { type: Number, required: true }
             }
         ]
     }
 } )
-userSchema.methods.addToCart = function ( bahan )
+userSchema.methods.addToCart = function ( bahan, event )
 {
     const cartProductIndex = this.cart.items.findIndex( cp =>
-    // console.log( cartProductIndex )
     {
-        return cp.bahanId.toString() == bahan._id.toString()
+        if ( cp.bahanId != null ) {
+            return cp.bahanId.toString() == bahan._id.toString()
+
+        }
+        else if ( cp.eventId != null ) {
+
+            return cp.eventId.toString() == event._id.toString()
+        }
+
     } )
     let newQuantity = 1;
     const updatedCartItems = [ ...this.cart.items ];
@@ -62,10 +74,23 @@ userSchema.methods.addToCart = function ( bahan )
         newQuantity = this.cart.items[ cartProductIndex ].quantity + 1;
         updatedCartItems[ cartProductIndex ].quantity = newQuantity;
     } else {
-        updatedCartItems.push( {
-            bahanId: bahan._id,
-            quantity: newQuantity
-        } );
+        if ( event == '' ) {
+            updatedCartItems.push( {
+                // eventId: 0,
+                bahanId: bahan._id,
+                quantity: newQuantity
+            } );
+        }
+        else if ( bahan == '' ) {
+            console.log( event )
+            console.log( 'coba update event' )
+            updatedCartItems.push( {
+                // bahanId: 0,
+                eventId: event._id,
+                quantity: newQuantity
+            } );
+        }
+
     }
     const updatedCart = {
         items: updatedCartItems
@@ -73,6 +98,7 @@ userSchema.methods.addToCart = function ( bahan )
     this.cart = updatedCart;
     return this.save();
 }
+
 userSchema.methods.removeFromCart = function ( bahanId )
 {
     const updatedCartItems = this.cart.items.filter( item =>

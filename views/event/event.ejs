@@ -4,13 +4,24 @@
     <body>
         <%- include ('../component/navbar.ejs') %>
         <div class="body-event">
+            
             <div class="top-event">
                 <h1>
                     <%= event.nameEvent.toUpperCase() %>
                 </h1>
                 <p>
-                    <%=event.createByDate.toLocaleDateString() %>
+                    <% if (event.Harga==0) { %>
+                        <h5 class='custom'>Free</h5>
+                
+                        <% } else { %>
+                            <h5 class='custom'>Eksklusif</h5>
+                            
+                            <% } %>
                 </p>
+                <p>
+                    diterbitkaan tanggal : <%=event.createByDate.toLocaleDateString() %>
+                </p>
+                
             </div>
             <div class="image-picture">
                 <img class='img-display' src="/<%=event.ImageEvent%>" alt="">
@@ -18,7 +29,13 @@
             
             <div class="markdone">
                 <%- event.html.replace(/\n/g,'<br />')%>
-                tanggal diadakan : <%= event.Ondate.toLocaleDateString() %> 
+                tanggal diadakan : <%= event.Ondate.toLocaleDateString() %> </br>
+                Kapasitas: <%= event.Kapasitas %> orang </br>
+                <form action="/add-cart" method="post">
+                <Button class='btn btn-lg btn-success btn-daftar'>
+                    Pendaftaran
+                    <input type="hidden" name="eventId" value='<%= event._id %>'>
+                </Button></form>
             </div>
             <%- include ('../component/like-event.ejs') %> 
             <%- include ('../component/comment.ejs') %> 

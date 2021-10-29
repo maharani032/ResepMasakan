@@ -93,8 +93,6 @@ footer .link-website .info-website {
 }
 
 .topnav .dropdown {
-  padding-left: 20px;
-  width: 70px;
   position: relative;
   display: inline-block;
 }
@@ -110,8 +108,9 @@ footer .link-website .info-website {
   border-radius: 15px 50px 30px;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
-  overflow-y: scroll;
+  width: 150px;
+  margin-right: 20px;
+  overflow-y: auto;
   max-height: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -450,16 +449,21 @@ input[type=password]::placeholder {
   width: 60%;
 }
 
-.container {
+.body-postEvent {
   position: absolute;
-  top: 0;
-  left: 5%;
-  margin-top: 10%;
+  margin-top: 100px;
+  padding-left: 5rem;
+  width: 100%;
+  padding-right: 3rem;
 }
 
 .btn-postEvent {
-  margin-top: 5%;
-  position: absolute;
+  display: flex;
+  margin-top: 10px;
+}
+
+.number {
+  width: 25%;
 }
 
 textarea {
@@ -567,13 +571,14 @@ textarea:focus {
 .bodyPost-resep {
   position: absolute;
   padding-top: 100px;
-  padding-left: 3rem;
+  padding-left: 5rem;
+  width: 100%;
+  padding-right: 3rem;
   align-items: center;
 }
 
 .bodyPost-resep .form-resep {
   margin: auto;
-  width: 50rem;
 }
 
 .bodyPost-resep .form-resep .form-group {
@@ -604,6 +609,11 @@ textarea:focus {
   text-align: right;
 }
 
+.body-event .top-event .custom {
+  text-align: right;
+  font-weight: bold;
+}
+
 .body-event .img-display {
   display: block;
   display: block;
@@ -615,7 +625,11 @@ textarea:focus {
 
 .body-event .markdone {
   display: block;
-  margin: 3% 3%;
+  margin: 30px 0;
+}
+
+.body-event .markdone .btn-daftar {
+  margin-top: 20px;
 }
 
 .body-events {

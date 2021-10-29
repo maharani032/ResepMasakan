@@ -14,6 +14,7 @@ const passport = require( 'passport' )
 require( './controllers/passport-auth-google' )( passport )
 const User = require( './models/user' )
 const app = express()
+
 //session
 const store = new MongoDBStore( {
     uri: process.env.DB,
