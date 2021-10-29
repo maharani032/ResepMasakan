@@ -1,36 +1,196 @@
-body{
-    background-image: url(images.png);
-    background-size:cover;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-header{
-    width: 100%;
-    height: 100px;
-    background-color: coral;
+
+/* Nav Bar*/
+nav {
+    order: 1;
     display: flex;
+    align-items: center;
+    justify-items: space-evenly;
+    background-color: #00a29e;
+    overflow-x: hidden;
+}
+
+.logo {
+    width: 10%;
+    height: 70%;
+    padding: auto;
+    align-self: center;
+}
+
+nav a{
+    display: flex;
+    float: left;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    color: #fff8e6;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.brand {
+    font-size: 50px;
+}
+
+.links {
+    display: flex;
+    float:left;
+    font-size: 20px;
+    padding: 20px 20px;
+    margin-right: 20px;
+}
+
+.logo-brand{
+    display: flex;
+    justify-items: flex-start;
+}
+
+nav a:hover {
+    color: black;
+}
+
+/* SECTION */
+section {
+    overflow-x: hidden;
+    background-color: rgba(255, 180, 66);       
+}
+
+.konten {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.profil {
+    display: flex;
+    align-self: flex-start;
+    background-color: #00a29e;
+    flex-flow: column wrap;
+    padding: 20px;
+    margin: 40px 20px ;
+    width: fit-content;
+    height: auto;
+}
+
+.header {   
+    display: flex;
+    position: relative;
+    height: 500px;
+    width: fit-content;
+    text-align: center;
+    overflow-y: hidden;
     justify-content: center;
     align-items: center;
 }
-nav{
-    width: 100%;
-    height: 75px;
-    background-color: crimson;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+.isiheader {
+    position: absolute;
+    flex-flow: column wrap;
+    line-height: 1.6;
+    background-color: rgba(	255, 248, 230, 0.6);
+    padding: 30px;
+    border-radius: 10px;
 }
-.editprofil{
-    width: 350px;
-    height: 450px;
-    background-color: #FFF8E5;
-    margin: 20px auto;
+
+.fheader {
+    object-fit: cover;
+    object-position: center;
+    width: 100%; 
 }
-.editprofil img{
-    width: 120px;
-    height: 120px;
+
+.fprofil {
+    width: 150px;
+    height: 150px;
+    border: 10px solid rgba(255, 180, 66);
     border-radius: 50%;
-    margin-left: 120px;
-    margin-top: 20px;
 }
-.editprofil ul{
-    align-content: center;
+
+.capai {
+    margin-top: 50px;
 }
+
+.capai div {
+    float: left;
+    margin: 0 10px;
+}
+
+.profil h6{
+    margin: 10px;
+    justify-self: center;
+    line-height: 1.6;
+}
+
+.profil button {
+    background-color: #00a29e;
+    color: #fff8e6;
+    align-self: center;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.cred {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: baseline;
+    margin: 30px;
+}
+
+.cred h5 {
+    flex: 1 1;
+    background-color: #fff8e6;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.ra {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.resep {
+    flex: 50%;
+}
+.resepbox {
+    background-color: #fff8e6;
+    padding: 200px;
+    margin-right:  10px;
+}
+.acara {
+    flex: 50%;
+}
+.acarabox {
+    background-color: #fff8e6;
+    padding: 200px;
+    margin-right: 10px;
+}
+/* FOOTER */
+footer {
+    order: 7;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: #00a29e;
+  }
+  
+.link-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+  }
+  
+.info-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+  }
