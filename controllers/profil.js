@@ -11,7 +11,7 @@ exports.postUpdateProfil = ( req, res ) =>
     const fname = req.body.fname
     const lname = req.body.lname
     const email = req.body.email
-
+    const gambar = req.file
     User.findById( req.user._id ).then( user =>
     {
         user.name.fname = fname
@@ -28,28 +28,41 @@ exports.postUpdateProfil = ( req, res ) =>
             user.email = user.email
         }
 
-        if ( user.picture != null ) {
-            let imagePicture = req.file.location
-            let pictureKey = req.file.key
+        if ( gambar == null ) {
+            console.log( gambar )
+            console.log( 'gambar null' )
+            user.picture = user.picture
+            user.pictureKey = user.pictureKey
+        }
+        else if ( gambar != null ) {
+            console.log( 'gambar tidak null' )
+            if ( user.picture != null ) {
+                console.log( 'in here' )
+                let imagePicture = req.file.location
+                let pictureKey = req.file.key
 
-            if ( user.pictureKey == '' ) {
-                user.pictureKey = pictureKey
-                user.picture = imagePicture
-            } else {
+                if ( user.pictureKey == '' ) {
+                    user.pictureKey = pictureKey
+                    user.picture = imagePicture
+                } else {
 
-                deletefile( user.pictureKey )
-                user.pictureKey = pictureKey
-                user.picture = imagePicture
+                    deletefile( user.pictureKey )
+                    user.pictureKey = pictureKey
+                    user.picture = imagePicture
+                }
+
             }
+            else if ( user.picture == null ) {
 
+                let imagePicture = req.file.location
+                let pictureKey = req.file.key
+                user.picture = imagePicture
+                user.pictureKey = pictureKey
+            }
         }
-        else if ( user.picture == null ) {
 
-            let imagePicture = req.file.location
-            let pictureKey = req.file.key
-            user.picture = imagePicture
-            user.pictureKey = pictureKey
-        }
+
+
         return user.save()
             .then( result =>
             {

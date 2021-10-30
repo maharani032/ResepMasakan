@@ -13,7 +13,7 @@ router.get( '/', postController.getHome )
 router.get( '/add-resep', isAuth, postController.getAddResep )
 router.get( '/edit-resep/:resepId', isAuth, postController.getEditResep )
 //post
-router.post( '/update-profil', isAuth, Profilupload.single( 'profil-image' ), profilController.postUpdateProfil )
+router.post( '/update-profil', isAuth, Profilupload.single( 'profilImage' ), profilController.postUpdateProfil )
 router.post( '/edit-resep/:resepId', isAuth, Resepupload.single( 'ImageResep' ),
     [
         check( 'namaResep', 'isi judul resep' ).not().isEmpty(),

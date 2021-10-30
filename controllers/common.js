@@ -32,7 +32,7 @@ exports.getEvent = ( req, res ) =>
                 Comment.find( { eventId: EventId } )
                     .populate( 'userId' ).then( comments =>
                     {
-                        console.log( comments )
+
                         let message = ''
                         if ( message.length > 0 ) {
                             message = message[ 0 ]
@@ -69,6 +69,7 @@ exports.getResep = ( req, res ) =>
     {
         Like.find( { resepId: resepId }, ( err, likes ) =>
         {
+
             Comment.find( { resepId: resepId } ).populate( 'userId' ).then( comments =>
             {
                 Bahan.find( {}, ( err, bahans ) =>
@@ -84,6 +85,7 @@ exports.getResep = ( req, res ) =>
                         let x = bahan._id
                         bahanId.push( x )
                     } )
+
                     res.render( 'resep/resep', {
                         pageTitle: resep.namaResep,
                         path: '/resep/:resepId',
@@ -172,7 +174,6 @@ exports.getEvents = ( req, res ) =>
 }
 exports.postComment = ( req, res ) =>
 {
-
     const eventId = req.params.eventId
     const komentar = req.body.Komentar
     const user = req.user
@@ -229,7 +230,7 @@ exports.deleteComment = ( req, res, next ) =>
     let commentId = req.params.commentId
     Comment.findById( commentId ).then( ( comment ) =>
     {
-        console.log( comment )
+
         let eventId = comment.eventId
         let resepId = comment.resepId
 
@@ -287,17 +288,9 @@ exports.postCommentResep = ( req, res ) =>
         } )
     }
     else {
-        // if ( gambar == '' ) {
-        //     gambar = 'https://cookbook-kel7.s3.ap-southeast-1.amazonaws.com/icon/icon_profil.png'
-        // }
         const comment = new Comment( {
             userId: id,
             resepId: resepId,
-            // gambar: gambar,
-            // name: {
-            //     fname: fname,
-            //     lname: lname
-            // },
             komentar: komentar,
             eventId: null,
             html: "",
@@ -337,9 +330,6 @@ exports.postLikeEvent = ( req, res, next ) =>
                 .then( like =>
                 {
                     { UpdateEventLike( eventId, like._id ) }
-                    // { UpdateArrayPost( Event, eventId, like, like._id ) }
-
-
                     res.redirect( '/event/' + eventId )
                 } ).catch( err =>
                 {
@@ -371,7 +361,7 @@ exports.postlikeResep = ( req, res, next ) =>
 {
     const resepId = req.params.resepId
     const id = req.user._id
-    Like.find( { resepId: resepId, userId: id } ).then( like =>
+    Like.find( { resepId: resepId, userId: req.user._id } ).then( like =>
     {
         if ( like.length == 0 ) {
             const fname = req.user.name.fname
@@ -404,6 +394,7 @@ exports.deleteLikeResep = ( req, res, next ) =>
 {
     const likeId = req.params.likeId
     const resepId = req.params.resepId
+    console.log( 'onm' + likeId )
     const id = req.user._id
     Like.findByIdAndDelete( likeId ).then( ( like ) =>
     {
