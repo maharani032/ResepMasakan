@@ -2,23 +2,14 @@ const mongoose = require( 'mongoose' )
 const marked = require( 'marked' )
 const createDomPurify = require( 'dompurify' )
 const { JSDOM } = require( 'jsdom' )
+const { Types } = require( 'aws-sdk/clients/ec2instanceconnect' )
 const dompurify = createDomPurify( new JSDOM().window )
 
 const Schema = mongoose.Schema
 const commentSchema = new Schema( {
-    gambar: {
-        type: String,
-        required: true
-    },
-    name: {
-        fname: {
-            type: String,
-            required: true
-        },
-        lname: {
-            type: String,
-            required: true
-        }
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
     komentar: {
         type: String,

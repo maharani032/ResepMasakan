@@ -1,63 +1,101 @@
 .body-profile{
-    
     padding-top: 100px;
     margin-top: 3%;
     max-width: 100%;
     overflow-x:hidden;
+    background-color: rgb(255, 180, 66);
     .profil{
+        display: flex;
+        align-self: flex-start;
+        background-color: #00a29e;
+        flex-flow: column wrap;
+        padding: 20px;
+        margin: 40px 20px;
+        width: fit-content;
+        height: auto;
+        & .button {
+      background-color: #00a29e;
+      color: #fff8e6;
+      align-self: center;
+      text-decoration: none;
+      text-align: center;
+      padding: 10px;
+      margin: 5px;
+      font-size: 20px;
+      border: 1px solid black;
+      border-radius: 15px;
+    }
+    .button-inline{
+        margin: 10px;
+        align-self: center;
+        & .btn-inline{
+        color: #fff8e6;
+        // border: 1px solid black;
+      border-radius: 15px;
+    }
+    }
+    
+    .header {
+    display: flex;
+    position: relative;
+    height: 500px;
+    width: fit-content;
+    text-align: center;
+    overflow-y: hidden;
+    justify-content: center;
+    align-items: center;
+    .fheader {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+    }
+    }
+
+    .isiheader {
         position: absolute;
-        border-radius: 20px;
-        background-color: rgb(122, 199, 195);
-        margin-left: 20px;
-        padding: 20px 20px;
-        max-height: 90vh;
-        max-width: 300px;
-        margin-bottom: 10px;
-        .form-control{
-            width: 260px;
+        flex-flow: column wrap;
+        min-width: 300px;
+        line-height: 1.6;
+        background-color: rgba(255, 248, 230, 0.6);
+        justify-content: center;
+        padding: 30px;
+        border-radius: 10px;
+        .fprofil {
+        width: 150px;
+        height: 150px;
+        border: 10px solid rgb(255, 180, 66);
+        border-radius: 50%;
+     
+    }
+       .capai {
+        margin-top: 50px;
+    }
+    .capai div{
+        display:inline-block;
+        margin: 0 10px;
         }
-        .profile-picture{
-            // background-color: pink;
-            border-radius: 50%;
-            // display: block;
-            margin:20px auto;
-            width: 150px;
-            height: 150px;
-        display: inline-block;
-        text-align: center;
-        
-
+    }
+    .cred {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: baseline;
+      margin: 30px;
+      & label{
+            width: 500px;
+            flex: 1 1;
+            background-color: #fff8e6;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .nama{
+            display: inline-flex;
+            justify-content: space-between;
             
-        } 
-        #input-gambar{
-            // top: 110px;
-            // position: absolute;
-            left: 0;
-            // width: 300px;
-            // height: 125px;
-            // z-index: -1;
-            // background: black;
-            
-
-        }
-         
-        .gambar-profil{
-            display: block;
-            margin:0 auto;
-            
-        }
-        .informasi-user{
-            // background-color: purple;
-            top:0
-            // position: absolute;
-            // display: block;
-            // margin: 20px auto;
-        }
-        .button{
-            margin-top: 10px;
-        }
-        #resep-button #event-button{
-            margin: 10px 10px;
+            width: 100%;
+            & input{
+                margin: 0 5px;
+            }
         }
     }
     #resep{
@@ -105,4 +143,14 @@
                 padding: 10px;
             }
     }
+    }
+
+
+
+
+
+
+
+    
+    
 }

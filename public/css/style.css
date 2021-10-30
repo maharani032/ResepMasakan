@@ -479,54 +479,114 @@ textarea:focus {
   margin-top: 3%;
   max-width: 100%;
   overflow-x: hidden;
+  background-color: #ffb442;
 }
 
 .body-profile .profil {
-  position: absolute;
-  border-radius: 20px;
-  background-color: #7ac7c3;
-  margin-left: 20px;
-  padding: 20px 20px;
-  max-height: 90vh;
-  max-width: 300px;
-  margin-bottom: 10px;
-}
-
-.body-profile .profil .form-control {
-  width: 260px;
-}
-
-.body-profile .profil .profile-picture {
-  border-radius: 50%;
-  margin: 20px auto;
-  width: 150px;
-  height: 150px;
-  display: inline-block;
-  text-align: center;
-}
-
-.body-profile .profil #input-gambar {
-  left: 0;
-}
-
-.body-profile .profil .gambar-profil {
-  display: block;
-  margin: 0 auto;
-}
-
-.body-profile .profil .informasi-user {
-  top: 0;
+  display: flex;
+  align-self: flex-start;
+  background-color: #00a29e;
+  flex-flow: column wrap;
+  padding: 20px;
+  margin: 40px 20px;
+  width: fit-content;
+  height: auto;
 }
 
 .body-profile .profil .button {
-  margin-top: 10px;
+  background-color: #00a29e;
+  color: #fff8e6;
+  align-self: center;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  margin: 5px;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
 }
 
-.body-profile .profil #resep-button #event-button {
-  margin: 10px 10px;
+.body-profile .profil .button-inline {
+  margin: 10px;
+  align-self: center;
 }
 
-.body-profile #resep {
+.body-profile .profil .button-inline .btn-inline {
+  color: #fff8e6;
+  border-radius: 15px;
+}
+
+.body-profile .profil .header {
+  display: flex;
+  position: relative;
+  height: 500px;
+  width: fit-content;
+  text-align: center;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.body-profile .profil .header .fheader {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.body-profile .profil .isiheader {
+  position: absolute;
+  flex-flow: column wrap;
+  min-width: 300px;
+  line-height: 1.6;
+  background-color: rgba(255, 248, 230, 0.6);
+  justify-content: center;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.body-profile .profil .isiheader .fprofil {
+  width: 150px;
+  height: 150px;
+  border: 10px solid #ffb442;
+  border-radius: 50%;
+}
+
+.body-profile .profil .isiheader .capai {
+  margin-top: 50px;
+}
+
+.body-profile .profil .isiheader .capai div {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.body-profile .profil .cred {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: baseline;
+  margin: 30px;
+}
+
+.body-profile .profil .cred label {
+  width: 500px;
+  flex: 1 1;
+  background-color: #fff8e6;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+.body-profile .profil .cred .nama {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.body-profile .profil .cred .nama input {
+  margin: 0 5px;
+}
+
+.body-profile .profil #resep {
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 20px;
@@ -535,14 +595,14 @@ textarea:focus {
   padding: 10px 10px;
 }
 
-.body-profile #resep .box {
+.body-profile .profil #resep .box {
   background-color: rgba(85, 214, 182, 0.493);
   margin: 15px;
   border-radius: 20px;
   padding: 10px;
 }
 
-.body-profile #event {
+.body-profile .profil #event {
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 20px;
@@ -551,14 +611,14 @@ textarea:focus {
   padding: 10px 10px;
 }
 
-.body-profile #event .box {
+.body-profile .profil #event .box {
   background-color: rgba(85, 214, 182, 0.493);
   margin: 15px;
   border-radius: 20px;
   padding: 10px;
 }
 
-.body-profile #bahan {
+.body-profile .profil #bahan {
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 20px;
@@ -567,7 +627,7 @@ textarea:focus {
   padding: 10px 10px;
 }
 
-.body-profile #bahan .box {
+.body-profile .profil #bahan .box {
   background-color: rgba(85, 214, 182, 0.493);
   margin: 15px;
   border-radius: 20px;

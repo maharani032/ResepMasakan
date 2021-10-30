@@ -38,7 +38,6 @@ exports.postPostEvent = ( req, res, next ) =>
     const id = req.user._id
     let harga = req.body.harga
     const kapasitas = req.body.Kapasitas
-    console.log( req.body.Category )
     const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
         return res.render( 'event/postEvent', {
@@ -52,7 +51,7 @@ exports.postPostEvent = ( req, res, next ) =>
     }
     else {
         if ( req.body.Category == 'free' ) {
-            console.log( 'set value harga =0' )
+
             harga = 0
         }
         const imageKey = req.file.key
@@ -178,7 +177,7 @@ exports.postEditEvent = ( req, res ) =>
         }
         else {
             if ( req.body.Category == 'free' ) {
-                console.log( 'set value harga =0' )
+
                 Updateharga = 0
             }
             event.Harga = Updateharga

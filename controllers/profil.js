@@ -12,7 +12,6 @@ exports.postUpdateProfil = ( req, res ) =>
     const lname = req.body.lname
     const email = req.body.email
 
-    console.log( fname, lname, email )
     User.findById( req.user._id ).then( user =>
     {
         user.name.fname = fname
@@ -32,12 +31,12 @@ exports.postUpdateProfil = ( req, res ) =>
         if ( user.picture != null ) {
             let imagePicture = req.file.location
             let pictureKey = req.file.key
-            console.log( 'disini' )
+
             if ( user.pictureKey == '' ) {
                 user.pictureKey = pictureKey
                 user.picture = imagePicture
             } else {
-                console.log( 'sss' )
+
                 deletefile( user.pictureKey )
                 user.pictureKey = pictureKey
                 user.picture = imagePicture
@@ -45,7 +44,7 @@ exports.postUpdateProfil = ( req, res ) =>
 
         }
         else if ( user.picture == null ) {
-            console.log( 'disana' )
+
             let imagePicture = req.file.location
             let pictureKey = req.file.key
             user.picture = imagePicture
@@ -54,11 +53,9 @@ exports.postUpdateProfil = ( req, res ) =>
         return user.save()
             .then( result =>
             {
-                console.log( 'be save' )
                 res.redirect( '/profil' )
             } ).catch( err =>
             {
-                console.log( err )
                 res.redirect( '/500' )
             } )
     } )

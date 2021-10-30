@@ -32,7 +32,6 @@ exports.postAddCart = ( req, res ) =>
             } )
             .then( result =>
             {
-                console.log( result )
                 res.redirect( '/' )
 
             } )
@@ -48,7 +47,6 @@ exports.postAddCart = ( req, res ) =>
 }
 exports.getCart = ( req, res, next ) =>
 {
-    // console.log( req.user )
     User.findById( req.user._id )
         .populate( 'cart.items.bahanId' )
         .populate( 'cart.items.eventId' )
@@ -160,11 +158,9 @@ exports.getCheckOutSuccess = ( req, res ) =>
             const item = user.cart.items.map( i =>
             {
                 if ( i.bahanId ) {
-                    console.log( i )
                     return { quantity: i.quantity, item: { ...i.bahanId._doc } }
                 }
                 else if ( i.eventId ) {
-                    console.log( i )
                     return { quantity: i.quantity, item: { ...i.eventId._doc } }
                 }
             } )

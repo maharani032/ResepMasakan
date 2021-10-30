@@ -6,181 +6,165 @@
 
         <%- include ('component/navbar.ejs') %>
         <div class="body-profile">
-            <div class="row">
-                <div class="col-4">
-                    <div class="profil">
-                    <form  enctype='multipart/form-data' action="/update-profil" id='profil' method='POST'>
-                        <%if(user.picture!="" && user.picture!=null ){ %>
-                            <img id='profile-picture' class='d-flex justify-content-center profile-picture' src="<%=user.picture%>" alt="user-picture">
-                            <!-- <i class="fa fa-picture-o fa-sm" aria-hidden="true"></i> -->
-                            <% } else if(user.picture==="" ) { %>
-                                <div class="d-flex justify-content-center">
-                                    <i id='profile-picture' class="fas fa-user-circle profile-picture fa-5x">
-                                    </i>
+            <div class="profil">
+                    <form enctype='multipart/form-data' action="/update-profil" id='profil' method='POST'>
+                        <div class="header">
+                            <img src="/image/conscious-design-IMMHJRp4dcM-unsplash.jpg" class="fheader" />
+                            <div class="isiheader">
+                            <img id='profile-picture' class='fprofil' src="<%=user.picture%>"
+                                alt="user-picture">
+                                <input type="file" style='display: none;' name='profil-image' id="input-gambar">
+                                <h3><%= user.name.fname %> <%= user.name.lname %> </h3>
+                                <div class="capai">
+                                <div class="">
+                                    <h5>Resep</h5>
+                                    <h1><%= user.resepId.length %></h1>
                                 </div>
                                 
-                                <!-- <i class="fa fa-picture-o fa-lg" aria-hidden="true"></i> -->
-                        <% } %>
-                        <div class="informasi-user">
-                            <p>
-                                Role:
                                 <% if (user.admin==true) { %>
-                                    Admin
-                                <% } else { %>
-                                    User
+                                    <div class="">
+                                        <h5>Acara</h5>
+                                        <h1>
+                                            <%= user.eventId.length %>
+                                        </h1>
+                                    </div>
                                 <% } %>
-                            </p>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <h5>
-                                        Resep: <%= user.resepId.length %>
-                                    </h5>
-                                    
                                 </div>
+                            </div>
+                        </div>
+                   
+                        <div class="cred">
+                            <label 'for="">
+                                Nama :
+                                <tb class='nama'>
+                                    <input type="text" class='form-control' name="fname" value='<%= user.name.fname %>' autocomplete="off">
+                                    <input type="text" class='form-control' autocomplete="off" name="lname" value='<%= user.name.lname %>'></label><br>
                                 
-                            <% if(user.admin==true){ %>
-                                <div class="col-sm">
-                                <h5>Event :<%= user.eventId.length %></h5>
-                                </div>
-                                <!-- <div class="col-sm">
-                                    <h5>Product : </h5>
-                                </div> -->
-                                <% } %>  
+                            </label></tb<br>
+                                
                                
+                            
+                            <% if (user.googleId=="" ) { %>
+                            <label for="">Email : 
+                                <input class='form-control' type="email" autocomplete="off" name="email" value='<%= user.email %>'>
+                            </label><br>
+                            <% } %>
+                            </div>
+                            <button id='save' class='button'>
+                                save
+                            </button>
+                            </form>
+                            <button id='update' class='button'>
+                                update
+                            </button>
+                            <div class="button-inline">
+                                <button id='resep-button' class='btn btn-lg d-inline btn-inline'>Resep</button>
+                                
+                                <% if(user.admin==true){ %>
+                                    <button id='event-button' class='btn btn-lg d-inline btn-inline'>Event</button>
+                                    <button id='bahan-button' class='btn btn-lg d-inline btn-inline'>Product</button>
+                                <% } %>
                                 
                             </div>
+                            <div id="resep">
+                                <% if (reseps.length>0) { %>
+                                    <% reseps.forEach(resep=>{ %>
+                                        <% %>
+                                            <div class="box">
                             
-                                <input type="file" style='display: none;' name='profil-image' id="input-gambar">
-                            
-                               
-                           
-                            
-                            <label for="fname">nama depan :
-                                <input type="text" class='form-control' name="fname" value='<%= user.name.fname %>' autocomplete="off">
-                            </label><br>
-                            <label for="">nama belakang :
-                                <input type="text" class='form-control' autocomplete="off" name="lname" value='<%= user.name.lname %>'></label><br>
-                            <% if (user.googleId==null|| user.googleId=='' ) { %>
-                                <label for="">Email : </label><br>
-                                <input class='form-control' type="email" autocomplete="off" name="email" value='<%= user.email %>'>
-                                <% } %>
-                            
-                            
-                                    <button id='save' class='btn btn-danger button'>
-                                        save
-                                    </button>
-                            
-                                    
-                        </div>
-                        
-                        
-                    </form>
-                    <button id='update' class='btn btn-danger button'>
-                        update
-                    </button>
-                    </div>
-                </div>
-                    <div class="col-8">
-                        <button id='resep-button' class='btn btn-lg btn-expanded'>Resep</button>
-                        <button id='event-button' class='btn btn-lg btn-expanded'>Event</button>
-                        <% if(user.admin==true){ %> 
-                        <button id='bahan-button' class='btn btn-lg btn-expanded'>Product</button>
-                        <% } %> 
-                        <div id="resep">
-                            <% if (reseps.length>0) { %>
-                                <% reseps.forEach(resep=>{ %>
-                                    <% %>
-                                        <div class="box">
-                            
-                                            <p>
-                                                nama resep: <%= resep.namaResep %>
-                                            </p>
-                                            <div class="deskripsi">
-                                                <p>deskripsi: </p>
                                                 <p>
-                                                    <%= resep.deskripsi.substring(0,30) %>
+                                                    nama resep: <%= resep.namaResep %>
                                                 </p>
-                                                <!-- <!%- resep.html.replace(/\n/g,'<br />')%> -->
-                                            </div>
+                                                <div class="deskripsi">
+                                                    <p>deskripsi: </p>
+                                                    <p>
+                                                        <%= resep.deskripsi.substring(0,30) %>
+                                                    </p>
+                                                    <!-- <!%- resep.html.replace(/\n/g,'<br />')%> -->
+                                                </div>
                             
-                                            <p>tanggal dibuat : <%= resep.createByDate.toLocaleDateString() %>
-                                            </p>
-                                            <p>selection Option: <%= resep.selectionOption %>
-                                            </p>
-                                            <a href="/edit-resep/<%=resep._id %>?edit=true">edit resep</a>
-                                            <!-- <input type="hidden" value="<!%= event._id %>" name="eventId"> -->
+                                                <p>tanggal dibuat : <%= resep.createByDate.toLocaleDateString() %>
+                                                </p>
+                                                <p>selection Option: <%= resep.selectionOption %>
+                                                </p>
+                                                <a href="/edit-resep/<%=resep._id %>?edit=true">edit resep</a>
+                                                <!-- <input type="hidden" value="<!%= event._id %>" name="eventId"> -->
                             
-                                            <form action="/delete-resep/<%=resep._id %>?_method=DELETE" method="POST" class="d-inline">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <form action="/delete-resep/<%=resep._id %>?_method=DELETE" method="POST" class="d-inline">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
                                                 </form>
                                             </div>
                             
-                                        <%}) %>
-                                            <% } %>
-                        </div>
-                        <div id="event">
-                            <% if (events.length>0) { %>
-                                <% events.forEach(event=>{ %>
-                                    <% %>
-                                        <div class="box">
+                                            <%}) %>
+                                                <% } %>
+                            </div>
+                            <div id="event">
+                                <% if (events.length>0) { %>
+                                    <% events.forEach(event=>{ %>
+                                        <% %>
+                                            <div class="box">
                             
-                                            <p>
-                                                nama Acara:<%= event.nameEvent %>
-                                            </p>
+                                                <p>
+                                                    nama Acara:<%= event.nameEvent %>
+                                                </p>
                             
-                                            <p>tempat : <%= event.tempat %>
-                                            </p>
+                                                <p>tempat : <%= event.tempat %>
+                                                </p>
                             
-                                            <div class="deskripsi">
-                                                <p>deskripsi: </p>
-                                                <%- event.html.replace(/\n/g,'<br />')%>
+                                                <div class="deskripsi">
+                                                    <p>deskripsi: </p>
+                                                    <%- event.html.replace(/\n/g,'<br />')%>
+                                                </div>
+                            
+                                                <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %>
+                                                </p>
+                                                <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %>
+                                                </p>
+                                                <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
+                                                <input type="hidden" value="<%= event._id %>" name="eventId">
+                            
+                                                <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
                                             </div>
                             
-                                            <p>tanggal dibuat : <%= event.createByDate.toLocaleDateString() %>
-                                            </p>
-                                            <p>acara diadakan: <%= event.Ondate.toLocaleDateString() %>
-                                            </p>
-                                            <a href="/edit-event/<%=event._id %>?edit=true">edit event</a>
-                                            <input type="hidden" value="<%= event._id %>" name="eventId">
+                                            <%}) %>
+                                                <% } %>
+                            </div>
+                            <div id="bahan">
+                                <% if (bahans.length>0) { %>
+                                    <% bahans.forEach(bahan=>{ %>
+                                        <% %>
+                                            <div class="box">
                             
-                                            <form action="/delete-event/<%=event._id %>?_method=DELETE" method="POST" class="d-inline">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                                <p>
+                                                    nama Bahan: <%= bahan.namaBahan %>
+                                                </p>
+                                                <div class="deskripsi">
+                                                    <p>deskripsi: <%= bahan.Deskripsi %>
+                                                    </p>
+                            
+                                                </div>
+                                                <p>Harga : <%= bahan.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>
+                                                </p>
+                                                <a href="/edit-bahan/<%=bahan._id %>?edit=true">edit bahan</a>
+                                                <input type="hidden" value="<%= bahan._id %>" name="bahanId">
+                            
+                                                <form action="/delete-bahan/<%=bahan._id %>?_method=DELETE" method="POST" class="d-inline">
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
                                             </div>
                             
-                                        <%}) %>
-                                            <% } %>
-                        </div>
-                        <div id="bahan">
-                            <% if (bahans.length>0) { %>
-                                <% bahans.forEach(bahan=>{ %>
-                                    <% %>
-                                        <div class="box">
-                            
-                                            <p>
-                                                nama Bahan: <%= bahan.namaBahan %>
-                                            </p>
-                                            <div class="deskripsi">
-                                                <p>deskripsi: <%= bahan.Deskripsi %> </p>
-                                                
-                                            </div>
-                                            <p>Harga : <%= bahan.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %>
-                                            </p>
-                                            <a href="/edit-bahan/<%=bahan._id %>?edit=true">edit bahan</a>
-                                            <input type="hidden" value="<%= bahan._id %>" name="bahanId">
-                            
-                                            <form action="/delete-bahan/<%=bahan._id %>?_method=DELETE" method="POST" class="d-inline">
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                        </div>
-                            
-                                        <%}) %>
-                                            <% } %>
-                        </div>
-                    </div>
+                                            <%}) %>
+                                                <% } %>
+                            </div>
                 </div>
+                        
+                    
+                
             </div>
-        </div>
-            
+          
+        
+    <%- include ('includes/footer.ejs') %> 
     <%- include('includes/end.ejs') %>
 

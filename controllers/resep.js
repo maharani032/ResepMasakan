@@ -88,7 +88,6 @@ exports.postAddResep = ( req, res, next ) =>
         const resepPicture = req.file.location
         const pictureKey = req.file.key
         if ( bahans != null ) {
-            console.log( 'in herre' )
             bahans.forEach( id =>
             {
                 let x = id.split( '-' )[ 0 ]
@@ -144,9 +143,7 @@ exports.postDeleteResep = ( req, res, next ) =>
                         if ( err ) {
                             console.log( err )
                         }
-                        else {
-                            console.log( 'deleted:', docs )
-                        }
+
                     } )
                 }
             } )

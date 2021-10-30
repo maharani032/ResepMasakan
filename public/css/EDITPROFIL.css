@@ -1,196 +1,195 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Nav Bar*/
 nav {
-    order: 1;
-    display: flex;
-    align-items: center;
-    justify-items: space-evenly;
-    background-color: #00a29e;
-    overflow-x: hidden;
+  order: 1;
+  display: flex;
+  align-items: center;
+  justify-items: space-evenly;
+  background-color: #00a29e;
+  overflow-x: hidden;
 }
 
 .logo {
-    width: 10%;
-    height: 70%;
-    padding: auto;
-    align-self: center;
+  width: 10%;
+  height: 70%;
+  padding: auto;
+  align-self: center;
 }
 
-nav a{
-    display: flex;
-    float: left;
-    align-items: center;
-    position: relative;
-    text-align: center;
-    color: #fff8e6;
-    text-decoration: none;
-    padding: 10px 10px;
+nav a {
+  display: flex;
+  float: left;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  color: #fff8e6;
+  text-decoration: none;
+  padding: 10px 10px;
 }
 
 .brand {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .links {
-    display: flex;
-    float:left;
-    font-size: 20px;
-    padding: 20px 20px;
-    margin-right: 20px;
+  display: flex;
+  float: left;
+  font-size: 20px;
+  padding: 20px 20px;
+  margin-right: 20px;
 }
 
-.logo-brand{
-    display: flex;
-    justify-items: flex-start;
+.logo-brand {
+  display: flex;
+  justify-items: flex-start;
 }
 
 nav a:hover {
-    color: black;
+  color: black;
 }
 
 /* SECTION */
 section {
-    overflow-x: hidden;
-    background-color: rgba(255, 180, 66);       
+  overflow-x: hidden;
+  background-color: rgba(255, 180, 66);
 }
 
 .konten {
-    display: flex;
-    flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .profil {
-    display: flex;
-    align-self: flex-start;
-    background-color: #00a29e;
-    flex-flow: column wrap;
-    padding: 20px;
-    margin: 40px 20px ;
-    width: fit-content;
-    height: auto;
+  display: flex;
+  align-self: flex-start;
+  background-color: #00a29e;
+  flex-flow: column wrap;
+  padding: 20px;
+  margin: 40px 20px;
+  width: fit-content;
+  height: auto;
 }
 
-.header {   
-    display: flex;
-    position: relative;
-    height: 500px;
-    width: fit-content;
-    text-align: center;
-    overflow-y: hidden;
-    justify-content: center;
-    align-items: center;
+.header {
+  display: flex;
+  position: relative;
+  height: 500px;
+  width: fit-content;
+  text-align: center;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
 }
-
 
 .isiheader {
-    position: absolute;
-    flex-flow: column wrap;
-    line-height: 1.6;
-    background-color: rgba(	255, 248, 230, 0.6);
-    padding: 30px;
-    border-radius: 10px;
+  position: absolute;
+  flex-flow: column wrap;
+  line-height: 1.6;
+  background-color: rgba(255, 248, 230, 0.6);
+  padding: 30px;
+  border-radius: 10px;
 }
 
 .fheader {
-    object-fit: cover;
-    object-position: center;
-    width: 100%; 
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
 }
 
 .fprofil {
-    width: 150px;
-    height: 150px;
-    border: 10px solid rgba(255, 180, 66);
-    border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border: 10px solid rgba(255, 180, 66);
+  border-radius: 50%;
 }
 
 .capai {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .capai div {
-    float: left;
-    margin: 0 10px;
+  float: left;
+  margin: 0 10px;
 }
 
-.profil h6{
-    margin: 10px;
-    justify-self: center;
-    line-height: 1.6;
+.profil h6 {
+  margin: 10px;
+  justify-self: center;
+  line-height: 1.6;
 }
 
 .profil button {
-    background-color: #00a29e;
-    color: #fff8e6;
-    align-self: center;
-    text-decoration: none;
-    text-align: center;
-    padding: 10px;
-    margin: 5px;
-    font-size: 20px;
-    border: 1px solid black;
-    border-radius: 15px;
+  background-color: #00a29e;
+  color: #fff8e6;
+  align-self: center;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  margin: 5px;
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
 }
 
 .cred {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: baseline;
-    margin: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: baseline;
+  margin: 30px;
 }
 
 .cred h5 {
-    flex: 1 1;
-    background-color: #fff8e6;
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin-right: 20px;
+  flex: 1 1;
+  background-color: #fff8e6;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 
 .ra {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
 }
 
 .resep {
-    flex: 50%;
+  flex: 50%;
 }
 .resepbox {
-    background-color: #fff8e6;
-    padding: 200px;
-    margin-right:  10px;
+  background-color: #fff8e6;
+  padding: 200px;
+  margin-right: 10px;
 }
 .acara {
-    flex: 50%;
+  flex: 50%;
 }
 .acarabox {
-    background-color: #fff8e6;
-    padding: 200px;
-    margin-right: 10px;
+  background-color: #fff8e6;
+  padding: 200px;
+  margin-right: 10px;
 }
 /* FOOTER */
 footer {
-    order: 7;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    background-color: #00a29e;
-  }
-  
+  order: 7;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  background-color: #00a29e;
+}
+
 .link-website {
-    display: flex;
-    flex-flow: column wrap;
-    margin: 50px;
-  }
-  
+  display: flex;
+  flex-flow: column wrap;
+  margin: 50px;
+}
+
 .info-website {
-    display: flex;
-    flex-flow: column wrap;
-    margin: 50px;
-  }
+  display: flex;
+  flex-flow: column wrap;
+  margin: 50px;
+}

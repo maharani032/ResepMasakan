@@ -29,27 +29,29 @@ exports.getEvent = ( req, res ) =>
         {
             Like.find( { eventId: EventId }, ( err, likes ) =>
             {
-                Comment.find( { eventId: EventId }, ( err, comments ) =>
-                {
-                    let message = ''
-                    if ( message.length > 0 ) {
-                        message = message[ 0 ]
-                    } else {
-                        message = null
-                    }
-                    res.render( 'event/event', {
-                        pageTitle: event.nameEvent,
-                        path: '/event/:eventId',
-                        user: req.user,
-                        event: event,
-                        comments: comments,
-                        likes: likes,
-                        modeEventorResep: true,
-                        errorMessage: message,
-                        validErrors: []
-                        //if true== comment.event,false==comment.resep
+                Comment.find( { eventId: EventId } )
+                    .populate( 'userId' ).then( comments =>
+                    {
+                        console.log( comments )
+                        let message = ''
+                        if ( message.length > 0 ) {
+                            message = message[ 0 ]
+                        } else {
+                            message = null
+                        }
+                        res.render( 'event/event', {
+                            pageTitle: event.nameEvent,
+                            path: '/event/:eventId',
+                            user: req.user,
+                            event: event,
+                            comments: comments,
+                            likes: likes,
+                            modeEventorResep: true,
+                            errorMessage: message,
+                            validErrors: []
+                            //if true== comment.event,false==comment.resep
+                        } )
                     } )
-                } )
             } )
 
 
@@ -67,7 +69,7 @@ exports.getResep = ( req, res ) =>
     {
         Like.find( { resepId: resepId }, ( err, likes ) =>
         {
-            Comment.find( { resepId: resepId }, ( err, comments ) =>
+            Comment.find( { resepId: resepId } ).populate( 'userId' ).then( comments =>
             {
                 Bahan.find( {}, ( err, bahans ) =>
                 {
@@ -172,10 +174,8 @@ exports.postComment = ( req, res ) =>
 {
 
     const eventId = req.params.eventId
-    let gambar = req.user.picture
     const komentar = req.body.Komentar
-    const fname = req.user.name.fname
-    const lname = req.user.name.lname
+    const user = req.user
     const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
         Event.findById( eventId )
@@ -183,12 +183,12 @@ exports.postComment = ( req, res ) =>
             {
                 Like.find( { eventId: eventId }, ( err, likes ) =>
                 {
-                    Comment.find( { eventId: eventId }, ( err, comments ) =>
+                    Comment.find( { eventId: eventId } ).populate( 'userId' ).then( comment =>
                     {
                         res.render( 'event/event', {
                             pageTitle: event.nameEvent,
                             path: '/event/:eventId',
-                            user: req.user,
+                            user: user,
                             event: event,
                             comments: comments,
                             likes: likes,
@@ -198,24 +198,17 @@ exports.postComment = ( req, res ) =>
                             //if true== comment.event,false==comment.resep
                         } )
                     } )
+
                 } )
             } )
     }
     else {
-        if ( gambar == '' ) {
-            gambar = 'https://cookbook-kel7.s3.ap-southeast-1.amazonaws.com/icon/icon_profil.png'
-        }
+
         const comment = new Comment( {
             userId: req.user._id,
-            gambar: gambar,
-            name: {
-                fname: fname,
-                lname: lname
-            },
             komentar: komentar,
             eventId: eventId,
             resepId: null,
-
         } )
         comment.save().then( comment =>
         {
@@ -258,9 +251,6 @@ exports.postCommentResep = ( req, res ) =>
 {
     const resepId = req.params.resepId
     const komentar = req.body.Komentar
-    const fname = req.user.name.fname
-    const lname = req.user.name.lname
-    let gambar = req.user.picture
     let id = req.user._id
     const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
@@ -268,7 +258,7 @@ exports.postCommentResep = ( req, res ) =>
         {
             Like.find( { resepId: resepId }, ( err, likes ) =>
             {
-                Comment.find( { resepId: resepId }, ( err, comments ) =>
+                Comment.populate( 'userId' ).find( { resepId: resepId }, ( err, comments ) =>
                 {
                     Bahan.find( {}, ( err, bahans ) =>
                     {
@@ -297,17 +287,17 @@ exports.postCommentResep = ( req, res ) =>
         } )
     }
     else {
-        if ( gambar == '' ) {
-            gambar = 'https://cookbook-kel7.s3.ap-southeast-1.amazonaws.com/icon/icon_profil.png'
-        }
+        // if ( gambar == '' ) {
+        //     gambar = 'https://cookbook-kel7.s3.ap-southeast-1.amazonaws.com/icon/icon_profil.png'
+        // }
         const comment = new Comment( {
             userId: id,
             resepId: resepId,
-            gambar: gambar,
-            name: {
-                fname: fname,
-                lname: lname
-            },
+            // gambar: gambar,
+            // name: {
+            //     fname: fname,
+            //     lname: lname
+            // },
             komentar: komentar,
             eventId: null,
             html: "",
@@ -330,9 +320,9 @@ exports.postLikeEvent = ( req, res, next ) =>
     const id = req.user._id
     Like.find( { eventId: eventId, userId: req.user._id } ).then( like =>
     {
-        console.log( like.length )
+
         if ( like.length == 0 ) {
-            console.log( '' )
+
             const fname = req.user.name.fname
             const lname = req.user.name.lname
             const like = new Like( {
@@ -381,12 +371,9 @@ exports.postlikeResep = ( req, res, next ) =>
 {
     const resepId = req.params.resepId
     const id = req.user._id
-    console.log( resepId )
     Like.find( { resepId: resepId, userId: id } ).then( like =>
     {
-        console.log( like.length )
         if ( like.length == 0 ) {
-            console.log( '' )
             const fname = req.user.name.fname
             const lname = req.user.name.lname
             const like = new Like( {
@@ -430,7 +417,7 @@ exports.deleteLikeResep = ( req, res, next ) =>
 exports.getResepsCategory = ( req, res ) =>
 {
     const category = req.params.kategori
-    console.log( category )
+
     const ITEM_PER_PAGE = 3;
     const page = + req.query.page || 1;
     let totalItems;
@@ -444,7 +431,7 @@ exports.getResepsCategory = ( req, res ) =>
                 .limit( ITEM_PER_PAGE )
         } ).then( resepskategori =>
         {
-            console.log( resepskategori.length )
+
             res.render( 'resep/reseps', {
                 modeSort: true,
                 pageTitle: 'Reseps',

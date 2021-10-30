@@ -8,10 +8,8 @@ const DeletePostLike = ( eventorresep, postid, postID ) =>
     Like.find( { postid: postID } ).then( likes =>
     {
         var likelength = likes.length - 1
-        console.log( likes )
         for ( likelength; likelength >= 0; likelength-- ) {
             let id = eventorresep.like[ likelength ]
-            console.log( id )
             Like.findByIdAndDelete( id, ( err, docs ) =>
             {
                 if ( err ) {
@@ -52,9 +50,7 @@ const UpdateArrayPost = ( database, databaseId, databaseObject, arrayidupdate ) 
             if ( err ) {
                 console.log( err )
             }
-            else if ( sucess ) {
-                console.log( 'data update:' + databaseObject )
-            }
+            
             else {
                 console.log( 'cant found id' )
             }
@@ -92,9 +88,7 @@ function DeleteArrayPost ( database, databaseId, object, arrayidupdate )
             if ( err ) {
                 console.log( err )
             }
-            else if ( sucess ) {
-                console.log( object )
-            }
+            
             else {
                 console.log( "not defined" )
             }
@@ -109,9 +103,7 @@ const DeleteEventComment = ( databaseId, arrayidupdate ) =>
             if ( err ) {
                 console.log( err )
             }
-            else if ( sucess ) {
-                console.log( 'data update:' + arrayidupdate )
-            }
+            
             else {
                 console.log( 'cant found id' )
             }

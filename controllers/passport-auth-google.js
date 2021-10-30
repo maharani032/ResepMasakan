@@ -30,10 +30,8 @@ module.exports = ( passport ) =>
 
                 if ( user ) {
                     done( null, user )
-                    console.log( 'user ada' )
                 } else {
                     user = await User.create( newUser )
-                    console.log( 'create user' )
                     done( null, user )
                 }
             } catch ( err ) {
