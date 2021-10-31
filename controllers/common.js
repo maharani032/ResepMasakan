@@ -394,7 +394,6 @@ exports.deleteLikeResep = ( req, res, next ) =>
 {
     const likeId = req.params.likeId
     const resepId = req.params.resepId
-    console.log( 'onm' + likeId )
     const id = req.user._id
     Like.findByIdAndDelete( likeId ).then( ( like ) =>
     {

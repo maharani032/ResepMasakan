@@ -15,7 +15,6 @@ exports.postAddCart = ( req, res ) =>
             return req.user.addToCart( "", event )
         } ).then( result =>
         {
-            console.log( result )
             res.redirect( '/event/' + idparam )
         } ).catch(
             err =>
@@ -26,7 +25,6 @@ exports.postAddCart = ( req, res ) =>
         )
     }
     else if ( eventId == null ) {
-        console.log()
         Bahan.findById( bahanId )
             .then( bahan =>
             {
@@ -197,12 +195,13 @@ exports.getCheckOutSuccess = ( req, res ) =>
 exports.postDeleteItemCart = ( req, res ) =>
 {
     // const bahanId = req.body.bahanId
-
+    const idpost = req.params.id
     const bahanId = req.body.bahanId
     const eventId = req.body.eventId
     if ( bahanId == null ) {
-        Event.findById( eventId ).then( event =>
+        Event.findById( idpost ).then( event =>
         {
+
             return req.user
                 .removeFromCart( "", event )
                 .then( result =>
@@ -217,7 +216,7 @@ exports.postDeleteItemCart = ( req, res ) =>
 
         } )
     } else if ( eventId == null ) {
-        Bahan.findById( bahanId )
+        Bahan.findById( idpost )
             .then( bahan =>
             {
                 return req.user.removeFromCart( bahan, '' )

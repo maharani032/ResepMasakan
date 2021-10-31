@@ -108,24 +108,29 @@ userSchema.methods.addToCart = function ( bahan, event )
     return this.save();
 }
 
-userSchema.methods.removeFromCart = function ( bahanId, eventId )
+userSchema.methods.removeFromCart = function ( bahan, event )
 {
     const updatedCartItems = this.cart.items.filter( item =>
     {
-        if ( bahanId != '' ) {
+        if ( bahan != '' ) {
             if ( item.bahanId != null ) {
-                return item.bahanId.toString() !== bahanId._id.toString()
+                return item.eventId, item.bahanId.toString() !== bahan._id.toString()
+            }
+            else if ( item.bahanId == null ) {
+                return item.eventId
+            }
+        }
+        else if ( event != '' ) {
+            if ( item.event != null ) {
+                return item.bahanId, item.eventId.toString() !== event._id.toString()
+            }
+            else if ( item.event == null ) {
+                return item.bahanId
             }
 
 
         }
-        else if ( eventId != '' ) {
-            if ( item.eventId != null ) {
-                return item.eventId.toString() !== eventId._id.toString()
-            }
 
-        }
-        // return item.bahanId.toString() !== bahanId.toString()
     } )
     this.cart.items = updatedCartItems;
     return this.save()
