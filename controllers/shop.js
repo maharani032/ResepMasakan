@@ -6,6 +6,7 @@ const Order = require( '../models/order' );
 const stripe = require( 'stripe' )( process.env.API_KEY_STRIPE_SECRET )
 exports.postAddCart = ( req, res ) =>
 {
+    const idparam = req.params.id
     const bahanId = req.body.bahanId
     const eventId = req.body.eventId
     if ( bahanId == null ) {
@@ -15,7 +16,7 @@ exports.postAddCart = ( req, res ) =>
         } ).then( result =>
         {
             console.log( result )
-            res.redirect( '/' )
+            res.redirect( '/event/' + idparam )
         } ).catch(
             err =>
             {
@@ -25,6 +26,7 @@ exports.postAddCart = ( req, res ) =>
         )
     }
     else if ( eventId == null ) {
+        console.log()
         Bahan.findById( bahanId )
             .then( bahan =>
             {
@@ -32,7 +34,7 @@ exports.postAddCart = ( req, res ) =>
             } )
             .then( result =>
             {
-                res.redirect( '/' )
+                res.redirect( '/resep/' + idparam )
 
             } )
             .catch(
@@ -98,16 +100,16 @@ exports.getCheckOut = ( req, res ) =>
                 {
                     if ( b.bahanId ) {
                         return {
-                            name: b.bahanId.namaBahan,
+                            name: '(product) ' + b.bahanId.namaBahan,
                             amount: Math.round( b.bahanId.harga / 15000 * 100 ),
                             currency: 'usd',
                             quantity: b.quantity
                         };
                     }
                     if ( b.eventId ) {
-                        if ( total = 0 ) {
+                        if ( total == 0 ) {
                             return {
-                                name: b.eventId.nameEvent,
+                                name: '(event) ' + b.eventId.nameEvent,
                                 amount: ( b.eventId.Harga == 0 ) ? b.eventId.Harga = 0.50 * 100 : b.eventId.Harga / 15000 * 100,
                                 // amount: Math.round( b.eventId.Harga / 15000 * 100 ),
                                 currency: 'usd',
@@ -116,7 +118,7 @@ exports.getCheckOut = ( req, res ) =>
                         }
                         else {
                             return {
-                                name: b.eventId.nameEvent,
+                                name: '(event) ' + b.eventId.nameEvent,
                                 // amount: ( b.eventId.Harga == 0 ) ? b.eventId.Harga = 0.50 * 100 : b.eventId.Harga / 15000 * 100,
                                 amount: Math.round( b.eventId.Harga / 15000 * 100 ),
                                 currency: 'usd',

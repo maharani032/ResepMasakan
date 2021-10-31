@@ -5,8 +5,8 @@ module.exports = ( passport ) =>
     passport.use( new GoogleStrategy( {
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "https://cookbook-kel7.herokuapp.com/auth/google/webmasakan",
-        // callbackURL: 'http://localhost:3000/auth/google/webmasakan',
+        // callbackURL: "https://cookbook-kel7.herokuapp.com/auth/google/webmasakan",
+        callbackURL: 'http://localhost:3000/auth/google/webmasakan',
 
         userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },

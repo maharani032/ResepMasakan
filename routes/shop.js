@@ -10,5 +10,5 @@ router.get( '/checkout/sucess', isAuth, shopController.getCheckOutSuccess )
 router.get( '/checkout/cancel', isAuth, shopController.getCheckOut )
 router.get( '/order', isAuth, shopController.getOrder )
 router.post( '/cart-delete-item', isAuth, shopController.postDeleteItemCart )
-router.post( '/add-cart', isAuth, shopController.postAddCart )
+router.post( '/add-cart/:id', isAuth, shopController.postAddCart )
 module.exports = router

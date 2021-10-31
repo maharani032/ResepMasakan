@@ -31,7 +31,7 @@
                 <%- event.html.replace(/\n/g,'<br />')%>
                 tanggal diadakan : <%= event.Ondate.toLocaleDateString() %> </br>
                 Kapasitas: <%= event.Kapasitas %> orang </br>
-                <form action="/add-cart" method="post">
+                <form action="/add-cart/<%= event._id %> " method="post">
                 <Button class='btn btn-lg btn-success btn-daftar'>
                     Pendaftaran
                     <input type="hidden" name="eventId" value='<%= event._id %>'>

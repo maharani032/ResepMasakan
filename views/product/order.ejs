@@ -15,13 +15,12 @@
                         <h1>Order - # <%= order._id %>  <a href=""></a></h1>
                         <ul class="order-bahan">
                             <% order.item.forEach(o => { %>
-                                <% if (o.item) { %>
-                                    <li class="order-item"><%= o.item.nameEvent %> (<%= o.quantity %> )</li>
-                                    <!-- <@% console.log(o.item) %>  -->
-                                
-                                <% } else { %>
+                                <% if (o.item.nameEvent) { %>
+                                    <li class="order-item"><%= o.item.nameEvent %> (<%= o.quantity %>) (<%= o.item.Harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>)
+                                    </li>                                
+                                <% } else if (o.item.namaBahan){ %>
                                     <li class="order-item">
-                                        <%= o.item.namaBahan %> (<%= o.quantity %> )
+                                        <%= o.item.namaBahan %> (<%= o.quantity %>) (<%= o.item.harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," ) %>) 
                                     </li>
                                 <% } %>
                             <% }) %>
