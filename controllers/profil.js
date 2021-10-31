@@ -20,7 +20,7 @@ exports.postUpdateProfil = ( req, res ) =>
         user.event = user.event
         user.resep = user.resep
 
-        console.log( email )
+
         if ( user.googleId === null || user.googleId === '' ) {
             user.email = email
         }
@@ -29,15 +29,11 @@ exports.postUpdateProfil = ( req, res ) =>
         }
 
         if ( gambar == null ) {
-            console.log( gambar )
-            console.log( 'gambar null' )
             user.picture = user.picture
             user.pictureKey = user.pictureKey
         }
         else if ( gambar != null ) {
-            console.log( 'gambar tidak null' )
             if ( user.picture != null ) {
-                console.log( 'in here' )
                 let imagePicture = req.file.location
                 let pictureKey = req.file.key
 

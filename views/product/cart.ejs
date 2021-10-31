@@ -29,7 +29,7 @@
                                         <div class="col col-img">
                                             <img class='img-cart' src="<%=item.eventId.ImageEvent%>" alt="test">
                                         </div>
-                                        <form action="/cart-delete-item" method="post">
+                                        <form action="/cart-delete-item/<%= item.eventId._id %>" method="post">
                                             <input type="hidden" name="eventId" value='<%= item.eventId._id %>' id="">
                                             <button class="btn btn-danger">Delete</button>
                                         </form>
@@ -46,7 +46,7 @@
                                         <div class="col col-img">
                                             <img class='img-cart' src="<%=item.bahanId.image%>" alt="test">
                                         </div>
-                                        <form action="/cart-delete-item" method="post">
+                                        <form action="/cart-delete-item/<%= item.bahanId._id %>" method="post">
                                             <input type="hidden" name="bahanId" value='<%= item.bahanId._id %>' id="">
                                             <button class="btn btn-danger">Delete</button>
                                         </form>

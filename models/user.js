@@ -61,13 +61,18 @@ userSchema.methods.addToCart = function ( bahan, event )
 {
     const cartProductIndex = this.cart.items.findIndex( cp =>
     {
-        if ( cp.bahanId != null ) {
-            return cp.bahanId.toString() == bahan._id.toString()
+        if ( bahan != '' ) {
+            if ( cp.bahanId != null ) {
+                return cp.bahanId.toString() == bahan._id.toString()
+            }
+
 
         }
-        else if ( cp.eventId != null ) {
+        else if ( event != '' ) {
+            if ( cp.eventId != null ) {
+                return cp.eventId.toString() == event._id.toString()
+            }
 
-            return cp.eventId.toString() == event._id.toString()
         }
 
     } )
@@ -103,11 +108,29 @@ userSchema.methods.addToCart = function ( bahan, event )
     return this.save();
 }
 
-userSchema.methods.removeFromCart = function ( bahanId )
+userSchema.methods.removeFromCart = function ( bahan, event )
 {
     const updatedCartItems = this.cart.items.filter( item =>
     {
-        return item.bahanId.toString() !== bahanId.toString()
+        if ( bahan != '' ) {
+            if ( item.bahanId != null ) {
+                return item.eventId, item.bahanId.toString() !== bahan._id.toString()
+            }
+            else if ( item.bahanId == null ) {
+                return item.eventId
+            }
+        }
+        else if ( event != '' ) {
+            if ( item.event != null ) {
+                return item.bahanId, item.eventId.toString() !== event._id.toString()
+            }
+            else if ( item.event == null ) {
+                return item.bahanId
+            }
+
+
+        }
+
     } )
     this.cart.items = updatedCartItems;
     return this.save()
