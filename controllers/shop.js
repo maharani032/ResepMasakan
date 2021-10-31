@@ -196,18 +196,45 @@ exports.getCheckOutSuccess = ( req, res ) =>
 }
 exports.postDeleteItemCart = ( req, res ) =>
 {
+    // const bahanId = req.body.bahanId
+
     const bahanId = req.body.bahanId
-    req.user
-        .removeFromCart( bahanId )
-        .then( result =>
+    const eventId = req.body.eventId
+    if ( bahanId == null ) {
+        Event.findById( eventId ).then( event =>
         {
-            res.redirect( '/cart' )
+            return req.user
+                .removeFromCart( "", event )
+                .then( result =>
+                {
+                    res.redirect( '/cart' )
+                } )
+                .catch( err =>
+                {
+                    console.log( err )
+                    res.redirect( '/500' )
+                } )
+
         } )
-        .catch( err =>
-        {
-            console.log( err )
-            res.redirect( '/500' )
-        } )
+    } else if ( eventId == null ) {
+        Bahan.findById( bahanId )
+            .then( bahan =>
+            {
+                return req.user.removeFromCart( bahan, '' )
+            } )
+            .then( result =>
+            {
+                res.redirect( '/cart' )
+
+            } )
+            .catch(
+                err =>
+                {
+                    console.log( err )
+                    res.redirect( '/500' )
+                }
+            )
+    }
 }
 exports.getOrder = ( req, res ) =>
 {

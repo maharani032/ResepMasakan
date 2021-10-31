@@ -108,11 +108,24 @@ userSchema.methods.addToCart = function ( bahan, event )
     return this.save();
 }
 
-userSchema.methods.removeFromCart = function ( bahanId )
+userSchema.methods.removeFromCart = function ( bahanId, eventId )
 {
     const updatedCartItems = this.cart.items.filter( item =>
     {
-        return item.bahanId.toString() !== bahanId.toString()
+        if ( bahanId != '' ) {
+            if ( item.bahanId != null ) {
+                return item.bahanId.toString() !== bahanId._id.toString()
+            }
+
+
+        }
+        else if ( eventId != '' ) {
+            if ( item.eventId != null ) {
+                return item.eventId.toString() !== eventId._id.toString()
+            }
+
+        }
+        // return item.bahanId.toString() !== bahanId.toString()
     } )
     this.cart.items = updatedCartItems;
     return this.save()
