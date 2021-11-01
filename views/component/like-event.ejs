@@ -22,7 +22,7 @@
                             </button>
                             <%= event.like.length %> orang menyukai posting ini
                         </form>
-                        <break>
+                        <% break %>
                     <% } else if(likes[likes.length-1].userId.toString()!==user._id.toString()) {%>
                         <form action="/like/<%=event._id %>" id='likeOrdislike' method="POST" class='red-button'>
                             <button type="submit" class="btn btn-primary">
@@ -30,7 +30,7 @@
                                 like</button>
                             <%= event.like.length %> orang menyukai posting ini
                         </form>
-                        <break>
+                        <% break %>
                     <% } %> 
                 <% } %> 
             <% } %> 
