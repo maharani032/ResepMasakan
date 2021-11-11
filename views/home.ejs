@@ -31,7 +31,7 @@
                 <div class="resep-box">
                     <% if (reseps.length>0) { %>
                         <% for (resep of Object.keys(reseps)){ %>
-                            <% if (resep>2) { %>
+                            <% if (resep>3) { %>
                                 <% break %> 
                             <% } %>
                             <a href='resep/<%= reseps[resep]._id %>'>
@@ -47,7 +47,7 @@
                 <div class="acara-box">
                     <% if (events.length>0) { %>
                                 <% for( event of Object.keys(events)) {%> 
-                                    <% if(event>2){ %>
+                                    <% if(event>3){ %>
                                         <% break %>
                                     <% } %>
                                     <a href='/event/<%=events[event]._id%>'>

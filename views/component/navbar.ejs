@@ -8,7 +8,13 @@
 <a href="/events">Acara</a>
 
 <% if (isAuthenticated) { %>
-    <a href="/cart">Cart</a>
+    <a href="/cart">Cart
+        <% if(user.cart.items.length!=0){ %> 
+            <span class="badge bg-danger">
+                <%= user.cart.items.length %> 
+            </span>
+        <% } %> 
+    </a>
     <div class="dropdown">
         <button class="dropbtn">Profil</button>
         <div class="dropdown-content">

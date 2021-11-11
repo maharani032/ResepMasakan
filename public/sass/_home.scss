@@ -36,9 +36,7 @@
     order: 3;
     display: flex;
     background-color: #ffb442;
-}
-
-.resep {
+    .resep {
     order: 3;
     flex: 50%;
     overflow: hidden;
@@ -56,6 +54,7 @@
     padding: 50px 50px;
     background-color: #fff8e6;
     margin: 30px 10px 50px 20px;
+    
     .ImageEvent{
         width: 200px;
         height: 200px;
@@ -99,6 +98,10 @@
     background-color: #e15d5d;
     padding: 10px 0;
 }
+
+}
+
+
     
 
 }

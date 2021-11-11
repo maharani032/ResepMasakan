@@ -108,7 +108,7 @@ exports.getResep = ( req, res ) =>
 }
 exports.getReseps = ( req, res ) =>
 {
-    const ITEM_PER_PAGE = 3;
+    const ITEM_PER_PAGE = 10;
     const page = + req.query.page || 1;
     let totalItems;
     Resep.find()
@@ -141,7 +141,7 @@ exports.getReseps = ( req, res ) =>
 }
 exports.getEvents = ( req, res ) =>
 {
-    const ITEM_PER_PAGE = 3;
+    const ITEM_PER_PAGE = 10;
     const page = + req.query.page || 1;
     let totalItems;
     Event.find()

@@ -185,19 +185,19 @@ footer .link-website .info-website {
   background-color: #ffb442;
 }
 
-.body-home .resep {
+.body-home section .resep {
   order: 3;
   flex: 50%;
   overflow: hidden;
 }
 
-.body-home .resep-box {
+.body-home section .resep-box {
   flex-flow: row wrap;
   display: flex;
   justify-content: space-evenly;
 }
 
-.body-home .resep-box a {
+.body-home section .resep-box a {
   display: flex;
   align-items: center;
   padding: 50px 50px;
@@ -205,25 +205,25 @@ footer .link-website .info-website {
   margin: 30px 10px 50px 20px;
 }
 
-.body-home .resep-box a .ImageEvent {
+.body-home section .resep-box a .ImageEvent {
   width: 200px;
   height: 200px;
   size: 300px;
 }
 
-.body-home .resep h2 {
+.body-home section .resep h2 {
   text-align: center;
   background-color: #e15d5d;
   padding: 10px 0;
 }
 
-.body-home .acara-box {
+.body-home section .acara-box {
   flex-flow: row wrap;
   display: flex;
   justify-content: space-evenly;
 }
 
-.body-home .acara-box a {
+.body-home section .acara-box a {
   display: flex;
   align-items: center;
   padding: 50px 50px;
@@ -231,19 +231,19 @@ footer .link-website .info-website {
   margin: 30px 10px 50px 20px;
 }
 
-.body-home .acara-box a .ImageEvent {
+.body-home section .acara-box a .ImageEvent {
   width: 200px;
   height: 200px;
   size: 300px;
 }
 
-.body-home .acara {
+.body-home section .acara {
   order: 3;
   flex: 50%;
   flex-flow: row wrap;
 }
 
-.body-home .acara h2 {
+.body-home section .acara h2 {
   text-align: center;
   background-color: #e15d5d;
   padding: 10px 0;

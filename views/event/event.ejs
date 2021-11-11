@@ -14,7 +14,7 @@
                         <h5 class='custom'>Free</h5>
                 
                         <% } else { %>
-                            <h5 class='custom'>Eksklusif</h5>
+                            <h5 class='custom'>Eksklusif <%= event.Harga.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "," )  %></h5>
                             
                             <% } %>
                 </p>

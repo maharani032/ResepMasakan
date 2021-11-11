@@ -91,8 +91,6 @@ userSchema.methods.addToCart = function ( bahan, event )
             } );
         }
         else if ( bahan == '' ) {
-            console.log( event )
-            console.log( 'coba update event' )
             updatedCartItems.push( {
                 // bahanId: 0,
                 eventId: event._id,
