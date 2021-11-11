@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Navigasi Bar Atas */
+  nav {
+    order: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #00a29e;
+    overflow-x: hidden;
+  }
+  
+  .logo {
+    width: 10%;
+    height: 10%;
+    padding: auto;
+    align-self: center;
+  }
+  
+  nav a{
+    float: left;
+    position: relative;
+    text-align: center;
+    color: #fff8e6;
+    text-decoration: none;
+    padding: 10px 10px;
+  }
+  
+  .brand {
+    font-size: 50px;
+  }
+  
+  .links {
+    font-size: 20px;
+    padding: 20px 20px;
+    margin-right: 20px;
+    align-items: center;
+  }
+  
+  .logo-brand{
+    display: flex;
+    justify-items: flex-start;
+  }
+  
+  nav a:hover {
+    color: black;
+  }
+  /* Section */  
+body {
+    background-color: #ffb441;
+    height: auto;
+}
+
+button {
+    background-color: #00a29d;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #fff8e6;
+    border: 1px solid #00a29d;
+  }
+  
+  .boxkonten {
+    line-height: 1.6;
+    display: flex;
+    border-radius: 50px;
+    background-color: #fff8e6;
+    border: 3px solid #00a29d;
+    margin: 20px 150px;
+    padding: 20px 50px;
+    flex-flow: column wrap;
+  }
+  
+  .topacara {
+    justify-content: center;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .fotoacara{
+    width:  500px;
+    height: auto;
+    align-self: center;
+  }
+  
+  .fotoacara img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+  }
+  
+  .sukai {
+    align-self: center;
+    margin: 10px 0;
+  }
+
+  .belitiket {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  .beras {
+    display: flex;
+    line-height: 0.5;
+    flex-flow: column wrap;
+    background-color: #e15c5d;
+    padding: 15px;
+    margin: 15px 20px;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .fotoberas {
+    width: 100px;
+    height: auto;
+  }
+  
+  .beras button {
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #fff8e6;
+    color: black;
+    border: 1px solid #fff8e6
+  }
+  
+  .beras p {
+    color: #fff8e6;
+  }
+
+  .isikomentar {
+    background-color: #ffff;
+    padding: 200px;
+    margin: 5px 20px;
+  }
+  /* Footer */
+footer {
+    order: 4;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: #00a29e;
+  }
+  
+  .link-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+  }
+  
+  .info-website {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 50px;
+  }
