@@ -13,6 +13,13 @@ footer {
         display: flex;
         flex-flow: column wrap;
         margin: 50px;
+        // color: black;
+        & a{
+            color: black;
+            &:hover{
+                color: black;
+            }
+        }
             .info-website {
             display: flex;
             flex-flow: column wrap;

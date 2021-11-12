@@ -17,7 +17,7 @@ exports.getAbout = ( req, res ) =>
 {
     res.render( 'about', {
         user: req.user,
-        pageTitle: 'About Us',
+        pageTitle: 'CookBook | About Us',
         path: '/about'
     } )
 }
@@ -40,7 +40,7 @@ exports.getEvent = ( req, res ) =>
                             message = null
                         }
                         res.render( 'event/event', {
-                            pageTitle: event.nameEvent,
+                            pageTitle: 'CookBook | ' + event.nameEvent.toUpperCase(),
                             path: '/event/:eventId',
                             user: req.user,
                             event: event,
@@ -87,7 +87,7 @@ exports.getResep = ( req, res ) =>
                     } )
 
                     res.render( 'resep/resep', {
-                        pageTitle: resep.namaResep,
+                        pageTitle: 'CookBook | ' + resep.namaResep.toUpperCase(),
                         path: '/resep/:resepId',
                         user: req.user,
                         resep: resep,
@@ -123,7 +123,7 @@ exports.getReseps = ( req, res ) =>
         {
             res.render( 'resep/reseps', {
                 reseps: reseps,
-                pageTitle: 'Reseps',
+                pageTitle: 'CookBook | Reseps',
                 path: '/reseps',
                 user: req.user,
                 currentPage: page,
@@ -156,7 +156,7 @@ exports.getEvents = ( req, res ) =>
         {
             res.render( 'event/events', {
                 events: events,
-                pageTitle: 'Event',
+                pageTitle: 'CookBook | Events',
                 path: '/events',
                 user: req.user,
                 currentPage: page,
@@ -187,7 +187,7 @@ exports.postComment = ( req, res ) =>
                     Comment.find( { eventId: eventId } ).populate( 'userId' ).then( comment =>
                     {
                         res.render( 'event/event', {
-                            pageTitle: event.nameEvent,
+                            pageTitle: 'CookBook | ' + event.nameEvent.toUpperCase(),
                             path: '/event/:eventId',
                             user: user,
                             event: event,
@@ -270,7 +270,7 @@ exports.postCommentResep = ( req, res ) =>
                             bahanId.push( x )
                         } )
                         return res.render( 'resep/resep', {
-                            pageTitle: resep.namaResep,
+                            pageTitle: 'CookBook | ' + resep.namaResep.toUpperCase(),
                             path: '/resep/:resepId',
                             user: req.user,
                             resep: resep,
@@ -424,7 +424,7 @@ exports.getResepsCategory = ( req, res ) =>
 
             res.render( 'resep/reseps', {
                 modeSort: true,
-                pageTitle: 'Reseps',
+                pageTitle: 'CookBook | Reseps',
                 path: '/reseps/' + category,
                 user: req.user,
                 currentPage: page,

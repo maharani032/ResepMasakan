@@ -20,6 +20,7 @@
             <form method='POST' action ='/login' autocomplete="off">
         
                 <input type="text" 
+                required
                 id="email" 
                 class="form-register-login <%= validErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" 
                 name="email" placeholder="email" 
@@ -27,6 +28,7 @@
                 autocomplete="off">
                 <input type="password" 
                 id="password" 
+                required
                 class="<%= validErrors.find(e => e.param === 'password') ? 'invalid' : '' %>" 
                 name="password" placeholder="password"
                 value="<%= inputPage.password %>">

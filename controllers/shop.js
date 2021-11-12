@@ -57,7 +57,7 @@ exports.getCart = ( req, res, next ) =>
 
             res.render( 'product/cart', {
                 path: '/cart',
-                pageTitle: 'Cart',
+                pageTitle: 'CookBook | Cart',
                 items: item,
                 user: req.user,
                 sum: sum
@@ -135,7 +135,7 @@ exports.getCheckOut = ( req, res ) =>
 
             res.render( 'product/checkout', {
                 path: '/checkout',
-                pageTitle: 'checkout',
+                pageTitle: 'CookBook | checkout',
                 items: item,
                 user: req.user,
                 totalSum: total,

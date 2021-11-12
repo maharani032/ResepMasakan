@@ -17,6 +17,14 @@ footer .link-website {
   margin: 50px;
 }
 
+footer .link-website a {
+  color: black;
+}
+
+footer .link-website a:hover {
+  color: black;
+}
+
 footer .link-website .info-website {
   display: flex;
   flex-flow: column wrap;
@@ -770,9 +778,16 @@ textarea:focus {
 }
 
 .icon-sort {
-  color: orange;
+  color: black;
+  background-color: #ffb442;
   text-decoration: none;
   margin: 0 10px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.icon-sort:hover {
+  color: black;
 }
 
 .resepItem {

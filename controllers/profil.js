@@ -83,7 +83,7 @@ exports.getProfile = ( req, res, next ) =>
                 if ( !err ) {
                     res.render( 'profil', {
                         path: '/profil',
-                        pageTitle: 'Profil',
+                        pageTitle: 'CookBook | Profil',
                         user: user,
                         events: event,
                         reseps: reseps,

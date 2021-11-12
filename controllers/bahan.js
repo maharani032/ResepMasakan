@@ -7,7 +7,7 @@ exports.getAddProduct = ( req, res ) =>
     res.render(
         'product/post-bahan',
         {
-            pageTitle: 'add Product',
+            pageTitle: 'CookBook | Add Product',
             path: '/add-product',
             user: req.user,
             editMode: false
@@ -78,7 +78,7 @@ exports.EditProduct = ( req, res ) =>
         } res.render(
             'product/post-bahan',
             {
-                pageTitle: 'add Product',
+                pageTitle: 'CookBook | Add Product',
                 path: '/add-product',
                 user: req.user,
                 editMode: true,

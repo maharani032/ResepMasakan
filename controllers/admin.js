@@ -19,7 +19,7 @@ exports.getPostEvent = ( req, res, next ) =>
     res.render(
         'event/postEvent',
         {
-            pageTitle: 'add event',
+            pageTitle: 'CookBook | Add Event',
             path: '/admin/add-event',
             user: req.user,
             editMode: false,
@@ -41,7 +41,7 @@ exports.postPostEvent = ( req, res, next ) =>
     const errors = validationResult( req )
     if ( !errors.isEmpty() ) {
         return res.render( 'event/postEvent', {
-            pageTitle: 'add event',
+            pageTitle: 'CookBook | Add Event',
             path: '/admin/add-event',
             user: req.user,
             editMode: false,
@@ -105,7 +105,7 @@ exports.getEditEvent = ( req, res, next ) =>
                 message = null
             }
             res.render( 'event/postEvent', {
-                pageTitle: 'Edit Event',
+                pageTitle: 'CookBook | Edit Event',
                 path: 'edit-event/:eventId',
                 event: event,
                 user: user,
@@ -167,7 +167,7 @@ exports.postEditEvent = ( req, res ) =>
         const errors = validationResult( req )
         if ( !errors.isEmpty() ) {
             return res.render( 'event/postEvent', {
-                pageTitle: 'Edit Event',
+                pageTitle: 'CookBook | Edit Event',
                 path: 'edit-event/:eventId',
                 user: req.user,
                 editMode: false,

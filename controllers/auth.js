@@ -19,7 +19,7 @@ exports.getRegister = ( req, res, next ) =>
             'auth/register',
             {
                 path: '/register',
-                pageTitle: 'Register',
+                pageTitle: 'CookBook | Register',
                 errorMessage: message,
                 inputPage: {
                     name: {
@@ -50,7 +50,7 @@ exports.getLogIn = ( req, res, next ) =>
             'auth/login',
             {
                 errorMessage: message,
-                pageTitle: 'Log In',
+                pageTitle: 'CookBook | Log In',
                 path: '/login',
                 inputPage: {
                     email: '',
@@ -73,7 +73,7 @@ exports.postRegister = ( req, res, next ) =>
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/register', {
             path: '/register',
-            pageTitle: 'Register',
+            pageTitle: 'CookBook | Register',
             errorMessage: errors.array()[ 0 ].msg,
             inputPage: {
                 name: {
@@ -126,7 +126,7 @@ exports.postLogIn = ( req, res, next ) =>
     if ( !errors.isEmpty() ) {
         return res.render( 'auth/login', {
             path: '/login',
-            pageTitle: 'Log In',
+            pageTitle: 'CookBook | Log In',
             errorMessage: errors.array()[ 0 ].msg,
             inputPage: {
                 email: email,
@@ -141,7 +141,7 @@ exports.postLogIn = ( req, res, next ) =>
         if ( !user ) {
             return res.render( 'auth/login', {
                 path: '/login',
-                pageTitle: 'Log In',
+                pageTitle: 'CookBook | Log In',
                 errorMessage: 'salah email atau password',
                 inputPage: {
                     email: email,
@@ -163,7 +163,7 @@ exports.postLogIn = ( req, res, next ) =>
                     } )
                 } return res.render( 'auth/login', {
                     path: '/login',
-                    pageTitle: 'Log In',
+                    pageTitle: 'CookBook | Log In',
                     errorMessage: 'salah email atau password',
                     inputPage: {
                         email: email,

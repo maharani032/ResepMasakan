@@ -44,7 +44,7 @@ exports.getAddResep = ( req, res, next ) =>
             res.render( 'resep/post-resep', {
                 user: req.user,
                 path: '/add-resep',
-                pageTitle: 'Add Resep',
+                pageTitle: 'CookBook | Add Resep',
                 editMode: editMode,
                 bahans: bahans,
                 errorMessage: message,
@@ -74,7 +74,7 @@ exports.postAddResep = ( req, res, next ) =>
                 return res.render( 'resep/post-resep', {
                     user: req.user,
                     path: '/add-resep',
-                    pageTitle: 'Add Resep',
+                    pageTitle: 'CookBook | Add Resep',
                     editMode: editMode,
                     bahans: bahans,
                     errorMessage: errors.array()[ 0 ].msg,
@@ -182,7 +182,7 @@ exports.getEditResep = ( req, res, next ) =>
                     message = null
                 }
                 res.render( 'resep/post-resep', {
-                    pageTitle: 'Edit Resep',
+                    pageTitle: 'CookBook | Edit Resep',
                     path: 'edit-resep',
                     resep: resep,
                     user: user,
@@ -224,7 +224,7 @@ exports.postEditResep = ( req, res ) =>
                     return res.render( 'resep/post-resep', {
                         user: req.user,
                         path: '/edit-resep',
-                        pageTitle: 'Edit Resep',
+                        pageTitle: 'CookBook | Edit Resep',
                         editMode: true,
                         resep: resep,
                         bahans: bahans,
